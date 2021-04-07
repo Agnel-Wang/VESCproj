@@ -105,9 +105,9 @@
 #define HW_UART_DEV				UARTD3
 #define HW_UART_GPIO_AF			GPIO_AF_USART3
 #define HW_UART_TX_PORT			GPIOB
-#define HW_UART_TX_PIN			10
+#define HW_UART_TX_PIN			PIN10
 #define HW_UART_RX_PORT			GPIOB
-#define HW_UART_RX_PIN			11
+#define HW_UART_RX_PIN			PIN11
 
 // ICU Peripheral for servo decoding
 #define HW_ICU_TIMER			TIM4
@@ -116,23 +116,23 @@
 #define HW_ICU_CHANNEL			ICU_CHANNEL_1
 #define HW_ICU_GPIO_AF			GPIO_AF_TIM4
 #define HW_ICU_GPIO				GPIOB
-#define HW_ICU_PIN				6
+#define HW_ICU_PIN				PIN6
 
 // I2C Peripheral
 #define HW_I2C_DEV				I2CD2
 #define HW_I2C_GPIO_AF			GPIO_AF_I2C2
 #define HW_I2C_SCL_PORT			GPIOB
-#define HW_I2C_SCL_PIN			10
+#define HW_I2C_SCL_PIN			PIN10
 #define HW_I2C_SDA_PORT			GPIOB
-#define HW_I2C_SDA_PIN			11
+#define HW_I2C_SDA_PIN			PIN11
 
 // Hall/encoder pins
 #define HW_HALL_ENC_GPIO1		GPIOC
-#define HW_HALL_ENC_PIN1		6
+#define HW_HALL_ENC_PIN1		PIN6
 #define HW_HALL_ENC_GPIO2		GPIOC
-#define HW_HALL_ENC_PIN2		7
+#define HW_HALL_ENC_PIN2		PIN7
 #define HW_HALL_ENC_GPIO3		GPIOC
-#define HW_HALL_ENC_PIN3		8
+#define HW_HALL_ENC_PIN3		PIN8
 #define HW_ENC_TIM				TIM3
 #define HW_ENC_TIM_AF			GPIO_AF_TIM3
 #define HW_ENC_TIM_CLK_EN()		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3, ENABLE)
@@ -146,35 +146,35 @@
 
 // NRF pins
 #define NRF_PORT_CSN			GPIOB
-#define NRF_PIN_CSN				12
+#define NRF_PIN_CSN				PIN12
 #define NRF_PORT_SCK			GPIOB
-#define NRF_PIN_SCK				4
+#define NRF_PIN_SCK				PIN4
 #define NRF_PORT_MOSI			GPIOB
-#define NRF_PIN_MOSI			3
+#define NRF_PIN_MOSI			PIN3
 #define NRF_PORT_MISO			GPIOD
-#define NRF_PIN_MISO			2
+#define NRF_PIN_MISO			PIN2
 
 // SPI pins
 #define HW_SPI_DEV				SPID1
 #define HW_SPI_GPIO_AF			GPIO_AF_SPI1
 #define HW_SPI_PORT_NSS			GPIOA
-#define HW_SPI_PIN_NSS			4
+#define HW_SPI_PIN_NSS			PIN4
 #define HW_SPI_PORT_SCK			GPIOA
-#define HW_SPI_PIN_SCK			5
+#define HW_SPI_PIN_SCK			PIN5
 #define HW_SPI_PORT_MOSI		GPIOA
-#define HW_SPI_PIN_MOSI			7
+#define HW_SPI_PIN_MOSI			PIN7
 #define HW_SPI_PORT_MISO		GPIOA
-#define HW_SPI_PIN_MISO			6
+#define HW_SPI_PIN_MISO			PIN6
 
 // SPI for DRV8301
 #define DRV8301_MOSI_GPIO		GPIOC
-#define DRV8301_MOSI_PIN		12
+#define DRV8301_MOSI_PIN		PIN12
 #define DRV8301_MISO_GPIO		GPIOC
-#define DRV8301_MISO_PIN		11
+#define DRV8301_MISO_PIN		PIN11
 #define DRV8301_SCK_GPIO		GPIOC
-#define DRV8301_SCK_PIN			10
+#define DRV8301_SCK_PIN			PIN10
 #define DRV8301_CS_GPIO			GPIOC
-#define DRV8301_CS_PIN			9
+#define DRV8301_CS_PIN			PIN9
 
 // Measurement macros
 #define ADC_V_L1				ADC_Value[ADC_IND_SENS1]

@@ -36,3 +36,4 @@
 .\obj\hw_60.o: .\uCOSII\CORE\ucos_ii.h
 .\obj\hw_60.o: .\uCOSII\CONFIG\os_cfg.h
 .\obj\hw_60.o: .\uCOSII\PORT\os_cpu.h
+.\obj\hw_60.o: hwconf\drv8301.h

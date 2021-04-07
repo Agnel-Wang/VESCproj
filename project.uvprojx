@@ -621,6 +621,11 @@
               <FileType>1</FileType>
               <FilePath>.\hwconf\hw_60.c</FilePath>
             </File>
+            <File>
+              <FileName>drv8301.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\hwconf\drv8301.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
