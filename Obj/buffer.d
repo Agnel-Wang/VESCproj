@@ -1,0 +1,16 @@
+.\obj\buffer.o: USER\SRC\buffer.c
+.\obj\buffer.o: .\USER\INC\buffer.h
+.\obj\buffer.o: .\Libraries\CMSIS\stm32f4xx.h
+.\obj\buffer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h
+.\obj\buffer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\obj\buffer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_version.h
+.\obj\buffer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_compiler.h
+.\obj\buffer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\cmsis_armcc.h
+.\obj\buffer.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\mpu_armv7.h
+.\obj\buffer.o: .\Libraries\CMSIS\system_stm32f4xx.h
+.\obj\buffer.o: .\USER\INC\stm32f4xx_conf.h
+.\obj\buffer.o: .\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
+.\obj\buffer.o: .\Libraries\CMSIS\stm32f4xx.h
+.\obj\buffer.o: .\USER\INC\macro.h
+.\obj\buffer.o: .\GeneralFunction\inc\utils.h
+.\obj\buffer.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdbool.h
