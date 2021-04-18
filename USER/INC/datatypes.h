@@ -32,19 +32,6 @@ typedef enum {
 } mc_state;
 
 typedef enum {
-	COMM_MODE_INTEGRATE = 0,
-	COMM_MODE_DELAY
-} mc_comm_mode;
-
-// Auxiliary output mode
-typedef enum {
-	OUT_AUX_MODE_OFF = 0,
-	OUT_AUX_MODE_ON_AFTER_2S,
-	OUT_AUX_MODE_ON_AFTER_5S,
-	OUT_AUX_MODE_ON_AFTER_10S
-} out_aux_mode;
-
-typedef enum {
 	FAULT_CODE_NONE = 0,
 	FAULT_CODE_OVER_VOLTAGE,
 	FAULT_CODE_UNDER_VOLTAGE,
@@ -56,34 +43,12 @@ typedef enum {
 
 typedef enum {
 	CONTROL_MODE_DUTY = 0,
-	CONTROL_MODE_SPEED,
 	CONTROL_MODE_CURRENT,
-	CONTROL_MODE_CURRENT_BRAKE,
+	CONTROL_MODE_SPEED,
 	CONTROL_MODE_POS,
-	CONTROL_MODE_HANDBRAKE,
-	CONTROL_MODE_OPENLOOP,
+	CONTROL_MODE_CURRENT_BRAKE,
 	CONTROL_MODE_NONE
 } mc_control_mode;
-
-typedef enum {
-	DISP_POS_MODE_NONE = 0,
-	DISP_POS_MODE_INDUCTANCE,
-	DISP_POS_MODE_OBSERVER,
-	DISP_POS_MODE_ENCODER,
-	DISP_POS_MODE_PID_POS,
-	DISP_POS_MODE_PID_POS_ERROR,
-	DISP_POS_MODE_ENCODER_OBSERVER_ERROR
-} disp_pos_mode;
-
-typedef struct {
-	float cycle_int_limit;
-	float cycle_int_limit_running;
-	float cycle_int_limit_max;
-	float comm_time_sum;
-	float comm_time_sum_min_rpm;
-	int32_t comms;
-	uint32_t time_at_comm;
-} mc_rpm_dep_struct;
 
 typedef enum {
 	DRV8301_OC_LIMIT = 0,
@@ -91,17 +56,6 @@ typedef enum {
 	DRV8301_OC_REPORT_ONLY,
 	DRV8301_OC_DISABLED
 } drv8301_oc_mode;
-
-typedef enum {
-	DEBUG_SAMPLING_OFF = 0,
-	DEBUG_SAMPLING_NOW,
-	DEBUG_SAMPLING_START,
-	DEBUG_SAMPLING_TRIGGER_START,
-	DEBUG_SAMPLING_TRIGGER_FAULT,
-	DEBUG_SAMPLING_TRIGGER_START_NOSEND,
-	DEBUG_SAMPLING_TRIGGER_FAULT_NOSEND,
-	DEBUG_SAMPLING_SEND_LAST_SAMPLES
-} debug_sampling_mode;
 
 typedef struct {
 	// Limits
@@ -136,14 +90,6 @@ typedef struct {
 	float lo_in_current_min;
 	float lo_current_motor_max_now;
 	float lo_current_motor_min_now;
-	// Sensorless (bldc)
-	float sl_min_erpm;
-	float sl_min_erpm_cycle_int_limit;
-	float sl_max_fullbreak_current_dir_change;
-	float sl_cycle_int_limit;
-	float sl_phase_advance_at_br;
-	float sl_cycle_int_rpm_br;
-	float sl_bemf_coupling_k;
 	// FOC
 	float foc_current_kp;
 	float foc_current_ki;
@@ -161,9 +107,6 @@ typedef struct {
 	float foc_pll_ki;
 	float foc_duty_dowmramp_kp;
 	float foc_duty_dowmramp_ki;
-	float foc_openloop_rpm;
-	float foc_sl_openloop_hyst;
-	float foc_sl_openloop_time;
 	float foc_sl_d_current_duty;
 	float foc_sl_d_current_factor;
 	float foc_sl_erpm;
@@ -179,13 +122,12 @@ typedef struct {
 	float s_pid_kd;
 	float s_pid_kd_filter;
 	float s_pid_min_erpm;
-	bool  s_pid_allow_braking;
 	// Pos PID
 	float p_pid_kp;
 	float p_pid_ki;
 	float p_pid_kd;
 	float p_pid_kd_filter;
-	float p_pid_ang_div;
+	float p_pid_ang_div; // 可以理解为外部齿轮减速比
 	// Current controller
 	float cc_startup_boost_duty;
 	float cc_min_current; //Absolute values less than cc_min_current will release the motor.
@@ -198,19 +140,7 @@ typedef struct {
 	bool m_invert_direction;
 	drv8301_oc_mode m_drv8301_oc_mode;
 	int m_drv8301_oc_adj;
-	float m_bldc_f_sw_min;
-	float m_bldc_f_sw_max;
-	float m_dc_f_sw;
-	float m_ntc_motor_beta;
-	out_aux_mode m_out_aux_mode;
 } mc_configuration;
-
-// Throttle curve mode
-typedef enum {
-	THR_EXP_EXPO = 0,
-	THR_EXP_NATURAL,
-	THR_EXP_POLY
-} thr_exp_mode;
 
 typedef struct {
 	// Settings
@@ -220,48 +150,6 @@ typedef struct {
 	bool send_can_status;
 	uint32_t send_can_status_rate_hz;
 } app_configuration;
-
-// Communication commands
-typedef enum {
-	COMM_FW_VERSION = 0,
-	COMM_JUMP_TO_BOOTLOADER,
-	COMM_ERASE_NEW_APP,
-	COMM_WRITE_NEW_APP_DATA,
-	COMM_GET_VALUES,
-	COMM_SET_DUTY,
-	COMM_SET_CURRENT,
-	COMM_SET_CURRENT_BRAKE,
-	COMM_SET_RPM,
-	COMM_SET_POS,
-	COMM_SET_HANDBRAKE,
-	COMM_SET_DETECT,
-	COMM_SET_SERVO_POS,
-	COMM_SET_MCCONF,
-	COMM_GET_MCCONF,
-	COMM_GET_MCCONF_DEFAULT,
-	COMM_SET_APPCONF,
-	COMM_GET_APPCONF,
-	COMM_GET_APPCONF_DEFAULT,
-	COMM_SAMPLE_PRINT,
-	COMM_TERMINAL_CMD,
-	COMM_PRINT,
-	COMM_ROTOR_POSITION,
-	COMM_EXPERIMENT_SAMPLE,
-	COMM_DETECT_MOTOR_PARAM,
-	COMM_DETECT_MOTOR_R_L,
-	COMM_DETECT_MOTOR_FLUX_LINKAGE,
-	COMM_DETECT_ENCODER,
-	COMM_DETECT_HALL_FOC,
-	COMM_REBOOT,
-	COMM_ALIVE,
-	COMM_GET_DECODED_PPM,
-	COMM_GET_DECODED_ADC,
-	COMM_GET_DECODED_CHUK,
-	COMM_FORWARD_CAN,
-	COMM_SET_CHUCK_DATA,
-	COMM_CUSTOM_APP_DATA,
-	COMM_NRF_START_PAIRING
-} COMM_PACKET_ID;
 
 typedef struct {
 	int id;

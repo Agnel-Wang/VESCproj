@@ -48,20 +48,10 @@ static void sincosf(float value, float *s, float *c) {
          
 // Structs
 typedef struct {
-	volatile bool updated;
-	volatile unsigned int top;
-	volatile unsigned int duty;
-	volatile unsigned int val_sample;
-	volatile unsigned int curr1_sample;
-	volatile unsigned int curr2_sample;
-	volatile unsigned int curr3_sample;
-} mc_timer_struct;
-
-typedef struct {
 	int sample_num;
 	float avg_current_tot;
 	float avg_voltage_tot;
-	bool measure_inductance_now; //当前正在测量电感，用于mcpwm_foc_measure_inductance()函数中
+	bool measure_inductance_now; //当前是否正在测量电感，用于mcpwm_foc_measure_inductance()函数中
 	float measure_inductance_duty; //测量电感时的占空比
 } mc_sample_t;
 
@@ -95,35 +85,30 @@ typedef struct {
 
 // Private variables
 static volatile mc_configuration *m_conf;
-static volatile mc_state m_state;
-static volatile mc_control_mode m_control_mode;
-static volatile motor_state_t m_motor_state;
-static volatile mc_timer_struct timer_struct;
-static volatile mc_sample_t m_samples;
+static volatile mc_state m_state; // 运行状态
+static volatile mc_control_mode m_control_mode; // 控制模式
+static volatile motor_state_t m_motor_state; // 电机状态参数
 
-static volatile int direction;
 static volatile bool m_init_done; // foc初始化完成
-static volatile bool m_dccal_done;
-static volatile int curr_samp_volt; // Use the voltage-synchronized samples for this current sample
+static volatile bool m_dccal_done; // 电流零偏测量完成
 
-static volatile int comm_step; // Range [1 6]
 static volatile int detect_step; // 转速计单步计数值 Range [0 5]
 static volatile int curr0_sum; // 1路电流采样累计值
 static volatile int curr1_sum; // 2路电流采样累计值
 static volatile int curr2_sum; // 3路电流采样累计值
-static volatile int m_curr_samples;
+static volatile int m_curr_samples; // 计算电流零偏时的计数值
 static volatile int curr0_offset; // 1路电流采样零偏补偿值
 static volatile int curr1_offset; // 2路电流采样零偏补偿值
 static volatile int curr2_offset; // 3路电流采样零偏补偿值
 static volatile bool m_phase_override;
 static volatile float m_phase_now_override;
-static volatile float m_duty_cycle_set;
+static volatile float m_duty_cycle_set; // 占空比设定
 static volatile float m_id_set; // d轴电流设定
 static volatile float m_iq_set; // q轴电流设定
 static volatile float m_openloop_speed;
 static volatile bool m_output_on; // 是否是否输出pwm 只判断一次
 static volatile float m_pos_pid_set; //位置设定 [0, 360]
-static volatile float m_speed_pid_set_rpm;
+static volatile float m_speed_pid_set_rpm; // 速度设定 ERPM
 static volatile float m_phase_now_observer; // 通过观测器获得的当前相位角
 static volatile float m_phase_now_observer_override;
 static volatile bool m_phase_observer_override;
@@ -137,10 +122,6 @@ static volatile int m_tachometer; // 转速计计算，其实是累计位置，每一圈增6
 static volatile int m_tachometer_abs; // 总转动位置(绝对值)
 static volatile float last_inj_adc_isr_duration; // 上一次adc采样中断持续时间
 static volatile float m_pos_pid_now; // 当前pid位置
-static volatile float last_current_sample;
-static volatile float last_current_sample_filtered;
-static volatile float switching_frequency_now;
-static volatile int has_commutated;
 static volatile float m_gamma_now;
 
 // Private functions
@@ -199,7 +180,6 @@ void mcpwm_foc_init(volatile mc_configuration *configuration) {
 	m_pos_pid_now = 0.0f;
 	m_gamma_now = 0.0f;
 	memset((void*)&m_motor_state, 0, sizeof(motor_state_t));
-	memset((void*)&m_samples, 0, sizeof(mc_sample_t));
     
 	TIM_DeInit(TIM1);
 	TIM_DeInit(TIM8);
@@ -317,8 +297,7 @@ void mcpwm_foc_init(volatile mc_configuration *configuration) {
 	// Enable DMA request after last transfer (Multi-ADC mode)
 	ADC_MultiModeDMARequestAfterLastTransferCmd(ENABLE);
 
-	hw_setup_adc_channels(); // 采样间隔15cycles, 转换时间TCONV = 15 + 12 = 27cycles
-    // 注：网上说是T_conv = 采样时间 + 12.5个周期，查参考手册P256为 +12个周期
+	hw_setup_adc_channels(); // 采样间隔15cycles, 总转换时间TCONV = 15 + 12 = 27cycles
     // 采样时间 = (采样间隔 + 总转换时间) * 采样通道数 / ADC时钟
     // 采样时间 = (5 + 27) * 15 / 42,000,000 = 11.4us
     
@@ -388,7 +367,7 @@ void mcpwm_foc_init(volatile mc_configuration *configuration) {
 	ENABLE_GATE();
     do_dc_cal();
     
-    // ------------- Timer5 for speed & position cycle ------------- //
+    // ------------- Timer5 for speed cycle ------------- //
     // TIM5 clock enable
 	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM5, ENABLE);
 
@@ -402,7 +381,6 @@ void mcpwm_foc_init(volatile mc_configuration *configuration) {
  	TIM5->DIER |= 1<<0;//允许更新中断
 	nvicEnableVector(TIM5_IRQn, 7);
 	TIM_Cmd(TIM5, ENABLE);
-    
     
     m_init_done = true;
 }
@@ -457,6 +435,7 @@ void mcpwm_foc_set_duty(float dutyCycle) {
  *
  * @param rpm
  * The electrical RPM goal value to use.
+ * 实为ERPM
  */
 void mcpwm_foc_set_pid_speed(float rpm) {
 	m_control_mode = CONTROL_MODE_SPEED;
@@ -523,35 +502,8 @@ void mcpwm_foc_set_brake_current(float current) {
 	}
 
 	m_control_mode = CONTROL_MODE_CURRENT_BRAKE;
-	m_iq_set = current;
-
-	if (m_state != MC_STATE_RUNNING) {
-		m_state = MC_STATE_RUNNING;
-	}
-}
-
-/**
- * Produce an openloop rotating current.
- *
- * @param current
- * The current to use.
- *
- * @param rpm
- * The RPM to use.
- */
-void mcpwm_foc_set_openloop(float current, float rpm) {
-	if (fabsf(current) < m_conf->cc_min_current) {
-		m_control_mode = CONTROL_MODE_NONE;
-		m_state = MC_STATE_OFF;
-		stop_pwm_hw();
-		return;
-	}
-
 	utils_truncate_number(&current, -m_conf->l_current_max, m_conf->l_current_max);
-
-	m_control_mode = CONTROL_MODE_OPENLOOP;
 	m_iq_set = current;
-	m_openloop_speed = rpm * ((2.0f * M_PI) / 60.0f);
 
 	if (m_state != MC_STATE_RUNNING) {
 		m_state = MC_STATE_RUNNING;
@@ -572,30 +524,6 @@ float mcpwm_foc_get_pid_pos_set(void) {
 
 float mcpwm_foc_get_pid_pos_now(void) {
 	return m_pos_pid_now;
-}
-
-/**
- * Get the current switching frequency.
- *
- * @return
- * The switching frequency in Hz.
- */
-float mcpwm_foc_get_switching_frequency_now(void) {
-	return m_conf->foc_f_sw;
-}
-
-/**
- * Get the current sampling frequency.
- *
- * @return
- * The sampling frequency in Hz.
- */
-float mcpwm_foc_get_sampling_frequency_now(void) {
-	if (m_conf->foc_sample_v0_v7) {
-		return m_conf->foc_f_sw;
-	} else {
-		return m_conf->foc_f_sw / 2.0f;
-	}
 }
 
 /**
@@ -962,184 +890,11 @@ void mcpwm_foc_encoder_detect(float current, bool print, float *offset, float *r
 	// timeout_configure(tout, tout_c);
 }
 
-/**
- * Lock the motor with a current and sample the voiltage and current to
- * calculate the motor resistance.
- *
- * @param current
- * The locking current.
- *
- * @param samples
- * The number of samples to take.
- *
- * @return
- * The calculated motor resistance.
- */
-float mcpwm_foc_measure_resistance(float current, int samples) {
-	m_phase_override = true;
-	m_phase_now_override = 0.0f;
-	m_id_set = 0.0f;
-	m_iq_set = current;
-	m_control_mode = CONTROL_MODE_CURRENT;
-	m_state = MC_STATE_RUNNING;
-
-	//TODO: Disable timeout
-	//	systime_t tout = timeout_get_timeout_msec();
-	//	float tout_c = timeout_get_brake_current();
-	//	timeout_reset();
-	//	timeout_configure(60000, 0.0f);
-
-	// Wait for the current to rise and the motor to lock.
-	delay_ms(500);
-
-	// Sample
-	m_samples.avg_current_tot = 0.0f;
-	m_samples.avg_voltage_tot = 0.0f;
-	m_samples.sample_num = 0;
-
-	int cnt = 0;
-	while (m_samples.sample_num < samples) {
-		delay_ms(1);
-		cnt++;
-		// Timeout
-		if (cnt > 10000) {
-			break;
-		}
-	}
-
-	const float current_avg = m_samples.avg_current_tot / (float)m_samples.sample_num;
-	const float voltage_avg = m_samples.avg_voltage_tot / (float)m_samples.sample_num;
-
-	// Stop
-	m_id_set = 0.0f;
-	m_iq_set = 0.0f;
-	m_phase_override = false;
-	m_control_mode = CONTROL_MODE_NONE;
-	m_state = MC_STATE_OFF;
-	stop_pwm_hw();
-
-	//TODO: Enable timeout
-	// timeout_configure(tout, tout_c);
-
-	return (voltage_avg / current_avg) * (2.0f / 3.0f);
-}
-
-/**
- * Measure the motor inductance with short voltage pulses.
- *
- * @param duty
- * The duty cycle to use in the pulses.
- *
- * @param samples
- * The number of samples to average over.
- *
- * @param
- * The current that was used for this measurement.
- *
- * @return
- * The average d and q axis inductance in microhenry.
- *
- * Unit: microhenry.
- */
-float mcpwm_foc_measure_inductance(float duty, int samples, float *curr) {
-
-}
-
-/**
- * Automatically measure the resistance and inductance of the motor with small steps.
- *
- * @param res
- * The measured resistance in ohm.
- *
- * @param ind
- * The measured inductance in microhenry.
- *
- * @return
- * True if the measurement succeeded, false otherwise.
- */
-bool mcpwm_foc_measure_res_ind(float *res, float *ind) {
-
-}
-
 //Private functions
 
 void TIM5_IRQHandler(void) { // 速度环
-    if(TIM5->SR & (1<<0)) {
-        // 1. 根据当前的iq设定值确定开环速度
-        float openloop_rpm = utils_map(fabsf(m_motor_state.iq_target),
-            0.0f, m_conf->l_current_max,0.0f, m_conf->foc_openloop_rpm); 
-        
-        // 1.1 开环速度限制
-		utils_truncate_number_abs(&openloop_rpm, m_conf->foc_openloop_rpm);
-
+    if(TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET) {
         const float dt = 0.001f;//速度环频率1000hz
-		const float min_rads = (openloop_rpm * 2.0f * M_PI) / 60.0f; //速度单位转换为rad/s
-		static float min_rpm_hyst_timer = 0.0f;
-		static float min_rpm_timer = 0.0f;
-
-		float add_min_speed = 0.0f; // 速度最小增量
-		if (m_motor_state.duty_now > 0.0f) {
-			add_min_speed = min_rads * dt;
-		} else {
-			add_min_speed = -min_rads * dt;
-		}
-
-		// Open loop encoder angle for when the index is not found
-		m_phase_now_encoder_no_index += add_min_speed;
-		utils_norm_angle_rad((float*)&m_phase_now_encoder_no_index);
-
-		// Output a minimum speed from the observer
-		if (fabsf(m_pll_speed) < min_rads) {
-			min_rpm_hyst_timer += dt;
-		} else if (min_rpm_hyst_timer > 0.0f) {
-			min_rpm_hyst_timer -= dt;
-		}
-
-		// Don't use this in brake mode.
-		if (m_control_mode == CONTROL_MODE_CURRENT_BRAKE || fabsf(m_motor_state.duty_now) < 0.001f) {
-			min_rpm_hyst_timer = 0.0f;
-			m_phase_observer_override = false;
-		}
-
-		bool started_now = false;
-		if (min_rpm_hyst_timer > m_conf->foc_sl_openloop_hyst && min_rpm_timer <= 0.0001f) {
-			min_rpm_timer = m_conf->foc_sl_openloop_time;
-			started_now = true;
-		}
-
-		if (min_rpm_timer > 0.0f) {
-			m_phase_now_observer_override += add_min_speed;
-
-			// When the motor gets stuck it tends to be 90 degrees off, so start the open loop
-			// sequence by correcting with 90 degrees.
-			if (started_now) {
-				if (m_motor_state.duty_now > 0.0f) {
-					m_phase_now_observer_override += M_PI / 2.0f;
-				} else {
-					m_phase_now_observer_override -= M_PI / 2.0f;
-				}
-			}
-
-			utils_norm_angle_rad((float*)&m_phase_now_observer_override);
-			m_phase_observer_override = true;
-			min_rpm_timer -= dt;
-			min_rpm_hyst_timer = 0.0f;
-		} else {
-			m_phase_now_observer_override = m_phase_now_observer;
-			m_phase_observer_override = false;
-		}
-
-		// Samples
-		if (m_state == MC_STATE_RUNNING) {
-			const volatile float vd_tmp = m_motor_state.vd;
-			const volatile float vq_tmp = m_motor_state.vq;
-			const volatile float id_tmp = m_motor_state.id;
-			const volatile float iq_tmp = m_motor_state.iq;
-
-			m_samples.avg_current_tot += sqrtf(SQ(id_tmp) + SQ(iq_tmp));
-			m_samples.avg_voltage_tot += sqrtf(SQ(vd_tmp) + SQ(vq_tmp));
-			m_samples.sample_num++;
-		}
 
 		// Update and the observer gain.
 		m_gamma_now = utils_map(fabsf(m_motor_state.duty_now), 0.0f, 1.0f,
@@ -1149,7 +904,7 @@ void TIM5_IRQHandler(void) { // 速度环
 			run_pid_control_speed(dt);
 		}
         
-        TIM5->SR &= ~(1<<0);
+        TIM_ClearITPendingBit(TIM5, TIM_IT_Update);
     }
 }
 
@@ -1159,10 +914,8 @@ void mcpwm_foc_tim_sample_int_handler(void) { // 电流环，位置环
     
     bool is_v7 = !(TIM1->CR1 & TIM_CR1_DIR);
     
-    if (!m_samples.measure_inductance_now) {
-        if (!m_conf->foc_sample_v0_v7 && is_v7) {
-            return;
-        }
+    if (!m_conf->foc_sample_v0_v7 && is_v7) {
+        return;
     }
     
     // Reset the watchdog
@@ -1355,17 +1108,6 @@ void mcpwm_foc_tim_sample_int_handler(void) { // 电流环，位置环
         if (!m_phase_override) {
             id_set_tmp = 0.0f;
         }
-        
-        // 手刹模式
-		// Force the phase to 0 in handbrake mode so that the current simply locks the rotor.
-		if (m_control_mode == CONTROL_MODE_HANDBRAKE) {
-			m_motor_state.phase = 0.0f;
-		} else if (m_control_mode == CONTROL_MODE_OPENLOOP) {
-			static float openloop_angle = 0.0f;
-			openloop_angle += dt * m_openloop_speed;
-			utils_norm_angle_rad(&openloop_angle);
-			m_motor_state.phase = openloop_angle;
-		}
         
 		if (m_phase_override) {
 			m_motor_state.phase = m_phase_now_override;
@@ -1837,17 +1579,6 @@ static void run_pid_control_speed(float dt) {
 	// Calculate output
 	float output = p_term + i_term + d_term;
 	utils_truncate_number(&output, -1.0f, 1.0f);
-
-	// Optionally disable braking
-	if (!m_conf->s_pid_allow_braking) {
-		if (rpm > 0.0f && output < 0.0f) {
-			output = 0.0f;
-		}
-
-		if (rpm < 0.0f && output > 0.0f) {
-			output = 0.0f;
-		}
-	}
 
 	m_iq_set = output * m_conf->lo_current_max;
 }

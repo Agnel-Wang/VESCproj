@@ -14,6 +14,7 @@
  * TIM3: servo_dec/Encoder (HW_R2)/servo_simple
  * TIM4: WS2811/WS2812 LEDs/Encoder (other HW)
  * TIM5: speed cycle
+ * TIM2: motor timer task
  *
  * DMA/stream   Device      Function
  * 1, 2         I2C1        Nunchuk, temp on rev 4.5f
@@ -49,8 +50,9 @@ __align(8) OS_STK LED_TASK_STK[LED_STK_SIZE];
 OS_EVENT *RUN;
 
 int main(void) {
-    // 本杰明的MCO2PRE为4分频，RTCPRE为8分频，此处暂未更改
+    // 本杰明的MCO2PRE为4分频，RTCPRE为8分频，暂未更改
     // 修改 PLL_M = 8
+    // 但目前因此UCOS的时钟慢了25/8,待改
 	SystemInit();
     
     hw_init_gpio();

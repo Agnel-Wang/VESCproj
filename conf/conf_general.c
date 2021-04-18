@@ -61,14 +61,6 @@ void conf_general_get_default_mc_configuration(mc_configuration *conf) {
 	conf->lo_current_motor_max_now = conf->l_current_max;
 	conf->lo_current_motor_min_now = conf->l_current_min;
 
-	conf->sl_min_erpm = MCCONF_SL_MIN_RPM;
-	conf->sl_max_fullbreak_current_dir_change = MCCONF_SL_MAX_FB_CURR_DIR_CHANGE;
-	conf->sl_min_erpm_cycle_int_limit = MCCONF_SL_MIN_ERPM_CYCLE_INT_LIMIT;
-	conf->sl_cycle_int_limit = MCCONF_SL_CYCLE_INT_LIMIT;
-	conf->sl_phase_advance_at_br = MCCONF_SL_PHASE_ADVANCE_AT_BR;
-	conf->sl_cycle_int_rpm_br = MCCONF_SL_CYCLE_INT_BR;
-	conf->sl_bemf_coupling_k = MCCONF_SL_BEMF_COUPLING_K;
-
 	conf->foc_current_kp = MCCONF_FOC_CURRENT_KP;
 	conf->foc_current_ki = MCCONF_FOC_CURRENT_KI;
 	conf->foc_f_sw = MCCONF_FOC_F_SW;
@@ -85,9 +77,6 @@ void conf_general_get_default_mc_configuration(mc_configuration *conf) {
 	conf->foc_observer_gain_slow = MCCONF_FOC_OBSERVER_GAIN_SLOW;
 	conf->foc_duty_dowmramp_kp = MCCONF_FOC_DUTY_DOWNRAMP_KP;
 	conf->foc_duty_dowmramp_ki = MCCONF_FOC_DUTY_DOWNRAMP_KI;
-	conf->foc_openloop_rpm = MCCONF_FOC_OPENLOOP_RPM;
-	conf->foc_sl_openloop_hyst = MCCONF_FOC_SL_OPENLOOP_HYST;
-	conf->foc_sl_openloop_time = MCCONF_FOC_SL_OPENLOOP_TIME;
 	conf->foc_sl_d_current_duty = MCCONF_FOC_SL_D_CURRENT_DUTY;
 	conf->foc_sl_d_current_factor = MCCONF_FOC_SL_D_CURRENT_FACTOR;
 	conf->foc_sl_erpm = MCCONF_FOC_SL_ERPM;
@@ -103,7 +92,6 @@ void conf_general_get_default_mc_configuration(mc_configuration *conf) {
 	conf->s_pid_kd = MCCONF_S_PID_KD;
 	conf->s_pid_kd_filter = MCCONF_S_PID_KD_FILTER;
 	conf->s_pid_min_erpm = MCCONF_S_PID_MIN_RPM;
-	conf->s_pid_allow_braking = MCCONF_S_PID_ALLOW_BRAKING;
 
 	conf->p_pid_kp = MCCONF_P_PID_KP;
 	conf->p_pid_ki = MCCONF_P_PID_KI;
@@ -122,9 +110,4 @@ void conf_general_get_default_mc_configuration(mc_configuration *conf) {
 	conf->m_invert_direction = MCCONF_M_INVERT_DIRECTION;
 	conf->m_drv8301_oc_mode = MCCONF_M_DRV8301_OC_MODE;
 	conf->m_drv8301_oc_adj = MCCONF_M_DRV8301_OC_ADJ;
-	conf->m_bldc_f_sw_min = MCCONF_M_BLDC_F_SW_MIN;
-	conf->m_bldc_f_sw_max = MCCONF_M_BLDC_F_SW_MAX;
-	conf->m_dc_f_sw = MCCONF_M_DC_F_SW;
-	conf->m_ntc_motor_beta = MCCONF_M_NTC_MOTOR_BETA;
-	conf->m_out_aux_mode = MCCONF_M_OUT_AUX_MODE;
 }

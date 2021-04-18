@@ -1,11 +1,6 @@
 #ifndef MCCONF_DEFAULT_H_
 #define MCCONF_DEFAULT_H_
 
-// Default settings
-#ifndef MCCONF_COMM_MODE
-#define MCCONF_COMM_MODE				COMM_MODE_INTEGRATE	// The commutation mode to use
-#endif
-
 // Limits
 #ifndef MCCONF_L_CURRENT_MAX
 #define MCCONF_L_CURRENT_MAX			5.0f	// Current limit in Amperes (Upper)
@@ -96,9 +91,6 @@
 #ifndef MCCONF_S_PID_MIN_RPM
 #define MCCONF_S_PID_MIN_RPM			0.0f	// Minimum allowed RPM
 #endif
-#ifndef MCCONF_S_PID_ALLOW_BRAKING
-#define MCCONF_S_PID_ALLOW_BRAKING		true	// Allow braking in speed control mode
-#endif
 
 // Position PID parameters
 #ifndef MCCONF_P_PID_KP
@@ -180,15 +172,6 @@
 #ifndef MCCONF_FOC_DUTY_DOWNRAMP_KI
 #define MCCONF_FOC_DUTY_DOWNRAMP_KI		200.0f	// PI controller for duty control when decreasing the duty
 #endif
-#ifndef MCCONF_FOC_OPENLOOP_RPM
-#define MCCONF_FOC_OPENLOOP_RPM			400.0f	// Openloop RPM (sensorless low speed or when finding index pulse)
-#endif
-#ifndef MCCONF_FOC_SL_OPENLOOP_HYST
-#define MCCONF_FOC_SL_OPENLOOP_HYST		0.1f		// Time below min RPM to activate openloop (s)
-#endif
-#ifndef MCCONF_FOC_SL_OPENLOOP_TIME
-#define MCCONF_FOC_SL_OPENLOOP_TIME		0.1f		// Time to remain in openloop (s)
-#endif
 #ifndef MCCONF_FOC_SL_D_CURRENT_DUTY
 #define MCCONF_FOC_SL_D_CURRENT_DUTY	0.0f		// Inject d-axis current below this duty cycle in sensorless more
 #endif
@@ -217,29 +200,6 @@
 #define MCCONF_FOC_CURRENT_FILTER_CONST	0.1f		// Filter constant for the filtered currents
 #endif
 
-// BLDC
-#ifndef MCCONF_SL_MIN_RPM
-#define MCCONF_SL_MIN_RPM				150		// Auto-commutate below this RPM
-#endif
-#ifndef MCCONF_SL_MIN_ERPM_CYCLE_INT_LIMIT
-#define MCCONF_SL_MIN_ERPM_CYCLE_INT_LIMIT	1100.0f	// Minimum RPM to calculate the BEMF coupling from
-#endif
-#ifndef MCCONF_SL_CYCLE_INT_LIMIT
-#define MCCONF_SL_CYCLE_INT_LIMIT		62.0f	// Flux integrator limit 0 ERPM
-#endif
-#ifndef MCCONF_SL_BEMF_COUPLING_K
-#define MCCONF_SL_BEMF_COUPLING_K		600.0f	// Input voltage to bemf coupling constant
-#endif
-#ifndef MCCONF_SL_PHASE_ADVANCE_AT_BR
-#define MCCONF_SL_PHASE_ADVANCE_AT_BR	0.8f		// Flux integrator limit percentage at MCPWM_CYCLE_INT_START_RPM_BR ERPM
-#endif
-#ifndef MCCONF_SL_CYCLE_INT_BR
-#define MCCONF_SL_CYCLE_INT_BR			80000.0f	// RPM border between the START and LOW interval
-#endif
-#ifndef MCCONF_SL_MAX_FB_CURR_DIR_CHANGE
-#define MCCONF_SL_MAX_FB_CURR_DIR_CHANGE	10.0f	// Maximum current during full brake during which a direction change is allowed
-#endif
-
 // Misc
 #ifndef MCCONF_M_FAULT_STOP_TIME
 #define MCCONF_M_FAULT_STOP_TIME		500	// Ignore commands for this duration in msec when faults occur
@@ -258,21 +218,6 @@
 #endif
 #ifndef MCCONF_M_DRV8301_OC_ADJ
 #define MCCONF_M_DRV8301_OC_ADJ			16 // DRV8301 over current protection threshold
-#endif
-#ifndef MCCONF_M_BLDC_F_SW_MIN
-#define MCCONF_M_BLDC_F_SW_MIN			3000 // Minimum switching frequency in bldc mode
-#endif
-#ifndef MCCONF_M_BLDC_F_SW_MAX
-#define MCCONF_M_BLDC_F_SW_MAX			40000 // Maximum switching frequency in bldc mode
-#endif
-#ifndef MCCONF_M_DC_F_SW
-#define MCCONF_M_DC_F_SW				35000 // Switching frequency in dc mode
-#endif
-#ifndef MCCONF_M_NTC_MOTOR_BETA
-#define MCCONF_M_NTC_MOTOR_BETA			3380.0f // Beta value for motor termistor
-#endif
-#ifndef MCCONF_M_OUT_AUX_MODE
-#define MCCONF_M_OUT_AUX_MODE			OUT_AUX_MODE_OFF // Auxiliary output mode
 #endif
 
 #endif /* MCCONF_DEFAULT_H_ */

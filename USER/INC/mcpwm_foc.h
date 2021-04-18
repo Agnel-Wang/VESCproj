@@ -20,8 +20,6 @@ float mcpwm_foc_get_duty_cycle_set(void);
 float mcpwm_foc_get_duty_cycle_now(void);
 float mcpwm_foc_get_pid_pos_set(void);
 float mcpwm_foc_get_pid_pos_now(void);
-float mcpwm_foc_get_switching_frequency_now(void);
-float mcpwm_foc_get_sampling_frequency_now(void);
 float mcpwm_foc_get_rpm(void);
 float mcpwm_foc_get_tot_current(void);
 float mcpwm_foc_get_tot_current_filtered(void);
@@ -40,9 +38,6 @@ float mcpwm_foc_get_phase_encoder(void);
 float mcpwm_foc_get_vd(void);
 float mcpwm_foc_get_vq(void);
 void mcpwm_foc_encoder_detect(float current, bool print, float *offset, float *ratio, bool *inverted);
-float mcpwm_foc_measure_resistance(float current, int samples);
-float mcpwm_foc_measure_inductance(float duty, int samples, float *curr);
-bool mcpwm_foc_measure_res_ind(float *res, float *ind);
 float mcpwm_foc_get_last_inj_adc_isr_duration(void);
 
 // Defines
