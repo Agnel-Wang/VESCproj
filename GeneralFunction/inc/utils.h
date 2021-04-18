@@ -4,6 +4,19 @@
 #include <stdbool.h>
 #include "stm32f4xx.h"
 
+typedef float float32_t;
+
+/**
+* @brief Macros required for SINE and COSINE Fast math approximations
+*/
+#define FAST_MATH_TABLE_SIZE  512
+#define FAST_MATH_Q31_SHIFT   (32 - 10)
+#define FAST_MATH_Q15_SHIFT   (16 - 10)
+#define CONTROLLER_Q31_SHIFT  (32 - 9)
+#define TABLE_SIZE  256
+#define TABLE_SPACING_Q31	   0x400000
+#define TABLE_SPACING_Q15	   0x80
+
 #define ABS(x)  ((x)>0? (x):(-(x)))
 #define SIG(x)  ((x < 0) ? -1 : 1)
 #define PEAK(A,B)   if(ABS(A)>B) A=SIG(A)*B; //此处默认B为正值
@@ -59,5 +72,7 @@ float utils_min_abs(float va, float vb);
 float utils_max_abs(float va, float vb);
 void utils_byte_to_binary(int x, char *b);
 float utils_throttle_curve(float val, float curve_acc, float curve_brake, int mode);
+float32_t utils_sin_f32(float x);
+float32_t utils_cos_f32(float32_t x);
 
 #endif

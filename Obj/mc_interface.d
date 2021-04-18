@@ -25,3 +25,17 @@
 .\obj\mc_interface.o: .\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\obj\mc_interface.o: .\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\obj\mc_interface.o: .\hwconf\hw_60.h
+.\obj\mc_interface.o: .\GeneralFunction\inc\sys.h
+.\obj\mc_interface.o: .\hwconf\drv8301.h
+.\obj\mc_interface.o: .\USER\INC\encoder.h
+.\obj\mc_interface.o: .\USER\INC\mcpwm_foc.h
+.\obj\mc_interface.o: .\GeneralFunction\inc\utils.h
+.\obj\mc_interface.o: .\uCOSII\CONFIG\includes.h
+.\obj\mc_interface.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h
+.\obj\mc_interface.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\string.h
+.\obj\mc_interface.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\ctype.h
+.\obj\mc_interface.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
+.\obj\mc_interface.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\obj\mc_interface.o: .\uCOSII\CORE\ucos_ii.h
+.\obj\mc_interface.o: .\uCOSII\CONFIG\os_cfg.h
+.\obj\mc_interface.o: .\uCOSII\PORT\os_cpu.h

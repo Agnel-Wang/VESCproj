@@ -36,7 +36,8 @@
 .\obj\main.o: .\conf\appconf_default.h
 .\obj\main.o: .\conf\mcconf_default.h
 .\obj\main.o: .\hwconf\hw_60.h
-.\obj\main.o: .\USER\INC\led.h
 .\obj\main.o: .\GeneralFunction\inc\sys.h
+.\obj\main.o: .\USER\INC\led.h
 .\obj\main.o: .\USER\INC\delay.h
 .\obj\main.o: .\USER\INC\mc_interface.h
+.\obj\main.o: .\USER\INC\mcpwm_foc.h

@@ -42,3 +42,4 @@
 .\obj\mcpwm_foc.o: .\conf\mcconf_default.h
 .\obj\mcpwm_foc.o: .\GeneralFunction\inc\utils.h
 .\obj\mcpwm_foc.o: .\USER\INC\encoder.h
+.\obj\mcpwm_foc.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\math.h

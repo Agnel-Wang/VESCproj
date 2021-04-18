@@ -150,7 +150,7 @@ typedef struct {
 	float foc_f_sw;
 	float foc_dt_us;
 	float foc_encoder_offset;
-	bool foc_encoder_inverted;
+	bool  foc_encoder_inverted;
 	float foc_encoder_ratio;
 	float foc_motor_l;
 	float foc_motor_r;
@@ -167,10 +167,10 @@ typedef struct {
 	float foc_sl_d_current_duty;
 	float foc_sl_d_current_factor;
 	float foc_sl_erpm;
-	bool foc_sample_v0_v7;
-	bool foc_sample_high_current;
+	bool  foc_sample_v0_v7;
+	bool  foc_sample_high_current;
 	float foc_sat_comp;
-	bool foc_temp_comp;
+	bool  foc_temp_comp;
 	float foc_temp_comp_base_temp;
 	float foc_current_filter_const;
 	// Speed PID
@@ -179,7 +179,7 @@ typedef struct {
 	float s_pid_kd;
 	float s_pid_kd_filter;
 	float s_pid_min_erpm;
-	bool s_pid_allow_braking;
+	bool  s_pid_allow_braking;
 	// Pos PID
 	float p_pid_kp;
 	float p_pid_ki;
@@ -188,7 +188,7 @@ typedef struct {
 	float p_pid_ang_div;
 	// Current controller
 	float cc_startup_boost_duty;
-	float cc_min_current;
+	float cc_min_current; //Absolute values less than cc_min_current will release the motor.
 	float cc_gain;
 	float cc_ramp_step_max;
 	// Misc
@@ -299,27 +299,5 @@ typedef enum {
 	LED_EXT_BRAKE_TURN_RIGHT,
 	LED_EXT_BATT
 } LED_EXT_STATE;
-
-typedef struct {
-	float v_in;
-	float temp_mos1;
-	float temp_mos2;
-	float temp_mos3;
-	float temp_mos4;
-    float temp_mos5;
-    float temp_mos6;
-    float temp_pcb;
-    float current_motor;
-    float current_in;
-    float rpm;
-    float duty_now;
-    float amp_hours;
-    float amp_hours_charged;
-    float watt_hours;
-    float watt_hours_charged;
-    int tachometer;
-    int tachometer_abs;
-    mc_fault_code fault_code;
-} mc_values;
 
 #endif /* DATATYPES_H_ */

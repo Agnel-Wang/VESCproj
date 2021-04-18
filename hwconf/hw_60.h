@@ -1,6 +1,8 @@
 #ifndef HW_60_H_
 #define HW_60_H_
 
+#include "sys.h"
+
 // HW properties
 #define HW_HAS_DRV8301
 #define HW_HAS_3_SHUNTS

@@ -132,11 +132,11 @@
 #endif
 
 // FOC
-#ifndef MCCONF_FOC_CURRENT_KP
-#define MCCONF_FOC_CURRENT_KP			0.03f
+#ifndef MCCONF_FOC_CURRENT_KP //**
+#define MCCONF_FOC_CURRENT_KP			0.0024f
 #endif
-#ifndef MCCONF_FOC_CURRENT_KI
-#define MCCONF_FOC_CURRENT_KI			50.0f
+#ifndef MCCONF_FOC_CURRENT_KI //**
+#define MCCONF_FOC_CURRENT_KI			10.40f
 #endif
 #ifndef MCCONF_FOC_F_SW
 #define MCCONF_FOC_F_SW					20000.0f
@@ -144,13 +144,13 @@
 #ifndef MCCONF_FOC_DT_US
 #define MCCONF_FOC_DT_US				0.08f // Microseconds for dead time compensation
 #endif
-#ifndef MCCONF_FOC_ENCODER_INVERTED
-#define MCCONF_FOC_ENCODER_INVERTED		false
+#ifndef MCCONF_FOC_ENCODER_INVERTED //**
+#define MCCONF_FOC_ENCODER_INVERTED		true
 #endif
-#ifndef MCCONF_FOC_ENCODER_OFFSET
-#define MCCONF_FOC_ENCODER_OFFSET		180.0f
+#ifndef MCCONF_FOC_ENCODER_OFFSET //**
+#define MCCONF_FOC_ENCODER_OFFSET		202.7f
 #endif
-#ifndef MCCONF_FOC_ENCODER_RATIO
+#ifndef MCCONF_FOC_ENCODER_RATIO //**
 #define MCCONF_FOC_ENCODER_RATIO		7.0f
 #endif
 #ifndef MCCONF_FOC_PLL_KP
@@ -159,17 +159,17 @@
 #ifndef MCCONF_FOC_PLL_KI
 #define MCCONF_FOC_PLL_KI				40000.0f
 #endif
-#ifndef MCCONF_FOC_MOTOR_L
-#define MCCONF_FOC_MOTOR_L				0.000007f
+#ifndef MCCONF_FOC_MOTOR_L //**
+#define MCCONF_FOC_MOTOR_L				0.00000236f
 #endif
-#ifndef MCCONF_FOC_MOTOR_R
-#define MCCONF_FOC_MOTOR_R				0.015f
+#ifndef MCCONF_FOC_MOTOR_R //**
+#define MCCONF_FOC_MOTOR_R				0.0104f
 #endif
-#ifndef MCCONF_FOC_MOTOR_FLUX_LINKAGE
-#define MCCONF_FOC_MOTOR_FLUX_LINKAGE	0.00245f
+#ifndef MCCONF_FOC_MOTOR_FLUX_LINKAGE //**
+#define MCCONF_FOC_MOTOR_FLUX_LINKAGE	0.002139f
 #endif
-#ifndef MCCONF_FOC_OBSERVER_GAIN
-#define MCCONF_FOC_OBSERVER_GAIN		9e7f		// Can be something like 600 / L
+#ifndef MCCONF_FOC_OBSERVER_GAIN //**
+#define MCCONF_FOC_OBSERVER_GAIN		2.1836e8f		// Can be something like 600 / L
 #endif
 #ifndef MCCONF_FOC_OBSERVER_GAIN_SLOW
 #define MCCONF_FOC_OBSERVER_GAIN_SLOW	0.3f		// Observer gain scale at minimum duty cycle
