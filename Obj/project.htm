@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Obj\project.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Obj\project.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Sun Apr 18 19:58:17 2021
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 5060750: Last Updated: Wed Apr 21 22:22:34 2021
 <BR><P>
 <H3>Maximum Stack Usage =        528 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -12,11 +12,11 @@ main &rArr; mc_interface_init &rArr; mcpwm_foc_init &rArr; delay_ms &rArr; OSTim
 <H3>
 Functions with no stack information
 </H3><UL>
- <LI><a href="#[7b]">OS_CPU_SR_Save</a>
- <LI><a href="#[7d]">OS_CPU_SR_Restore</a>
- <LI><a href="#[82]">OSStartHighRdy</a>
- <LI><a href="#[8e]">OSCtxSw</a>
- <LI><a href="#[7c]">OSIntCtxSw</a>
+ <LI><a href="#[7e]">OS_CPU_SR_Save</a>
+ <LI><a href="#[80]">OS_CPU_SR_Restore</a>
+ <LI><a href="#[85]">OSStartHighRdy</a>
+ <LI><a href="#[91]">OSCtxSw</a>
+ <LI><a href="#[7f]">OSIntCtxSw</a>
  <LI><a href="#[9]">PendSV_Handler</a>
 </UL>
 </UL>
@@ -39,7 +39,7 @@ Function Pointers
 </H3><UL>
  <LI><a href="#[1d]">ADC_IRQHandler</a> from startup_stm32f4xx.o(.text) referenced from startup_stm32f4xx.o(RESET)
  <LI><a href="#[5]">BusFault_Handler</a> from startup_stm32f4xx.o(.text) referenced from startup_stm32f4xx.o(RESET)
- <LI><a href="#[1f]">CAN1_RX0_IRQHandler</a> from startup_stm32f4xx.o(.text) referenced from startup_stm32f4xx.o(RESET)
+ <LI><a href="#[1f]">CAN1_RX0_IRQHandler</a> from common_can.o(i.CAN1_RX0_IRQHandler) referenced from startup_stm32f4xx.o(RESET)
  <LI><a href="#[20]">CAN1_RX1_IRQHandler</a> from startup_stm32f4xx.o(.text) referenced from startup_stm32f4xx.o(RESET)
  <LI><a href="#[21]">CAN1_SCE_IRQHandler</a> from startup_stm32f4xx.o(.text) referenced from startup_stm32f4xx.o(RESET)
  <LI><a href="#[1e]">CAN1_TX_IRQHandler</a> from startup_stm32f4xx.o(.text) referenced from startup_stm32f4xx.o(RESET)
@@ -120,7 +120,7 @@ Function Pointers
  <LI><a href="#[29]">TIM4_IRQHandler</a> from startup_stm32f4xx.o(.text) referenced from startup_stm32f4xx.o(RESET)
  <LI><a href="#[3d]">TIM5_IRQHandler</a> from mcpwm_foc.o(i.TIM5_IRQHandler) referenced from startup_stm32f4xx.o(RESET)
  <LI><a href="#[41]">TIM6_DAC_IRQHandler</a> from startup_stm32f4xx.o(.text) referenced from startup_stm32f4xx.o(RESET)
- <LI><a href="#[42]">TIM7_IRQHandler</a> from startup_stm32f4xx.o(.text) referenced from startup_stm32f4xx.o(RESET)
+ <LI><a href="#[42]">TIM7_IRQHandler</a> from common_can.o(i.TIM7_IRQHandler) referenced from startup_stm32f4xx.o(RESET)
  <LI><a href="#[36]">TIM8_BRK_TIM12_IRQHandler</a> from startup_stm32f4xx.o(.text) referenced from startup_stm32f4xx.o(RESET)
  <LI><a href="#[39]">TIM8_CC_IRQHandler</a> from mcpwm_foc.o(i.TIM8_CC_IRQHandler) referenced from startup_stm32f4xx.o(RESET)
  <LI><a href="#[38]">TIM8_TRG_COM_TIM14_IRQHandler</a> from startup_stm32f4xx.o(.text) referenced from startup_stm32f4xx.o(RESET)
@@ -146,7 +146,7 @@ Global Symbols
 <P><STRONG><a name="[5f]"></a>__main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry.o(.ARM.Collect$$$$00000000))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(.text)
 </UL>
-<P><STRONG><a name="[ff]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
+<P><STRONG><a name="[10f]"></a>_main_stk</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry2.o(.ARM.Collect$$$$00000001))
 
 <P><STRONG><a name="[66]"></a>_main_scatterload</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry5.o(.ARM.Collect$$$$00000004))
 <BR><BR>[Calls]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
@@ -156,15 +156,15 @@ Global Symbols
 <BR><BR>[Called By]<UL><LI><a href="#[67]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__scatterload
 </UL>
 
-<P><STRONG><a name="[100]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
+<P><STRONG><a name="[110]"></a>_main_clock</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry7b.o(.ARM.Collect$$$$00000008))
 
-<P><STRONG><a name="[101]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
+<P><STRONG><a name="[111]"></a>_main_cpp_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry8b.o(.ARM.Collect$$$$0000000A))
 
-<P><STRONG><a name="[102]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
+<P><STRONG><a name="[112]"></a>_main_init</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry9a.o(.ARM.Collect$$$$0000000B))
 
-<P><STRONG><a name="[103]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
+<P><STRONG><a name="[113]"></a>__rt_final_cpp</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry10a.o(.ARM.Collect$$$$0000000D))
 
-<P><STRONG><a name="[104]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
+<P><STRONG><a name="[114]"></a>__rt_final_exit</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, entry11a.o(.ARM.Collect$$$$0000000F))
 
 <P><STRONG><a name="[1]"></a>Reset_Handler</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, startup_stm32f4xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
@@ -223,9 +223,6 @@ Global Symbols
 </UL>
 <BR>[Called By]<UL><LI><a href="#[1d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_IRQHandler
 </UL>
-<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
-</UL>
-<P><STRONG><a name="[1f]"></a>CAN1_RX0_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f4xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
 <P><STRONG><a name="[20]"></a>CAN1_RX1_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f4xx.o(.text))
@@ -423,9 +420,6 @@ Global Symbols
 <P><STRONG><a name="[41]"></a>TIM6_DAC_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f4xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
-<P><STRONG><a name="[42]"></a>TIM7_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f4xx.o(.text))
-<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
-</UL>
 <P><STRONG><a name="[36]"></a>TIM8_BRK_TIM12_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f4xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
@@ -456,96 +450,104 @@ Global Symbols
 <P><STRONG><a name="[b]"></a>WWDG_IRQHandler</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, startup_stm32f4xx.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
-<P><STRONG><a name="[7b]"></a>OS_CPU_SR_Save</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedUnlock
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedLock
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSuspend
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
+<P><STRONG><a name="[7e]"></a>OS_CPU_SR_Save</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedUnlock
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedLock
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSuspend
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Start
-<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
-<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStkChk
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskNameSet
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStkChk
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskNameSet
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskStat
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskIdle
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeTick
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeTick
+<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
-<P><STRONG><a name="[7d]"></a>OS_CPU_SR_Restore</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedUnlock
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedLock
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSuspend
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
+<P><STRONG><a name="[80]"></a>OS_CPU_SR_Restore</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedUnlock
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedLock
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSuspend
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Start
-<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
-<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStkChk
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskNameSet
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStkChk
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskNameSet
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskStat
 <LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskIdle
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeTick
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeTick
+<LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
-<P><STRONG><a name="[82]"></a>OSStartHighRdy</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSStart
+<P><STRONG><a name="[85]"></a>OSStartHighRdy</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSStart
 </UL>
 
-<P><STRONG><a name="[8e]"></a>OSCtxSw</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
+<P><STRONG><a name="[91]"></a>OSCtxSw</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
 </UL>
 
-<P><STRONG><a name="[7c]"></a>OSIntCtxSw</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
+<P><STRONG><a name="[7f]"></a>OSIntCtxSw</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
 </UL>
 
 <P><STRONG><a name="[9]"></a>PendSV_Handler</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, os_cpu_a.o(.text))
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
+<P><STRONG><a name="[af]"></a>__aeabi_memcpy</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, memcpya.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canSendstatus
+</UL>
+
+<P><STRONG><a name="[115]"></a>__aeabi_memcpy4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
+
+<P><STRONG><a name="[116]"></a>__aeabi_memcpy8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memcpya.o(.text), UNUSED)
+
 <P><STRONG><a name="[69]"></a>__aeabi_memset</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 <BR><BR>[Called By]<UL><LI><a href="#[6a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_memset$wrapper
 <LI><a href="#[68]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr
 </UL>
 
-<P><STRONG><a name="[105]"></a>__aeabi_memset4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[117]"></a>__aeabi_memset4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
-<P><STRONG><a name="[106]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[118]"></a>__aeabi_memset8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
 <P><STRONG><a name="[68]"></a>__aeabi_memclr</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
 </UL>
 
-<P><STRONG><a name="[a4]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conf_general_get_default_mc_configuration
+<P><STRONG><a name="[ba]"></a>__aeabi_memclr4</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conf_general_get_default_mc_configuration
 </UL>
 
-<P><STRONG><a name="[107]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
+<P><STRONG><a name="[119]"></a>__aeabi_memclr8</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, memseta.o(.text), UNUSED)
 
 <P><STRONG><a name="[6a]"></a>_memset$wrapper</STRONG> (Thumb, 18 bytes, Stack size 8 bytes, memseta.o(.text), UNUSED)
 <BR><BR>[Calls]<UL><LI><a href="#[69]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memset
 </UL>
 
-<P><STRONG><a name="[ce]"></a>__aeabi_f2d</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, f2d.o(.text))
-<BR><BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<P><STRONG><a name="[de]"></a>__aeabi_f2d</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, f2d.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
 </UL>
 
-<P><STRONG><a name="[108]"></a>__I$use$fp</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, iusefp.o(.text), UNUSED)
+<P><STRONG><a name="[11a]"></a>__I$use$fp</STRONG> (Thumb, 0 bytes, Stack size 16 bytes, iusefp.o(.text), UNUSED)
 
 <P><STRONG><a name="[6b]"></a>_frem</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, frem.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 20<LI>Call Chain = _frem &rArr; _float_epilogue
 </UL>
 <BR>[Calls]<UL><LI><a href="#[6c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_float_epilogue
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_fmodf
+<BR>[Called By]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_fmodf
 </UL>
 
 <P><STRONG><a name="[67]"></a>__scatterload</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, init.o(.text))
@@ -554,9 +556,9 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[66]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_main_scatterload
 </UL>
 
-<P><STRONG><a name="[109]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
+<P><STRONG><a name="[11b]"></a>__scatterload_rt2</STRONG> (Thumb, 0 bytes, Stack size 0 bytes, init.o(.text), UNUSED)
 
-<P><STRONG><a name="[10a]"></a>_float_round</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, fepilogue.o(.text), UNUSED)
+<P><STRONG><a name="[11c]"></a>_float_round</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, fepilogue.o(.text), UNUSED)
 
 <P><STRONG><a name="[6c]"></a>_float_epilogue</STRONG> (Thumb, 92 bytes, Stack size 4 bytes, fepilogue.o(.text))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = _float_epilogue
@@ -564,262 +566,305 @@ Global Symbols
 <BR>[Called By]<UL><LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_frem
 </UL>
 
-<P><STRONG><a name="[10b]"></a>__decompress</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __dczerorl.o(.text), UNUSED)
+<P><STRONG><a name="[11d]"></a>__decompress</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __dczerorl.o(.text), UNUSED)
 
-<P><STRONG><a name="[10c]"></a>__decompress0</STRONG> (Thumb, 58 bytes, Stack size unknown bytes, __dczerorl.o(.text), UNUSED)
+<P><STRONG><a name="[11e]"></a>__decompress0</STRONG> (Thumb, 58 bytes, Stack size unknown bytes, __dczerorl.o(.text), UNUSED)
 
-<P><STRONG><a name="[eb]"></a>ADC_Cmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_adc.o(i.ADC_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[fc]"></a>ADC_Cmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_adc.o(i.ADC_Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[e7]"></a>ADC_CommonInit</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, stm32f4xx_adc.o(i.ADC_CommonInit))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[f8]"></a>ADC_CommonInit</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, stm32f4xx_adc.o(i.ADC_CommonInit))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[e8]"></a>ADC_Init</STRONG> (Thumb, 76 bytes, Stack size 4 bytes, stm32f4xx_adc.o(i.ADC_Init))
+<P><STRONG><a name="[f9]"></a>ADC_Init</STRONG> (Thumb, 76 bytes, Stack size 4 bytes, stm32f4xx_adc.o(i.ADC_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = ADC_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[c4]"></a>ADC_InjectedChannelConfig</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, stm32f4xx_adc.o(i.ADC_InjectedChannelConfig))
+<P><STRONG><a name="[d5]"></a>ADC_InjectedChannelConfig</STRONG> (Thumb, 92 bytes, Stack size 8 bytes, stm32f4xx_adc.o(i.ADC_InjectedChannelConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ADC_InjectedChannelConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_setup_adc_channels
+<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_setup_adc_channels
 </UL>
 
-<P><STRONG><a name="[ea]"></a>ADC_MultiModeDMARequestAfterLastTransferCmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f4xx_adc.o(i.ADC_MultiModeDMARequestAfterLastTransferCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[fb]"></a>ADC_MultiModeDMARequestAfterLastTransferCmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f4xx_adc.o(i.ADC_MultiModeDMARequestAfterLastTransferCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[c3]"></a>ADC_RegularChannelConfig</STRONG> (Thumb, 144 bytes, Stack size 8 bytes, stm32f4xx_adc.o(i.ADC_RegularChannelConfig))
+<P><STRONG><a name="[d4]"></a>ADC_RegularChannelConfig</STRONG> (Thumb, 144 bytes, Stack size 8 bytes, stm32f4xx_adc.o(i.ADC_RegularChannelConfig))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = ADC_RegularChannelConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_setup_adc_channels
+<BR>[Called By]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_setup_adc_channels
 </UL>
 
-<P><STRONG><a name="[e9]"></a>ADC_TempSensorVrefintCmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f4xx_adc.o(i.ADC_TempSensorVrefintCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[fa]"></a>ADC_TempSensorVrefintCmd</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, stm32f4xx_adc.o(i.ADC_TempSensorVrefintCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[47]"></a>DMA2_Stream4_IRQHandler</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, mcpwm_foc.o(i.DMA2_Stream4_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 312 + Unknown Stack Size
-<LI>Call Chain = DMA2_Stream4_IRQHandler &rArr; mcpwm_foc_tim_sample_int_handler &rArr; mc_interface_mc_timer_isr &rArr; mc_interface_fault_stop &rArr; drv8301_read_faults &rArr; drv8301_read_reg &rArr; spi_exchange
+<P><STRONG><a name="[1f]"></a>CAN1_RX0_IRQHandler</STRONG> (Thumb, 52 bytes, Stack size 8 bytes, common_can.o(i.CAN1_RX0_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = CAN1_RX0_IRQHandler &rArr; canReceive
 </UL>
-<BR>[Calls]<UL><LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
-<LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntEnter
-<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetITStatus
-<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ClearITPendingBit
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<BR>[Calls]<UL><LI><a href="#[6e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN_GetITStatus
+<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN_ClearITPendingBit
+<LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canReceive
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
-<P><STRONG><a name="[71]"></a>DMA_ClearITPendingBit</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_ClearITPendingBit))
+<P><STRONG><a name="[70]"></a>CAN_ClearITPendingBit</STRONG> (Thumb, 152 bytes, Stack size 4 bytes, stm32f4xx_can.o(i.CAN_ClearITPendingBit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = CAN_ClearITPendingBit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN1_RX0_IRQHandler
+</UL>
+
+<P><STRONG><a name="[b4]"></a>CAN_FilterInit</STRONG> (Thumb, 216 bytes, Stack size 8 bytes, stm32f4xx_can.o(i.CAN_FilterInit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = CAN_FilterInit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_can_init
+</UL>
+
+<P><STRONG><a name="[6e]"></a>CAN_GetITStatus</STRONG> (Thumb, 264 bytes, Stack size 0 bytes, stm32f4xx_can.o(i.CAN_GetITStatus))
+<BR><BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN1_RX0_IRQHandler
+</UL>
+
+<P><STRONG><a name="[b8]"></a>CAN_ITConfig</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_can.o(i.CAN_ITConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_can_init
+</UL>
+
+<P><STRONG><a name="[b3]"></a>CAN_Init</STRONG> (Thumb, 242 bytes, Stack size 0 bytes, stm32f4xx_can.o(i.CAN_Init))
+<BR><BR>[Called By]<UL><LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_can_init
+</UL>
+
+<P><STRONG><a name="[aa]"></a>CAN_Receive</STRONG> (Thumb, 180 bytes, Stack size 0 bytes, stm32f4xx_can.o(i.CAN_Receive))
+<BR><BR>[Called By]<UL><LI><a href="#[6f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canReceive
+</UL>
+
+<P><STRONG><a name="[b0]"></a>CAN_Transmit</STRONG> (Thumb, 192 bytes, Stack size 4 bytes, stm32f4xx_can.o(i.CAN_Transmit))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = CAN_Transmit
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canSendstatus
+</UL>
+
+<P><STRONG><a name="[47]"></a>DMA2_Stream4_IRQHandler</STRONG> (Thumb, 40 bytes, Stack size 16 bytes, mcpwm_foc.o(i.DMA2_Stream4_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
+<LI>Call Chain = DMA2_Stream4_IRQHandler &rArr; mcpwm_foc_tim_sample_int_handler &rArr; mc_interface_mc_timer_isr &rArr; mc_interface_fault_stop &rArr; drv8301_read_faults &rArr; drv8301_read_reg &rArr; spi_exchange
+</UL>
+<BR>[Calls]<UL><LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
+<LI><a href="#[71]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntEnter
+<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_GetITStatus
+<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ClearITPendingBit
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
+</UL>
+<P><STRONG><a name="[74]"></a>DMA_ClearITPendingBit</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_ClearITPendingBit))
 <BR><BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream4_IRQHandler
 </UL>
 
-<P><STRONG><a name="[e5]"></a>DMA_Cmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[f6]"></a>DMA_Cmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[6f]"></a>DMA_GetITStatus</STRONG> (Thumb, 74 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_GetITStatus))
+<P><STRONG><a name="[72]"></a>DMA_GetITStatus</STRONG> (Thumb, 74 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_GetITStatus))
 <BR><BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream4_IRQHandler
 </UL>
 
-<P><STRONG><a name="[e6]"></a>DMA_ITConfig</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_ITConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[f7]"></a>DMA_ITConfig</STRONG> (Thumb, 48 bytes, Stack size 0 bytes, stm32f4xx_dma.o(i.DMA_ITConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[e4]"></a>DMA_Init</STRONG> (Thumb, 116 bytes, Stack size 4 bytes, stm32f4xx_dma.o(i.DMA_Init))
+<P><STRONG><a name="[f5]"></a>DMA_Init</STRONG> (Thumb, 116 bytes, Stack size 4 bytes, stm32f4xx_dma.o(i.DMA_Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = DMA_Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[c1]"></a>GPIO_AF_Set</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, sys.o(i.GPIO_AF_Set))
-<BR><BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
+<P><STRONG><a name="[d2]"></a>GPIO_AF_Set</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, sys.o(i.GPIO_AF_Set))
+<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
 </UL>
 
-<P><STRONG><a name="[bd]"></a>GPIO_ReadInputDataBit</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(i.GPIO_ReadInputDataBit))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_tim_isr
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
+<P><STRONG><a name="[ce]"></a>GPIO_ReadInputDataBit</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(i.GPIO_ReadInputDataBit))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_tim_isr
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
 </UL>
 
-<P><STRONG><a name="[b2]"></a>GPIO_ResetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(i.GPIO_ResetBits))
-<BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_tim_isr
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
+<P><STRONG><a name="[c7]"></a>GPIO_ResetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(i.GPIO_ResetBits))
+<BR><BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_tim_isr
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
 </UL>
 
-<P><STRONG><a name="[ae]"></a>GPIO_Set</STRONG> (Thumb, 160 bytes, Stack size 36 bytes, sys.o(i.GPIO_Set))
+<P><STRONG><a name="[c3]"></a>GPIO_Set</STRONG> (Thumb, 160 bytes, Stack size 36 bytes, sys.o(i.GPIO_Set))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = GPIO_Set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_init
+<BR>[Called By]<UL><LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
+<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_init
 </UL>
 
-<P><STRONG><a name="[b4]"></a>GPIO_SetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(i.GPIO_SetBits))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_tim_isr
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
+<P><STRONG><a name="[c9]"></a>GPIO_SetBits</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(i.GPIO_SetBits))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_tim_isr
+<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
 </UL>
 
-<P><STRONG><a name="[fe]"></a>GPIO_WriteBit</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(i.GPIO_WriteBit))
-<BR><BR>[Called By]<UL><LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
+<P><STRONG><a name="[10e]"></a>GPIO_WriteBit</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, stm32f4xx_gpio.o(i.GPIO_WriteBit))
+<BR><BR>[Called By]<UL><LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
 </UL>
 
-<P><STRONG><a name="[73]"></a>OSInit</STRONG> (Thumb, 336 bytes, Stack size 40 bytes, os_core.o(i.OSInit))
+<P><STRONG><a name="[76]"></a>OSInit</STRONG> (Thumb, 336 bytes, Stack size 40 bytes, os_core.o(i.OSInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 160 + Unknown Stack Size
 <LI>Call Chain = OSInit &rArr; OSTaskCreateExt &rArr; OS_TCBInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_QInit
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MemInit
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_FlagInit
-<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskNameSet
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
-<LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInitHookEnd
-<LI><a href="#[74]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInitHookBegin
+<BR>[Calls]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_QInit
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MemInit
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_FlagInit
+<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskNameSet
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
+<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInitHookEnd
+<LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInitHookBegin
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[74]"></a>OSInitHookBegin</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSInitHookBegin))
-<BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
+<P><STRONG><a name="[77]"></a>OSInitHookBegin</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSInitHookBegin))
+<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
 </UL>
 
-<P><STRONG><a name="[7a]"></a>OSInitHookEnd</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSInitHookEnd))
-<BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
+<P><STRONG><a name="[7d]"></a>OSInitHookEnd</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSInitHookEnd))
+<BR><BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
 </UL>
 
-<P><STRONG><a name="[6e]"></a>OSIntEnter</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, os_core.o(i.OSIntEnter))
+<P><STRONG><a name="[71]"></a>OSIntEnter</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, os_core.o(i.OSIntEnter))
 <BR><BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream4_IRQHandler
 </UL>
 
-<P><STRONG><a name="[72]"></a>OSIntExit</STRONG> (Thumb, 96 bytes, Stack size 16 bytes, os_core.o(i.OSIntExit))
+<P><STRONG><a name="[75]"></a>OSIntExit</STRONG> (Thumb, 96 bytes, Stack size 16 bytes, os_core.o(i.OSIntExit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16 + Unknown Stack Size
 <LI>Call Chain = OSIntExit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[7c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntCtxSw
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntCtxSw
 </UL>
 <BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream4_IRQHandler
 <LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
-<P><STRONG><a name="[7e]"></a>OSSchedLock</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, os_core.o(i.OSSchedLock))
+<P><STRONG><a name="[81]"></a>OSSchedLock</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, os_core.o(i.OSSchedLock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = OSSchedLock
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
 </UL>
 
-<P><STRONG><a name="[7f]"></a>OSSchedUnlock</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, os_core.o(i.OSSchedUnlock))
+<P><STRONG><a name="[82]"></a>OSSchedUnlock</STRONG> (Thumb, 54 bytes, Stack size 8 bytes, os_core.o(i.OSSchedUnlock))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16 + Unknown Stack Size
 <LI>Call Chain = OSSchedUnlock &rArr; OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
 </UL>
 
-<P><STRONG><a name="[81]"></a>OSStart</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, os_core.o(i.OSStart))
-<BR><BR>[Calls]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSStartHighRdy
+<P><STRONG><a name="[84]"></a>OSStart</STRONG> (Thumb, 46 bytes, Stack size 0 bytes, os_core.o(i.OSStart))
+<BR><BR>[Calls]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSStartHighRdy
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[8f]"></a>OSTCBInitHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTCBInitHook))
-<BR><BR>[Called By]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
+<P><STRONG><a name="[92]"></a>OSTCBInitHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTCBInitHook))
+<BR><BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
 </UL>
 
-<P><STRONG><a name="[83]"></a>OSTaskCreate</STRONG> (Thumb, 136 bytes, Stack size 40 bytes, os_task.o(i.OSTaskCreate))
+<P><STRONG><a name="[86]"></a>OSTaskCreate</STRONG> (Thumb, 136 bytes, Stack size 40 bytes, os_task.o(i.OSTaskCreate))
 <BR><BR>[Stack]<UL><LI>Max Depth = 96 + Unknown Stack Size
 <LI>Call Chain = OSTaskCreate &rArr; OS_TCBInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStkInit
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStkInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 <LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Start
 </UL>
 
-<P><STRONG><a name="[78]"></a>OSTaskCreateExt</STRONG> (Thumb, 172 bytes, Stack size 64 bytes, os_task.o(i.OSTaskCreateExt))
+<P><STRONG><a name="[7b]"></a>OSTaskCreateExt</STRONG> (Thumb, 172 bytes, Stack size 64 bytes, os_task.o(i.OSTaskCreateExt))
 <BR><BR>[Stack]<UL><LI>Max Depth = 120 + Unknown Stack Size
 <LI>Call Chain = OSTaskCreateExt &rArr; OS_TCBInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStkInit
-<LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
+<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStkInit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
-</UL>
-
-<P><STRONG><a name="[90]"></a>OSTaskCreateHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTaskCreateHook))
-<BR><BR>[Called By]<UL><LI><a href="#[85]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
 </UL>
 
-<P><STRONG><a name="[91]"></a>OSTaskIdleHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTaskIdleHook))
+<P><STRONG><a name="[93]"></a>OSTaskCreateHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTaskCreateHook))
+<BR><BR>[Called By]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TCBInit
+</UL>
+
+<P><STRONG><a name="[94]"></a>OSTaskIdleHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTaskIdleHook))
 <BR><BR>[Called By]<UL><LI><a href="#[61]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskIdle
 </UL>
 
-<P><STRONG><a name="[79]"></a>OSTaskNameSet</STRONG> (Thumb, 80 bytes, Stack size 16 bytes, os_task.o(i.OSTaskNameSet))
+<P><STRONG><a name="[7c]"></a>OSTaskNameSet</STRONG> (Thumb, 80 bytes, Stack size 16 bytes, os_task.o(i.OSTaskNameSet))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16 + Unknown Stack Size
 <LI>Call Chain = OSTaskNameSet
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
 </UL>
-<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
 </UL>
 
-<P><STRONG><a name="[92]"></a>OSTaskStatHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTaskStatHook))
+<P><STRONG><a name="[95]"></a>OSTaskStatHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTaskStatHook))
 <BR><BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskStat
 </UL>
 
-<P><STRONG><a name="[86]"></a>OSTaskStkChk</STRONG> (Thumb, 122 bytes, Stack size 24 bytes, os_task.o(i.OSTaskStkChk))
+<P><STRONG><a name="[89]"></a>OSTaskStkChk</STRONG> (Thumb, 122 bytes, Stack size 24 bytes, os_task.o(i.OSTaskStkChk))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
 <LI>Call Chain = OSTaskStkChk
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
 </UL>
 <BR>[Called By]<UL><LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskStat
 </UL>
 
-<P><STRONG><a name="[84]"></a>OSTaskStkInit</STRONG> (Thumb, 338 bytes, Stack size 52 bytes, os_cpu_c.o(i.OSTaskStkInit))
+<P><STRONG><a name="[87]"></a>OSTaskStkInit</STRONG> (Thumb, 338 bytes, Stack size 52 bytes, os_cpu_c.o(i.OSTaskStkInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = OSTaskStkInit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
+<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
 </UL>
 
-<P><STRONG><a name="[87]"></a>OSTaskSuspend</STRONG> (Thumb, 134 bytes, Stack size 16 bytes, os_task.o(i.OSTaskSuspend))
+<P><STRONG><a name="[8a]"></a>OSTaskSuspend</STRONG> (Thumb, 134 bytes, Stack size 16 bytes, os_task.o(i.OSTaskSuspend))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
 <LI>Call Chain = OSTaskSuspend &rArr; OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
 </UL>
 <BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Start
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskStat
@@ -828,103 +873,103 @@ Global Symbols
 <P><STRONG><a name="[60]"></a>OSTaskSwHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTaskSwHook))
 <BR>[Address Reference Count : 1]<UL><LI> os_cpu_a.o(.text)
 </UL>
-<P><STRONG><a name="[88]"></a>OSTimeDly</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, os_time.o(i.OSTimeDly))
+<P><STRONG><a name="[8b]"></a>OSTimeDly</STRONG> (Thumb, 88 bytes, Stack size 16 bytes, os_time.o(i.OSTimeDly))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
 <LI>Call Chain = OSTimeDly &rArr; OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_Sched
 </UL>
-<BR>[Called By]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<BR>[Called By]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[62]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_TaskStat
 </UL>
 
-<P><STRONG><a name="[89]"></a>OSTimeTick</STRONG> (Thumb, 172 bytes, Stack size 24 bytes, os_core.o(i.OSTimeTick))
+<P><STRONG><a name="[8c]"></a>OSTimeTick</STRONG> (Thumb, 172 bytes, Stack size 24 bytes, os_core.o(i.OSTimeTick))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
 <LI>Call Chain = OSTimeTick
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeTickHook
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeTickHook
 </UL>
 <BR>[Called By]<UL><LI><a href="#[a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SysTick_Handler
 </UL>
 
-<P><STRONG><a name="[8a]"></a>OSTimeTickHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTimeTickHook))
-<BR><BR>[Called By]<UL><LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeTick
+<P><STRONG><a name="[8d]"></a>OSTimeTickHook</STRONG> (Thumb, 2 bytes, Stack size 0 bytes, os_cpu_c.o(i.OSTimeTickHook))
+<BR><BR>[Called By]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeTick
 </UL>
 
-<P><STRONG><a name="[8b]"></a>OS_CPU_SysTickInit</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, os_cpu_c.o(i.OS_CPU_SysTickInit))
+<P><STRONG><a name="[8e]"></a>OS_CPU_SysTickInit</STRONG> (Thumb, 58 bytes, Stack size 24 bytes, os_cpu_c.o(i.OS_CPU_SysTickInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = OS_CPU_SysTickInit &rArr; RCC_GetClocksFreq
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
+<BR>[Calls]<UL><LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_GetClocksFreq
 </UL>
 <BR>[Called By]<UL><LI><a href="#[65]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Start
 </UL>
 
-<P><STRONG><a name="[75]"></a>OS_FlagInit</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, os_flag.o(i.OS_FlagInit))
+<P><STRONG><a name="[78]"></a>OS_FlagInit</STRONG> (Thumb, 66 bytes, Stack size 8 bytes, os_flag.o(i.OS_FlagInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = OS_FlagInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MemClr
+<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MemClr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
-</UL>
-
-<P><STRONG><a name="[8d]"></a>OS_MemClr</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, os_core.o(i.OS_MemClr))
-<BR><BR>[Called By]<UL><LI><a href="#[77]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_QInit
-<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MemInit
-<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_FlagInit
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
 </UL>
 
-<P><STRONG><a name="[76]"></a>OS_MemInit</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, os_mem.o(i.OS_MemInit))
+<P><STRONG><a name="[90]"></a>OS_MemClr</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, os_core.o(i.OS_MemClr))
+<BR><BR>[Called By]<UL><LI><a href="#[7a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_QInit
+<LI><a href="#[79]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MemInit
+<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_FlagInit
+</UL>
+
+<P><STRONG><a name="[79]"></a>OS_MemInit</STRONG> (Thumb, 62 bytes, Stack size 8 bytes, os_mem.o(i.OS_MemInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = OS_MemInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MemClr
+<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MemClr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
 </UL>
 
-<P><STRONG><a name="[77]"></a>OS_QInit</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, os_q.o(i.OS_QInit))
+<P><STRONG><a name="[7a]"></a>OS_QInit</STRONG> (Thumb, 56 bytes, Stack size 8 bytes, os_q.o(i.OS_QInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = OS_QInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MemClr
+<BR>[Calls]<UL><LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_MemClr
 </UL>
-<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
+<BR>[Called By]<UL><LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
 </UL>
 
-<P><STRONG><a name="[80]"></a>OS_Sched</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, os_core.o(i.OS_Sched))
+<P><STRONG><a name="[83]"></a>OS_Sched</STRONG> (Thumb, 82 bytes, Stack size 8 bytes, os_core.o(i.OS_Sched))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
 <LI>Call Chain = OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSCtxSw
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSCtxSw
 </UL>
-<BR>[Called By]<UL><LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedUnlock
-<LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSuspend
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
+<BR>[Called By]<UL><LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedUnlock
+<LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSuspend
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
 </UL>
 
-<P><STRONG><a name="[85]"></a>OS_TCBInit</STRONG> (Thumb, 290 bytes, Stack size 56 bytes, os_core.o(i.OS_TCBInit))
+<P><STRONG><a name="[88]"></a>OS_TCBInit</STRONG> (Thumb, 290 bytes, Stack size 56 bytes, os_core.o(i.OS_TCBInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56 + Unknown Stack Size
 <LI>Call Chain = OS_TCBInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[90]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateHook
-<LI><a href="#[8f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTCBInitHook
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateHook
+<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTCBInitHook
 </UL>
-<BR>[Called By]<UL><LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
-<LI><a href="#[78]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
+<BR>[Called By]<UL><LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
+<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreateExt
 </UL>
 
 <P><STRONG><a name="[61]"></a>OS_TaskIdle</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, os_core.o(i.OS_TaskIdle))
-<BR><BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[91]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskIdleHook
+<BR><BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskIdleHook
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> os_core.o(i.OSInit)
 </UL>
@@ -932,51 +977,52 @@ Global Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 32 + Unknown Stack Size
 <LI>Call Chain = OS_TaskStat &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSuspend
-<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStkChk
-<LI><a href="#[92]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStatHook
+<BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSuspend
+<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStkChk
+<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskStatHook
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> os_core.o(i.OSInit)
 </UL>
-<P><STRONG><a name="[c0]"></a>RCC_AHB1PeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_AHB1PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
+<P><STRONG><a name="[d1]"></a>RCC_AHB1PeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_AHB1PeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
 </UL>
 
-<P><STRONG><a name="[b8]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB1PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
+<P><STRONG><a name="[b2]"></a>RCC_APB1PeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB1PeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_can_init
 </UL>
 
-<P><STRONG><a name="[9a]"></a>RCC_APB1PeriphResetCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB1PeriphResetCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
+<P><STRONG><a name="[a1]"></a>RCC_APB1PeriphResetCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB1PeriphResetCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
 </UL>
 
-<P><STRONG><a name="[d8]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB2PeriphClockCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[e9]"></a>RCC_APB2PeriphClockCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB2PeriphClockCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[9b]"></a>RCC_APB2PeriphResetCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB2PeriphResetCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
+<P><STRONG><a name="[a2]"></a>RCC_APB2PeriphResetCmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_rcc.o(i.RCC_APB2PeriphResetCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
 </UL>
 
-<P><STRONG><a name="[8c]"></a>RCC_GetClocksFreq</STRONG> (Thumb, 144 bytes, Stack size 8 bytes, stm32f4xx_rcc.o(i.RCC_GetClocksFreq))
+<P><STRONG><a name="[8f]"></a>RCC_GetClocksFreq</STRONG> (Thumb, 144 bytes, Stack size 8 bytes, stm32f4xx_rcc.o(i.RCC_GetClocksFreq))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = RCC_GetClocksFreq
 </UL>
-<BR>[Called By]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SysTickInit
+<BR>[Called By]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SysTickInit
 </UL>
 
 <P><STRONG><a name="[a]"></a>SysTick_Handler</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, os_cpu_c.o(i.SysTick_Handler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 32 + Unknown Stack Size
 <LI>Call Chain = SysTick_Handler &rArr; OSTimeTick
 </UL>
-<BR>[Calls]<UL><LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[72]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
-<LI><a href="#[89]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeTick
+<BR>[Calls]<UL><LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[75]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSIntExit
+<LI><a href="#[8c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeTick
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
@@ -990,644 +1036,735 @@ Global Symbols
 <P><STRONG><a name="[28]"></a>TIM3_IRQHandler</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, encoder.o(i.TIM3_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = TIM3_IRQHandler &rArr; encoder_tim_isr
 </UL>
-<BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ClearITPendingBit
-<LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_tim_isr
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ClearITPendingBit
+<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_tim_isr
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
-<P><STRONG><a name="[3d]"></a>TIM5_IRQHandler</STRONG> (Thumb, 328 bytes, Stack size 32 bytes, mcpwm_foc.o(i.TIM5_IRQHandler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = TIM5_IRQHandler
+<P><STRONG><a name="[3d]"></a>TIM5_IRQHandler</STRONG> (Thumb, 352 bytes, Stack size 40 bytes, mcpwm_foc.o(i.TIM5_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = TIM5_IRQHandler &rArr; run_pid_control_speed
 </UL>
-<BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ClearITPendingBit
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number
-<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_map
+<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;run_pid_control_speed
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number
+<LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ClearITPendingBit
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number_abs
+<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_map
+</UL>
+<BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
+</UL>
+<P><STRONG><a name="[42]"></a>TIM7_IRQHandler</STRONG> (Thumb, 58 bytes, Stack size 16 bytes, common_can.o(i.TIM7_IRQHandler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 72<LI>Call Chain = TIM7_IRQHandler &rArr; canSendstatus &rArr; mc_interface_get_rpm_now
+</UL>
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ClearITPendingBit
+<LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canSendstatus
+<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canProcess
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
 <P><STRONG><a name="[39]"></a>TIM8_CC_IRQHandler</STRONG> (Thumb, 44 bytes, Stack size 8 bytes, mcpwm_foc.o(i.TIM8_CC_IRQHandler))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TIM8_CC_IRQHandler
 </UL>
-<BR>[Calls]<UL><LI><a href="#[93]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
-<LI><a href="#[95]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ClearITPendingBit
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GenerateEvent
+<BR>[Calls]<UL><LI><a href="#[96]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GetITStatus
+<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ClearITPendingBit
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GenerateEvent
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> startup_stm32f4xx.o(RESET)
 </UL>
-<P><STRONG><a name="[e3]"></a>TIM_ARRPreloadConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_ARRPreloadConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[f4]"></a>TIM_ARRPreloadConfig</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_ARRPreloadConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[e1]"></a>TIM_BDTRConfig</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_BDTRConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[f2]"></a>TIM_BDTRConfig</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_BDTRConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[e2]"></a>TIM_CCPreloadControl</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_CCPreloadControl))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[f3]"></a>TIM_CCPreloadControl</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_CCPreloadControl))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[ab]"></a>TIM_CCxCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_CCxCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
+<P><STRONG><a name="[c0]"></a>TIM_CCxCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_CCxCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
 </UL>
 
-<P><STRONG><a name="[ac]"></a>TIM_CCxNCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_CCxNCmd))
-<BR><BR>[Called By]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
+<P><STRONG><a name="[c1]"></a>TIM_CCxNCmd</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_CCxNCmd))
+<BR><BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
 </UL>
 
-<P><STRONG><a name="[95]"></a>TIM_ClearITPendingBit</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_ClearITPendingBit))
-<BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM8_CC_IRQHandler
+<P><STRONG><a name="[98]"></a>TIM_ClearITPendingBit</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_ClearITPendingBit))
+<BR><BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM7_IRQHandler
+<LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM8_CC_IRQHandler
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
-<LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[bb]"></a>TIM_Cmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_Cmd))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
+<P><STRONG><a name="[cd]"></a>TIM_Cmd</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_Cmd))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
 </UL>
 
-<P><STRONG><a name="[ec]"></a>TIM_CtrlPWMOutputs</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_CtrlPWMOutputs))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[fd]"></a>TIM_CtrlPWMOutputs</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_CtrlPWMOutputs))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[99]"></a>TIM_DeInit</STRONG> (Thumb, 436 bytes, Stack size 8 bytes, stm32f4xx_tim.o(i.TIM_DeInit))
+<P><STRONG><a name="[a0]"></a>TIM_DeInit</STRONG> (Thumb, 436 bytes, Stack size 8 bytes, stm32f4xx_tim.o(i.TIM_DeInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TIM_DeInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphResetCmd
-<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
+<BR>[Calls]<UL><LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphResetCmd
+<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphResetCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-</UL>
-
-<P><STRONG><a name="[98]"></a>TIM_GenerateEvent</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_GenerateEvent))
-<BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM8_CC_IRQHandler
-<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_can_init
 </UL>
 
-<P><STRONG><a name="[93]"></a>TIM_GetITStatus</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_GetITStatus))
-<BR><BR>[Called By]<UL><LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM8_CC_IRQHandler
+<P><STRONG><a name="[9f]"></a>TIM_GenerateEvent</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_GenerateEvent))
+<BR><BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
+<LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM8_CC_IRQHandler
+</UL>
+
+<P><STRONG><a name="[96]"></a>TIM_GetITStatus</STRONG> (Thumb, 22 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_GetITStatus))
+<BR><BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
+<LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM7_IRQHandler
+<LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM8_CC_IRQHandler
 <LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
-<LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[ba]"></a>TIM_ITConfig</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_ITConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
+<P><STRONG><a name="[b6]"></a>TIM_ITConfig</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_ITConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_can_init
 </UL>
 
-<P><STRONG><a name="[d9]"></a>TIM_OC1Init</STRONG> (Thumb, 104 bytes, Stack size 4 bytes, stm32f4xx_tim.o(i.TIM_OC1Init))
+<P><STRONG><a name="[ea]"></a>TIM_OC1Init</STRONG> (Thumb, 104 bytes, Stack size 4 bytes, stm32f4xx_tim.o(i.TIM_OC1Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = TIM_OC1Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[dd]"></a>TIM_OC1PreloadConfig</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_OC1PreloadConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[ee]"></a>TIM_OC1PreloadConfig</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_OC1PreloadConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[da]"></a>TIM_OC2Init</STRONG> (Thumb, 134 bytes, Stack size 8 bytes, stm32f4xx_tim.o(i.TIM_OC2Init))
+<P><STRONG><a name="[eb]"></a>TIM_OC2Init</STRONG> (Thumb, 134 bytes, Stack size 8 bytes, stm32f4xx_tim.o(i.TIM_OC2Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TIM_OC2Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[de]"></a>TIM_OC2PreloadConfig</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_OC2PreloadConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[ef]"></a>TIM_OC2PreloadConfig</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_OC2PreloadConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[db]"></a>TIM_OC3Init</STRONG> (Thumb, 132 bytes, Stack size 8 bytes, stm32f4xx_tim.o(i.TIM_OC3Init))
+<P><STRONG><a name="[ec]"></a>TIM_OC3Init</STRONG> (Thumb, 132 bytes, Stack size 8 bytes, stm32f4xx_tim.o(i.TIM_OC3Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TIM_OC3Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[df]"></a>TIM_OC3PreloadConfig</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_OC3PreloadConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[f0]"></a>TIM_OC3PreloadConfig</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_OC3PreloadConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[dc]"></a>TIM_OC4Init</STRONG> (Thumb, 104 bytes, Stack size 8 bytes, stm32f4xx_tim.o(i.TIM_OC4Init))
+<P><STRONG><a name="[ed]"></a>TIM_OC4Init</STRONG> (Thumb, 104 bytes, Stack size 8 bytes, stm32f4xx_tim.o(i.TIM_OC4Init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = TIM_OC4Init
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[e0]"></a>TIM_OC4PreloadConfig</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_OC4PreloadConfig))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[f1]"></a>TIM_OC4PreloadConfig</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_OC4PreloadConfig))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[ef]"></a>TIM_SelectInputTrigger</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_SelectInputTrigger))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[100]"></a>TIM_SelectInputTrigger</STRONG> (Thumb, 12 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_SelectInputTrigger))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[ee]"></a>TIM_SelectMasterSlaveMode</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_SelectMasterSlaveMode))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[ff]"></a>TIM_SelectMasterSlaveMode</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_SelectMasterSlaveMode))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[aa]"></a>TIM_SelectOCxM</STRONG> (Thumb, 102 bytes, Stack size 4 bytes, stm32f4xx_tim.o(i.TIM_SelectOCxM))
+<P><STRONG><a name="[bf]"></a>TIM_SelectOCxM</STRONG> (Thumb, 102 bytes, Stack size 4 bytes, stm32f4xx_tim.o(i.TIM_SelectOCxM))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = TIM_SelectOCxM
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
+<BR>[Called By]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
 </UL>
 
-<P><STRONG><a name="[ed]"></a>TIM_SelectOutputTrigger</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_SelectOutputTrigger))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[fe]"></a>TIM_SelectOutputTrigger</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_SelectOutputTrigger))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[f0]"></a>TIM_SelectSlaveMode</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_SelectSlaveMode))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<P><STRONG><a name="[101]"></a>TIM_SelectSlaveMode</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, stm32f4xx_tim.o(i.TIM_SelectSlaveMode))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[b9]"></a>TIM_TimeBaseInit</STRONG> (Thumb, 120 bytes, Stack size 4 bytes, stm32f4xx_tim.o(i.TIM_TimeBaseInit))
+<P><STRONG><a name="[b5]"></a>TIM_TimeBaseInit</STRONG> (Thumb, 120 bytes, Stack size 4 bytes, stm32f4xx_tim.o(i.TIM_TimeBaseInit))
 <BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = TIM_TimeBaseInit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_can_init
 </UL>
 
 <P><STRONG><a name="[64]"></a>Task_LED</STRONG> (Thumb, 86 bytes, Stack size 0 bytes, led.o(i.Task_LED))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
 <LI>Call Chain = Task_LED &rArr; delay_ms &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.Task_Start)
 </UL>
-<P><STRONG><a name="[f9]"></a>__hardfp_floorf</STRONG> (Thumb, 98 bytes, Stack size 0 bytes, floorf.o(i.__hardfp_floorf))
-<BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
-</UL>
-
-<P><STRONG><a name="[9d]"></a>__hardfp_fmodf</STRONG> (Thumb, 176 bytes, Stack size 16 bytes, fmodf.o(i.__hardfp_fmodf))
+<P><STRONG><a name="[a4]"></a>__hardfp_fmodf</STRONG> (Thumb, 176 bytes, Stack size 16 bytes, fmodf.o(i.__hardfp_fmodf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 36<LI>Call Chain = __hardfp_fmodf &rArr; _frem &rArr; _float_epilogue
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_invalid
+<BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
+<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_invalid
 <LI><a href="#[6b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_frem
 </UL>
-<BR>[Called By]<UL><LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_norm_angle
+<BR>[Called By]<UL><LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_norm_angle
 </UL>
 
-<P><STRONG><a name="[a0]"></a>__hardfp_logf</STRONG> (Thumb, 320 bytes, Stack size 8 bytes, logf.o(i.__hardfp_logf))
+<P><STRONG><a name="[a7]"></a>__hardfp_logf</STRONG> (Thumb, 320 bytes, Stack size 8 bytes, logf.o(i.__hardfp_logf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = __hardfp_logf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
-<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_invalid
-<LI><a href="#[a1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_infnan
-<LI><a href="#[a2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_divzero
+<BR>[Calls]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__set_errno
+<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_invalid
+<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_infnan
+<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__mathlib_flt_divzero
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;logf
-</UL>
-
-<P><STRONG><a name="[10d]"></a>__mathlib_logf</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, logf.o(i.__hardfp_logf), UNUSED)
-
-<P><STRONG><a name="[a2]"></a>__mathlib_flt_divzero</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, funder.o(i.__mathlib_flt_divzero))
-<BR><BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_logf
+<BR>[Called By]<UL><LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;logf
 </UL>
 
-<P><STRONG><a name="[a1]"></a>__mathlib_flt_infnan</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, funder.o(i.__mathlib_flt_infnan))
-<BR><BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_logf
+<P><STRONG><a name="[11f]"></a>__mathlib_logf</STRONG> (Thumb, 0 bytes, Stack size 8 bytes, logf.o(i.__hardfp_logf), UNUSED)
+
+<P><STRONG><a name="[a9]"></a>__mathlib_flt_divzero</STRONG> (Thumb, 14 bytes, Stack size 0 bytes, funder.o(i.__mathlib_flt_divzero))
+<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_logf
 </UL>
 
-<P><STRONG><a name="[9f]"></a>__mathlib_flt_invalid</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, funder.o(i.__mathlib_flt_invalid))
-<BR><BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_logf
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_fmodf
+<P><STRONG><a name="[a8]"></a>__mathlib_flt_infnan</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, funder.o(i.__mathlib_flt_infnan))
+<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_logf
 </UL>
 
-<P><STRONG><a name="[10e]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
-
-<P><STRONG><a name="[10f]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
-
-<P><STRONG><a name="[110]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
-
-<P><STRONG><a name="[9e]"></a>__set_errno</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, errno.o(i.__set_errno))
-<BR><BR>[Called By]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_logf
-<LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_fmodf
+<P><STRONG><a name="[a6]"></a>__mathlib_flt_invalid</STRONG> (Thumb, 10 bytes, Stack size 0 bytes, funder.o(i.__mathlib_flt_invalid))
+<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_logf
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_fmodf
 </UL>
 
-<P><STRONG><a name="[a3]"></a>conf_general_get_default_mc_configuration</STRONG> (Thumb, 520 bytes, Stack size 8 bytes, conf_general.o(i.conf_general_get_default_mc_configuration))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = conf_general_get_default_mc_configuration
+<P><STRONG><a name="[120]"></a>__scatterload_copy</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_copy), UNUSED)
+
+<P><STRONG><a name="[121]"></a>__scatterload_null</STRONG> (Thumb, 2 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_null), UNUSED)
+
+<P><STRONG><a name="[122]"></a>__scatterload_zeroinit</STRONG> (Thumb, 14 bytes, Stack size unknown bytes, handlers.o(i.__scatterload_zeroinit), UNUSED)
+
+<P><STRONG><a name="[a5]"></a>__set_errno</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, errno.o(i.__set_errno))
+<BR><BR>[Called By]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_logf
+<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_fmodf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+
+<P><STRONG><a name="[ab]"></a>buffer_append_int16</STRONG> (Thumb, 32 bytes, Stack size 4 bytes, buffer.o(i.buffer_append_int16))
+<BR><BR>[Stack]<UL><LI>Max Depth = 4<LI>Call Chain = buffer_append_int16
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canSendstatus
+</UL>
+
+<P><STRONG><a name="[9d]"></a>canProcess</STRONG> (Thumb, 38 bytes, Stack size 0 bytes, common_can.o(i.canProcess))
+<BR><BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM7_IRQHandler
+</UL>
+
+<P><STRONG><a name="[6f]"></a>canReceive</STRONG> (Thumb, 78 bytes, Stack size 16 bytes, common_can.o(i.canReceive))
+<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = canReceive
+</UL>
+<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN_Receive
+</UL>
+<BR>[Called By]<UL><LI><a href="#[1f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN1_RX0_IRQHandler
+</UL>
+
+<P><STRONG><a name="[9e]"></a>canSendstatus</STRONG> (Thumb, 154 bytes, Stack size 48 bytes, common_can.o(i.canSendstatus))
+<BR><BR>[Stack]<UL><LI>Max Depth = 56<LI>Call Chain = canSendstatus &rArr; mc_interface_get_rpm_now
+</UL>
+<BR>[Calls]<UL><LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_get_tot_current
+<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_get_rpm_now
+<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_get_pid_pos_now
+<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;buffer_append_int16
+<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN_Transmit
+<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memcpy
+</UL>
+<BR>[Called By]<UL><LI><a href="#[42]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM7_IRQHandler
+</UL>
+
+<P><STRONG><a name="[b1]"></a>comm_can_init</STRONG> (Thumb, 224 bytes, Stack size 96 bytes, common_can.o(i.comm_can_init))
+<BR><BR>[Stack]<UL><LI>Max Depth = 104<LI>Call Chain = comm_can_init &rArr; CAN_FilterInit
+</UL>
+<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvicEnableVector
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ITConfig
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
+<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN_Init
+<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN_ITConfig
+<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;CAN_FilterInit
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[9c]"></a>delay_ms</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, delay.o(i.delay_ms))
+<P><STRONG><a name="[b9]"></a>conf_general_get_default_mc_configuration</STRONG> (Thumb, 528 bytes, Stack size 8 bytes, conf_general.o(i.conf_general_get_default_mc_configuration))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = conf_general_get_default_mc_configuration
+</UL>
+<BR>[Calls]<UL><LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+</UL>
+<BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+</UL>
+
+<P><STRONG><a name="[a3]"></a>delay_ms</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, delay.o(i.delay_ms))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24 + Unknown Stack Size
 <LI>Call Chain = delay_ms &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[88]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
+<BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTimeDly
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 <LI><a href="#[64]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_LED
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Main
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_init
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_init
 </UL>
 
-<P><STRONG><a name="[ad]"></a>drv8301_init</STRONG> (Thumb, 146 bytes, Stack size 24 bytes, drv8301.o(i.drv8301_init))
+<P><STRONG><a name="[c2]"></a>drv8301_init</STRONG> (Thumb, 146 bytes, Stack size 24 bytes, drv8301.o(i.drv8301_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 104 + Unknown Stack Size
 <LI>Call Chain = drv8301_init &rArr; drv8301_write_reg &rArr; spi_exchange
 </UL>
-<BR>[Calls]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Set
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
+<BR>[Calls]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Set
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
 </UL>
-<BR>[Called By]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
+<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
 </UL>
 
-<P><STRONG><a name="[b1]"></a>drv8301_read_faults</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, drv8301.o(i.drv8301_read_faults))
+<P><STRONG><a name="[c6]"></a>drv8301_read_faults</STRONG> (Thumb, 26 bytes, Stack size 8 bytes, drv8301.o(i.drv8301_read_faults))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = drv8301_read_faults &rArr; drv8301_read_reg &rArr; spi_exchange
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
+<BR>[Calls]<UL><LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
 </UL>
 
-<P><STRONG><a name="[b0]"></a>drv8301_read_reg</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, drv8301.o(i.drv8301_read_reg))
+<P><STRONG><a name="[c5]"></a>drv8301_read_reg</STRONG> (Thumb, 82 bytes, Stack size 16 bytes, drv8301.o(i.drv8301_read_reg))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = drv8301_read_reg &rArr; spi_exchange
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_mode
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_adj
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_faults
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_init
+<BR>[Called By]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_mode
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_adj
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_faults
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_init
 </UL>
 
-<P><STRONG><a name="[b5]"></a>drv8301_set_oc_adj</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, drv8301.o(i.drv8301_set_oc_adj))
+<P><STRONG><a name="[ca]"></a>drv8301_set_oc_adj</STRONG> (Thumb, 32 bytes, Stack size 8 bytes, drv8301.o(i.drv8301_set_oc_adj))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = drv8301_set_oc_adj &rArr; drv8301_write_reg &rArr; spi_exchange
 </UL>
-<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
+<BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_init
+<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_init
 </UL>
 
-<P><STRONG><a name="[b6]"></a>drv8301_set_oc_mode</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, drv8301.o(i.drv8301_set_oc_mode))
+<P><STRONG><a name="[cb]"></a>drv8301_set_oc_mode</STRONG> (Thumb, 34 bytes, Stack size 8 bytes, drv8301.o(i.drv8301_set_oc_mode))
 <BR><BR>[Stack]<UL><LI>Max Depth = 88<LI>Call Chain = drv8301_set_oc_mode &rArr; drv8301_write_reg &rArr; spi_exchange
 </UL>
-<BR>[Calls]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
+<BR>[Calls]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_init
+<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_init
 </UL>
 
-<P><STRONG><a name="[af]"></a>drv8301_write_reg</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, drv8301.o(i.drv8301_write_reg))
+<P><STRONG><a name="[c4]"></a>drv8301_write_reg</STRONG> (Thumb, 50 bytes, Stack size 16 bytes, drv8301.o(i.drv8301_write_reg))
 <BR><BR>[Stack]<UL><LI>Max Depth = 80<LI>Call Chain = drv8301_write_reg &rArr; spi_exchange
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
 </UL>
-<BR>[Called By]<UL><LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_mode
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_adj
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_init
-</UL>
-
-<P><STRONG><a name="[fc]"></a>encoder_index_found</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, encoder.o(i.encoder_index_found))
-<BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<BR>[Called By]<UL><LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_mode
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_adj
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_init
 </UL>
 
-<P><STRONG><a name="[b7]"></a>encoder_init</STRONG> (Thumb, 134 bytes, Stack size 40 bytes, encoder.o(i.encoder_init))
+<P><STRONG><a name="[10c]"></a>encoder_index_found</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, encoder.o(i.encoder_index_found))
+<BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+</UL>
+
+<P><STRONG><a name="[cc]"></a>encoder_init</STRONG> (Thumb, 134 bytes, Stack size 40 bytes, encoder.o(i.encoder_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 76<LI>Call Chain = encoder_init &rArr; GPIO_Set
 </UL>
-<BR>[Calls]<UL><LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvicEnableVector
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ITConfig
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Set
+<BR>[Calls]<UL><LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvicEnableVector
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ITConfig
+<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Set
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_init
-</UL>
-
-<P><STRONG><a name="[f2]"></a>encoder_read_deg</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, encoder.o(i.encoder_read_deg))
-<BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_init
 </UL>
 
-<P><STRONG><a name="[94]"></a>encoder_tim_isr</STRONG> (Thumb, 206 bytes, Stack size 48 bytes, encoder.o(i.encoder_tim_isr))
+<P><STRONG><a name="[104]"></a>encoder_read_deg</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, encoder.o(i.encoder_read_deg))
+<BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+</UL>
+
+<P><STRONG><a name="[97]"></a>encoder_tim_isr</STRONG> (Thumb, 206 bytes, Stack size 48 bytes, encoder.o(i.encoder_tim_isr))
 <BR><BR>[Stack]<UL><LI>Max Depth = 48<LI>Call Chain = encoder_tim_isr
 </UL>
-<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_middle_of_3_int
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
+<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_middle_of_3_int
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
 </UL>
 <BR>[Called By]<UL><LI><a href="#[28]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM3_IRQHandler
 </UL>
 
-<P><STRONG><a name="[bf]"></a>hw_init_gpio</STRONG> (Thumb, 466 bytes, Stack size 32 bytes, hw_60.o(i.hw_init_gpio))
+<P><STRONG><a name="[d0]"></a>hw_init_gpio</STRONG> (Thumb, 280 bytes, Stack size 32 bytes, hw_60.o(i.hw_init_gpio))
 <BR><BR>[Stack]<UL><LI>Max Depth = 136 + Unknown Stack Size
 <LI>Call Chain = hw_init_gpio &rArr; drv8301_init &rArr; drv8301_write_reg &rArr; spi_exchange
 </UL>
-<BR>[Calls]<UL><LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Set
-<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_AF_Set
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
-<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_init
+<BR>[Calls]<UL><LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
+<LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_Set
+<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_AF_Set
+<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
+<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[c2]"></a>hw_setup_adc_channels</STRONG> (Thumb, 300 bytes, Stack size 16 bytes, hw_60.o(i.hw_setup_adc_channels))
+<P><STRONG><a name="[d3]"></a>hw_setup_adc_channels</STRONG> (Thumb, 300 bytes, Stack size 16 bytes, hw_60.o(i.hw_setup_adc_channels))
 <BR><BR>[Stack]<UL><LI>Max Depth = 24<LI>Call Chain = hw_setup_adc_channels &rArr; ADC_RegularChannelConfig
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_RegularChannelConfig
-<LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_InjectedChannelConfig
+<BR>[Calls]<UL><LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_RegularChannelConfig
+<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_InjectedChannelConfig
 </UL>
-<BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[c5]"></a>logf</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, logf.o(i.logf))
+<P><STRONG><a name="[d6]"></a>logf</STRONG> (Thumb, 16 bytes, Stack size 8 bytes, logf.o(i.logf))
 <BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = logf &rArr; __hardfp_logf
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_logf
+<BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_logf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
 </UL>
 
-<P><STRONG><a name="[5d]"></a>main</STRONG> (Thumb, 50 bytes, Stack size 304 bytes, main.o(i.main))
+<P><STRONG><a name="[5d]"></a>main</STRONG> (Thumb, 54 bytes, Stack size 304 bytes, main.o(i.main))
 <BR><BR>[Stack]<UL><LI>Max Depth = 528 + Unknown Stack Size
 <LI>Call Chain = main &rArr; mc_interface_init &rArr; mcpwm_foc_init &rArr; delay_ms &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_init
-<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
-<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conf_general_get_default_mc_configuration
+<BR>[Calls]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_init
+<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_init_gpio
+<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;conf_general_get_default_mc_configuration
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_can_init
 <LI><a href="#[5e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;SystemInit
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
-<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSStart
-<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
+<LI><a href="#[84]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSStart
+<LI><a href="#[76]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSInit
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> entry9a.o(.ARM.Collect$$$$0000000B)
 </UL>
-<P><STRONG><a name="[c7]"></a>mc_interface_fault_stop</STRONG> (Thumb, 422 bytes, Stack size 88 bytes, mc_interface.o(i.mc_interface_fault_stop))
-<BR><BR>[Stack]<UL><LI>Max Depth = 176 + Unknown Stack Size
-<LI>Call Chain = mc_interface_fault_stop &rArr; drv8301_read_faults &rArr; drv8301_read_reg &rArr; spi_exchange
+<P><STRONG><a name="[d8]"></a>mc_interface_current_feedforward</STRONG> (Thumb, 52 bytes, Stack size 0 bytes, mc_interface.o(i.mc_interface_current_feedforward))
+<BR><BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number
 </UL>
-<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_stop_pwm
-<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_is_dccal_done
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tot_current_filtered
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tot_current
-<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tachometer_value
-<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_rpm
-<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_duty_cycle_now
-<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_faults
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedUnlock
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedLock
-<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;logf
-</UL>
-<BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
 </UL>
 
-<P><STRONG><a name="[c6]"></a>mc_interface_init</STRONG> (Thumb, 734 bytes, Stack size 8 bytes, mc_interface.o(i.mc_interface_init))
+<P><STRONG><a name="[d9]"></a>mc_interface_fault_stop</STRONG> (Thumb, 400 bytes, Stack size 80 bytes, mc_interface.o(i.mc_interface_fault_stop))
+<BR><BR>[Stack]<UL><LI>Max Depth = 168 + Unknown Stack Size
+<LI>Call Chain = mc_interface_fault_stop &rArr; drv8301_read_faults &rArr; drv8301_read_reg &rArr; spi_exchange
+</UL>
+<BR>[Calls]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_stop_pwm
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tot_current_filtered
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tot_current
+<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_rpm_now
+<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_duty_cycle_now
+<LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_faults
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedUnlock
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedLock
+<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;logf
+</UL>
+<BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+</UL>
+
+<P><STRONG><a name="[ae]"></a>mc_interface_get_pid_pos_now</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, mc_interface.o(i.mc_interface_get_pid_pos_now))
+<BR><BR>[Calls]<UL><LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_pid_pos_now
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canSendstatus
+</UL>
+
+<P><STRONG><a name="[ac]"></a>mc_interface_get_rpm_now</STRONG> (Thumb, 38 bytes, Stack size 8 bytes, mc_interface.o(i.mc_interface_get_rpm_now))
+<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = mc_interface_get_rpm_now
+</UL>
+<BR>[Calls]<UL><LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_rpm_now
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canSendstatus
+</UL>
+
+<P><STRONG><a name="[ad]"></a>mc_interface_get_tot_current</STRONG> (Thumb, 4 bytes, Stack size 0 bytes, mc_interface.o(i.mc_interface_get_tot_current))
+<BR><BR>[Calls]<UL><LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tot_current
+</UL>
+<BR>[Called By]<UL><LI><a href="#[9e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;canSendstatus
+</UL>
+
+<P><STRONG><a name="[d7]"></a>mc_interface_init</STRONG> (Thumb, 744 bytes, Stack size 8 bytes, mc_interface.o(i.mc_interface_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 224 + Unknown Stack Size
 <LI>Call Chain = mc_interface_init &rArr; mcpwm_foc_init &rArr; delay_ms &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_mode
-<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_adj
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
+<BR>[Calls]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[cb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_mode
+<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_set_oc_adj
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
 </UL>
 <BR>[Called By]<UL><LI><a href="#[5d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[d1]"></a>mc_interface_mc_timer_isr</STRONG> (Thumb, 384 bytes, Stack size 24 bytes, mc_interface.o(i.mc_interface_mc_timer_isr))
-<BR><BR>[Stack]<UL><LI>Max Depth = 200 + Unknown Stack Size
+<P><STRONG><a name="[e2]"></a>mc_interface_mc_timer_isr</STRONG> (Thumb, 384 bytes, Stack size 24 bytes, mc_interface.o(i.mc_interface_mc_timer_isr))
+<BR><BR>[Stack]<UL><LI>Max Depth = 192 + Unknown Stack Size
 <LI>Call Chain = mc_interface_mc_timer_isr &rArr; mc_interface_fault_stop &rArr; drv8301_read_faults &rArr; drv8301_read_reg &rArr; spi_exchange
 </UL>
-<BR>[Calls]<UL><LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tot_current_in
-<LI><a href="#[ca]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tot_current_filtered
-<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tot_current
-<LI><a href="#[d2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_state
-<LI><a href="#[d5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_iq
-<LI><a href="#[d4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_id
-<LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_abs_motor_current_filtered
-<LI><a href="#[d6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_abs_motor_current
-<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
+<BR>[Calls]<UL><LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tot_current_in
+<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tot_current_filtered
+<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_tot_current
+<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_state
+<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_iq
+<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_id
+<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_abs_motor_current_filtered
+<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_get_abs_motor_current
+<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_f2d
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
-</UL>
-
-<P><STRONG><a name="[a7]"></a>mc_interface_temp_motor_filtered</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mc_interface.o(i.mc_interface_temp_motor_filtered))
-<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
-<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;observer_update
+<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
 </UL>
 
-<P><STRONG><a name="[d6]"></a>mcpwm_foc_get_abs_motor_current</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_abs_motor_current))
-<BR><BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<P><STRONG><a name="[bd]"></a>mc_interface_temp_motor_filtered</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mc_interface.o(i.mc_interface_temp_motor_filtered))
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;observer_update
 </UL>
 
-<P><STRONG><a name="[d7]"></a>mcpwm_foc_get_abs_motor_current_filtered</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_abs_motor_current_filtered))
-<BR><BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<P><STRONG><a name="[e7]"></a>mcpwm_foc_get_abs_motor_current</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_abs_motor_current))
+<BR><BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
 </UL>
 
-<P><STRONG><a name="[cb]"></a>mcpwm_foc_get_duty_cycle_now</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_duty_cycle_now))
-<BR><BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<P><STRONG><a name="[e8]"></a>mcpwm_foc_get_abs_motor_current_filtered</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_abs_motor_current_filtered))
+<BR><BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
 </UL>
 
-<P><STRONG><a name="[d4]"></a>mcpwm_foc_get_id</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_id))
-<BR><BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<P><STRONG><a name="[dc]"></a>mcpwm_foc_get_duty_cycle_now</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_duty_cycle_now))
+<BR><BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
 </UL>
 
-<P><STRONG><a name="[d5]"></a>mcpwm_foc_get_iq</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_iq))
-<BR><BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<P><STRONG><a name="[e5]"></a>mcpwm_foc_get_id</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_id))
+<BR><BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
 </UL>
 
-<P><STRONG><a name="[cc]"></a>mcpwm_foc_get_rpm</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_rpm))
-<BR><BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<P><STRONG><a name="[e6]"></a>mcpwm_foc_get_iq</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_iq))
+<BR><BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
 </UL>
 
-<P><STRONG><a name="[d2]"></a>mcpwm_foc_get_state</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_state))
-<BR><BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<P><STRONG><a name="[e0]"></a>mcpwm_foc_get_pid_pos_now</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_pid_pos_now))
+<BR><BR>[Called By]<UL><LI><a href="#[ae]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_get_pid_pos_now
 </UL>
 
-<P><STRONG><a name="[cd]"></a>mcpwm_foc_get_tachometer_value</STRONG> (Thumb, 18 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_tachometer_value))
-<BR><BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<P><STRONG><a name="[dd]"></a>mcpwm_foc_get_rpm_now</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_rpm_now))
+<BR><BR>[Called By]<UL><LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_get_rpm_now
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
 </UL>
 
-<P><STRONG><a name="[c9]"></a>mcpwm_foc_get_tot_current</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_tot_current))
-<BR><BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<P><STRONG><a name="[e3]"></a>mcpwm_foc_get_state</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_state))
+<BR><BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
 </UL>
 
-<P><STRONG><a name="[ca]"></a>mcpwm_foc_get_tot_current_filtered</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_tot_current_filtered))
-<BR><BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
-<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<P><STRONG><a name="[da]"></a>mcpwm_foc_get_tot_current</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_tot_current))
+<BR><BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<LI><a href="#[ad]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_get_tot_current
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
 </UL>
 
-<P><STRONG><a name="[d3]"></a>mcpwm_foc_get_tot_current_in</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_tot_current_in))
-<BR><BR>[Called By]<UL><LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<P><STRONG><a name="[db]"></a>mcpwm_foc_get_tot_current_filtered</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_tot_current_filtered))
+<BR><BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
 </UL>
 
-<P><STRONG><a name="[d0]"></a>mcpwm_foc_init</STRONG> (Thumb, 1104 bytes, Stack size 192 bytes, mcpwm_foc.o(i.mcpwm_foc_init))
+<P><STRONG><a name="[e4]"></a>mcpwm_foc_get_tot_current_in</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_get_tot_current_in))
+<BR><BR>[Called By]<UL><LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+</UL>
+
+<P><STRONG><a name="[e1]"></a>mcpwm_foc_init</STRONG> (Thumb, 1152 bytes, Stack size 192 bytes, mcpwm_foc.o(i.mcpwm_foc_init))
 <BR><BR>[Stack]<UL><LI>Max Depth = 216 + Unknown Stack Size
 <LI>Call Chain = mcpwm_foc_init &rArr; delay_ms &rArr; OSTimeDly &rArr; OS_Sched
 </UL>
-<BR>[Calls]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
-<LI><a href="#[7f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedUnlock
-<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedLock
-<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvicEnableVector
-<LI><a href="#[b9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
-<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ITConfig
-<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
-<LI><a href="#[b8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
-<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
-<LI><a href="#[c2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_setup_adc_channels
-<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectSlaveMode
-<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectOutputTrigger
-<LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectMasterSlaveMode
-<LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectInputTrigger
-<LI><a href="#[e0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC4PreloadConfig
-<LI><a href="#[dc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC4Init
-<LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC3PreloadConfig
-<LI><a href="#[db]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC3Init
-<LI><a href="#[de]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC2PreloadConfig
-<LI><a href="#[da]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC2Init
-<LI><a href="#[dd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1PreloadConfig
-<LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1Init
-<LI><a href="#[99]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
-<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CtrlPWMOutputs
-<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCPreloadControl
-<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_BDTRConfig
-<LI><a href="#[e3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ARRPreloadConfig
-<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
-<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
-<LI><a href="#[e4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Init
-<LI><a href="#[e6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ITConfig
-<LI><a href="#[e5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
-<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_TempSensorVrefintCmd
-<LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_MultiModeDMARequestAfterLastTransferCmd
-<LI><a href="#[e8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
-<LI><a href="#[e7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_CommonInit
-<LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Cmd
-<LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
+<BR>[Calls]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
+<LI><a href="#[82]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedUnlock
+<LI><a href="#[81]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSSchedLock
+<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;nvicEnableVector
+<LI><a href="#[b5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_TimeBaseInit
+<LI><a href="#[b6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ITConfig
+<LI><a href="#[cd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_Cmd
+<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB1PeriphClockCmd
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
+<LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<LI><a href="#[d3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;hw_setup_adc_channels
+<LI><a href="#[101]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectSlaveMode
+<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectOutputTrigger
+<LI><a href="#[ff]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectMasterSlaveMode
+<LI><a href="#[100]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectInputTrigger
+<LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC4PreloadConfig
+<LI><a href="#[ed]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC4Init
+<LI><a href="#[f0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC3PreloadConfig
+<LI><a href="#[ec]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC3Init
+<LI><a href="#[ef]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC2PreloadConfig
+<LI><a href="#[eb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC2Init
+<LI><a href="#[ee]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1PreloadConfig
+<LI><a href="#[ea]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_OC1Init
+<LI><a href="#[a0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_DeInit
+<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CtrlPWMOutputs
+<LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCPreloadControl
+<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_BDTRConfig
+<LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_ARRPreloadConfig
+<LI><a href="#[e9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_APB2PeriphClockCmd
+<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;RCC_AHB1PeriphClockCmd
+<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Init
+<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_ITConfig
+<LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA_Cmd
+<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_TempSensorVrefintCmd
+<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_MultiModeDMARequestAfterLastTransferCmd
+<LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Init
+<LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_CommonInit
+<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;ADC_Cmd
+<LI><a href="#[ba]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__aeabi_memclr4
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_init
-</UL>
-
-<P><STRONG><a name="[c8]"></a>mcpwm_foc_is_dccal_done</STRONG> (Thumb, 6 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_is_dccal_done))
-<BR><BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<BR>[Called By]<UL><LI><a href="#[d7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_init
 </UL>
 
-<P><STRONG><a name="[cf]"></a>mcpwm_foc_stop_pwm</STRONG> (Thumb, 54 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_stop_pwm))
-<BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = mcpwm_foc_stop_pwm &rArr; stop_pwm_hw &rArr; TIM_SelectOCxM
+<P><STRONG><a name="[103]"></a>mcpwm_foc_set_current</STRONG> (Thumb, 86 bytes, Stack size 16 bytes, mcpwm_foc.o(i.mcpwm_foc_set_current))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = mcpwm_foc_set_current &rArr; stop_pwm_hw &rArr; TIM_SelectOCxM
 </UL>
-<BR>[Calls]<UL><LI><a href="#[f1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
+<BR>[Calls]<UL><LI><a href="#[102]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;stop_pwm_hw
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number
 </UL>
-<BR>[Called By]<UL><LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+<BR>[Called By]<UL><LI><a href="#[df]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_stop_pwm
 </UL>
 
-<P><STRONG><a name="[70]"></a>mcpwm_foc_tim_sample_int_handler</STRONG> (Thumb, 2566 bytes, Stack size 96 bytes, mcpwm_foc.o(i.mcpwm_foc_tim_sample_int_handler))
-<BR><BR>[Stack]<UL><LI>Max Depth = 296 + Unknown Stack Size
+<P><STRONG><a name="[df]"></a>mcpwm_foc_stop_pwm</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, mcpwm_foc.o(i.mcpwm_foc_stop_pwm))
+<BR><BR>[Stack]<UL><LI>Max Depth = 28<LI>Call Chain = mcpwm_foc_stop_pwm &rArr; mcpwm_foc_set_current &rArr; stop_pwm_hw &rArr; TIM_SelectOCxM
+</UL>
+<BR>[Calls]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_set_current
+</UL>
+<BR>[Called By]<UL><LI><a href="#[d9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_fault_stop
+</UL>
+
+<P><STRONG><a name="[73]"></a>mcpwm_foc_tim_sample_int_handler</STRONG> (Thumb, 2474 bytes, Stack size 88 bytes, mcpwm_foc.o(i.mcpwm_foc_tim_sample_int_handler))
+<BR><BR>[Stack]<UL><LI>Max Depth = 280 + Unknown Stack Size
 <LI>Call Chain = mcpwm_foc_tim_sample_int_handler &rArr; mc_interface_mc_timer_isr &rArr; mc_interface_fault_stop &rArr; drv8301_read_faults &rArr; drv8301_read_reg &rArr; spi_exchange
 </UL>
-<BR>[Calls]<UL><LI><a href="#[f6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;correct_encoder
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
-<LI><a href="#[f3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_norm_angle
-<LI><a href="#[d1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
-<LI><a href="#[f2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_read_deg
-<LI><a href="#[fc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_index_found
-<LI><a href="#[fa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number_int
-<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number_abs
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_saturate_vector_2d
-<LI><a href="#[f8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_norm_angle_rad
-<LI><a href="#[f7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_max_abs
-<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_fast_sincos_better
-<LI><a href="#[f4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_angle_difference_rad
-<LI><a href="#[fb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_angle_difference
-<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;observer_update
-<LI><a href="#[f9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_floorf
+<BR>[Calls]<UL><LI><a href="#[108]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;correct_encoder
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
+<LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number
+<LI><a href="#[105]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_norm_angle
+<LI><a href="#[e2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_mc_timer_isr
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_current_feedforward
+<LI><a href="#[104]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_read_deg
+<LI><a href="#[10c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_index_found
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number_abs
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_saturate_vector_2d
+<LI><a href="#[10a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_norm_angle_rad
+<LI><a href="#[109]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_max_abs
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_fast_sincos_better
+<LI><a href="#[106]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_angle_difference_rad
+<LI><a href="#[10b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_angle_difference
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;observer_update
 </UL>
 <BR>[Called By]<UL><LI><a href="#[47]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;DMA2_Stream4_IRQHandler
 </UL>
 
-<P><STRONG><a name="[bc]"></a>nvicEnableVector</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, sys.o(i.nvicEnableVector))
-<BR><BR>[Called By]<UL><LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
-<LI><a href="#[b7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
+<P><STRONG><a name="[b7]"></a>nvicEnableVector</STRONG> (Thumb, 36 bytes, Stack size 0 bytes, sys.o(i.nvicEnableVector))
+<BR><BR>[Called By]<UL><LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<LI><a href="#[cc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_init
+<LI><a href="#[b1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;comm_can_init
 </UL>
 
-<P><STRONG><a name="[f5]"></a>observer_update</STRONG> (Thumb, 466 bytes, Stack size 64 bytes, mcpwm_foc.o(i.observer_update))
+<P><STRONG><a name="[107]"></a>observer_update</STRONG> (Thumb, 466 bytes, Stack size 64 bytes, mcpwm_foc.o(i.observer_update))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = observer_update
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_temp_motor_filtered
-<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number_abs
-<LI><a href="#[fd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_fast_atan2
+<BR>[Calls]<UL><LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_temp_motor_filtered
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number_abs
+<LI><a href="#[10d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_fast_atan2
 </UL>
-<BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
-</UL>
-
-<P><STRONG><a name="[fb]"></a>utils_angle_difference</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, utils.o(i.utils_angle_difference))
-<BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
 </UL>
 
-<P><STRONG><a name="[f4]"></a>utils_angle_difference_rad</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, utils.o(i.utils_angle_difference_rad))
-<BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<P><STRONG><a name="[10b]"></a>utils_angle_difference</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, utils.o(i.utils_angle_difference))
+<BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
 </UL>
 
-<P><STRONG><a name="[fd]"></a>utils_fast_atan2</STRONG> (Thumb, 112 bytes, Stack size 0 bytes, utils.o(i.utils_fast_atan2))
-<BR><BR>[Called By]<UL><LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;observer_update
+<P><STRONG><a name="[106]"></a>utils_angle_difference_rad</STRONG> (Thumb, 56 bytes, Stack size 0 bytes, utils.o(i.utils_angle_difference_rad))
+<BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
 </UL>
 
-<P><STRONG><a name="[a6]"></a>utils_fast_sincos_better</STRONG> (Thumb, 262 bytes, Stack size 0 bytes, utils.o(i.utils_fast_sincos_better))
-<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<P><STRONG><a name="[10d]"></a>utils_fast_atan2</STRONG> (Thumb, 112 bytes, Stack size 0 bytes, utils.o(i.utils_fast_atan2))
+<BR><BR>[Called By]<UL><LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;observer_update
 </UL>
 
-<P><STRONG><a name="[96]"></a>utils_map</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, utils.o(i.utils_map))
+<P><STRONG><a name="[bc]"></a>utils_fast_sincos_better</STRONG> (Thumb, 262 bytes, Stack size 0 bytes, utils.o(i.utils_fast_sincos_better))
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+</UL>
+
+<P><STRONG><a name="[99]"></a>utils_map</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, utils.o(i.utils_map))
 <BR><BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
 </UL>
 
-<P><STRONG><a name="[f7]"></a>utils_max_abs</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, utils.o(i.utils_max_abs))
-<BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<P><STRONG><a name="[109]"></a>utils_max_abs</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, utils.o(i.utils_max_abs))
+<BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
 </UL>
 
-<P><STRONG><a name="[be]"></a>utils_middle_of_3_int</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, utils.o(i.utils_middle_of_3_int))
-<BR><BR>[Called By]<UL><LI><a href="#[94]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_tim_isr
-<LI><a href="#[b3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
+<P><STRONG><a name="[cf]"></a>utils_middle_of_3_int</STRONG> (Thumb, 42 bytes, Stack size 0 bytes, utils.o(i.utils_middle_of_3_int))
+<BR><BR>[Called By]<UL><LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;encoder_tim_isr
+<LI><a href="#[c8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;spi_exchange
 </UL>
 
-<P><STRONG><a name="[f3]"></a>utils_norm_angle</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, utils.o(i.utils_norm_angle))
+<P><STRONG><a name="[105]"></a>utils_norm_angle</STRONG> (Thumb, 52 bytes, Stack size 16 bytes, utils.o(i.utils_norm_angle))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = utils_norm_angle &rArr; __hardfp_fmodf &rArr; _frem &rArr; _float_epilogue
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_fmodf
+<BR>[Calls]<UL><LI><a href="#[a4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;__hardfp_fmodf
 </UL>
-<BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
-</UL>
-
-<P><STRONG><a name="[f8]"></a>utils_norm_angle_rad</STRONG> (Thumb, 64 bytes, Stack size 0 bytes, utils.o(i.utils_norm_angle_rad))
-<BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
 </UL>
 
-<P><STRONG><a name="[a8]"></a>utils_saturate_vector_2d</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, utils.o(i.utils_saturate_vector_2d))
-<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<P><STRONG><a name="[10a]"></a>utils_norm_angle_rad</STRONG> (Thumb, 64 bytes, Stack size 0 bytes, utils.o(i.utils_norm_angle_rad))
+<BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
 </UL>
 
-<P><STRONG><a name="[97]"></a>utils_truncate_number</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, utils.o(i.utils_truncate_number))
-<BR><BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
-<LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<P><STRONG><a name="[be]"></a>utils_saturate_vector_2d</STRONG> (Thumb, 82 bytes, Stack size 0 bytes, utils.o(i.utils_saturate_vector_2d))
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
 </UL>
 
-<P><STRONG><a name="[a9]"></a>utils_truncate_number_abs</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, utils.o(i.utils_truncate_number_abs))
-<BR><BR>[Called By]<UL><LI><a href="#[a5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
-<LI><a href="#[f5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;observer_update
-<LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<P><STRONG><a name="[9c]"></a>utils_truncate_number</STRONG> (Thumb, 44 bytes, Stack size 0 bytes, utils.o(i.utils_truncate_number))
+<BR><BR>[Called By]<UL><LI><a href="#[9a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;run_pid_control_speed
+<LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
+<LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_set_current
+<LI><a href="#[d8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_current_feedforward
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
 </UL>
 
-<P><STRONG><a name="[fa]"></a>utils_truncate_number_int</STRONG> (Thumb, 28 bytes, Stack size 0 bytes, utils.o(i.utils_truncate_number_int))
-<BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<P><STRONG><a name="[9b]"></a>utils_truncate_number_abs</STRONG> (Thumb, 40 bytes, Stack size 0 bytes, utils.o(i.utils_truncate_number_abs))
+<BR><BR>[Called By]<UL><LI><a href="#[bb]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;control_current
+<LI><a href="#[107]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;observer_update
+<LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
 </UL>
 <P>
 <H3>
@@ -1638,7 +1775,7 @@ Local Symbols
  + In Cycle
 <LI>Call Chain = Task_Main &rArr;  Task_Main (Cycle)
 </UL>
-<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
+<BR>[Calls]<UL><LI><a href="#[a3]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;delay_ms
 <LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Main
 </UL>
 <BR>[Called By]<UL><LI><a href="#[63]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;Task_Main
@@ -1649,56 +1786,64 @@ Local Symbols
 <BR><BR>[Stack]<UL><LI>Max Depth = 104 + Unknown Stack Size
 <LI>Call Chain = Task_Start &rArr; OSTaskCreate &rArr; OS_TCBInit
 </UL>
-<BR>[Calls]<UL><LI><a href="#[8b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SysTickInit
-<LI><a href="#[7b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
-<LI><a href="#[7d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
-<LI><a href="#[87]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSuspend
-<LI><a href="#[83]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
+<BR>[Calls]<UL><LI><a href="#[8e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SysTickInit
+<LI><a href="#[7e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Save
+<LI><a href="#[80]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OS_CPU_SR_Restore
+<LI><a href="#[8a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskSuspend
+<LI><a href="#[86]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;OSTaskCreate
 </UL>
 <BR>[Address Reference Count : 1]<UL><LI> main.o(i.main)
 </UL>
-<P><STRONG><a name="[a5]"></a>control_current</STRONG> (Thumb, 1546 bytes, Stack size 48 bytes, mcpwm_foc.o(i.control_current))
+<P><STRONG><a name="[bb]"></a>control_current</STRONG> (Thumb, 1546 bytes, Stack size 48 bytes, mcpwm_foc.o(i.control_current))
 <BR><BR>[Stack]<UL><LI>Max Depth = 52<LI>Call Chain = control_current &rArr; TIM_SelectOCxM
 </UL>
-<BR>[Calls]<UL><LI><a href="#[a7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_temp_motor_filtered
-<LI><a href="#[a9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number_abs
-<LI><a href="#[97]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number
-<LI><a href="#[a8]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_saturate_vector_2d
-<LI><a href="#[a6]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_fast_sincos_better
-<LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectOCxM
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxNCmd
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxCmd
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number
+<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mc_interface_temp_motor_filtered
+<LI><a href="#[9b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number_abs
+<LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_saturate_vector_2d
+<LI><a href="#[bc]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_fast_sincos_better
+<LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectOCxM
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxNCmd
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
-</UL>
-
-<P><STRONG><a name="[f6]"></a>correct_encoder</STRONG> (Thumb, 84 bytes, Stack size 0 bytes, mcpwm_foc.o(i.correct_encoder))
-<BR><BR>[Called By]<UL><LI><a href="#[70]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+<BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
 </UL>
 
-<P><STRONG><a name="[f1]"></a>stop_pwm_hw</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, mcpwm_foc.o(i.stop_pwm_hw))
+<P><STRONG><a name="[108]"></a>correct_encoder</STRONG> (Thumb, 84 bytes, Stack size 0 bytes, mcpwm_foc.o(i.correct_encoder))
+<BR><BR>[Called By]<UL><LI><a href="#[73]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_tim_sample_int_handler
+</UL>
+
+<P><STRONG><a name="[9a]"></a>run_pid_control_speed</STRONG> (Thumb, 250 bytes, Stack size 32 bytes, mcpwm_foc.o(i.run_pid_control_speed))
+<BR><BR>[Stack]<UL><LI>Max Depth = 32<LI>Call Chain = run_pid_control_speed
+</UL>
+<BR>[Calls]<UL><LI><a href="#[9c]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_truncate_number
+</UL>
+<BR>[Called By]<UL><LI><a href="#[3d]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM5_IRQHandler
+</UL>
+
+<P><STRONG><a name="[102]"></a>stop_pwm_hw</STRONG> (Thumb, 110 bytes, Stack size 8 bytes, mcpwm_foc.o(i.stop_pwm_hw))
 <BR><BR>[Stack]<UL><LI>Max Depth = 12<LI>Call Chain = stop_pwm_hw &rArr; TIM_SelectOCxM
 </UL>
-<BR>[Calls]<UL><LI><a href="#[aa]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectOCxM
-<LI><a href="#[98]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GenerateEvent
-<LI><a href="#[ac]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxNCmd
-<LI><a href="#[ab]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxCmd
+<BR>[Calls]<UL><LI><a href="#[bf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_SelectOCxM
+<LI><a href="#[9f]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_GenerateEvent
+<LI><a href="#[c1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxNCmd
+<LI><a href="#[c0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;TIM_CCxCmd
 </UL>
-<BR>[Called By]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_stop_pwm
-<LI><a href="#[d0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
+<BR>[Called By]<UL><LI><a href="#[103]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_set_current
+<LI><a href="#[e1]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;mcpwm_foc_init
 </UL>
 
-<P><STRONG><a name="[b3]"></a>spi_exchange</STRONG> (Thumb, 210 bytes, Stack size 64 bytes, drv8301.o(i.spi_exchange))
+<P><STRONG><a name="[c8]"></a>spi_exchange</STRONG> (Thumb, 210 bytes, Stack size 64 bytes, drv8301.o(i.spi_exchange))
 <BR><BR>[Stack]<UL><LI>Max Depth = 64<LI>Call Chain = spi_exchange
 </UL>
-<BR>[Calls]<UL><LI><a href="#[be]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_middle_of_3_int
-<LI><a href="#[b4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
-<LI><a href="#[b2]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
-<LI><a href="#[bd]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
-<LI><a href="#[fe]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
+<BR>[Calls]<UL><LI><a href="#[cf]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;utils_middle_of_3_int
+<LI><a href="#[c9]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_SetBits
+<LI><a href="#[c7]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ResetBits
+<LI><a href="#[ce]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_ReadInputDataBit
+<LI><a href="#[10e]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;GPIO_WriteBit
 </UL>
-<BR>[Called By]<UL><LI><a href="#[af]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
-<LI><a href="#[b0]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
+<BR>[Called By]<UL><LI><a href="#[c4]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_write_reg
+<LI><a href="#[c5]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;drv8301_read_reg
 </UL>
 <P>
 <H3>

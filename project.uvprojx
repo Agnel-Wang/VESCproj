@@ -411,6 +411,11 @@
               <FileType>1</FileType>
               <FilePath>.\USER\SRC\mcpwm_foc.c</FilePath>
             </File>
+            <File>
+              <FileName>common_can.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\USER\SRC\common_can.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -430,6 +435,11 @@
               <FileName>utils.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\GeneralFunction\src\utils.c</FilePath>
+            </File>
+            <File>
+              <FileName>buffer.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\GeneralFunction\src\buffer.c</FilePath>
             </File>
           </Files>
         </Group>

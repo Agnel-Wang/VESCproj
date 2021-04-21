@@ -14,8 +14,6 @@
 #define ENABLE_GATE()			GPIO_SetBits(GPIOB, PIN5)
 #define DISABLE_GATE()			GPIO_ResetBits(GPIOB, PIN5)
 
-#define DCCAL_ON()
-#define DCCAL_OFF()
 #define IS_DRV_FAULT()			(!GPIO_ReadInputDataBit(GPIOB, PIN7))
 
 /*

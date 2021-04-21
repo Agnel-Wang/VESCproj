@@ -27,3 +27,7 @@
 .\obj\encoder.o: .\hwconf\hw_60.h
 .\obj\encoder.o: .\GeneralFunction\inc\sys.h
 .\obj\encoder.o: .\GeneralFunction\inc\utils.h
+.\obj\encoder.o: .\conf\conf_general.h
+.\obj\encoder.o: .\USER\INC\datatypes.h
+.\obj\encoder.o: .\conf\appconf_default.h
+.\obj\encoder.o: .\conf\mcconf_default.h

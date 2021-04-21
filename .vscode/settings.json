@@ -6,7 +6,10 @@
       "string": "c",
       "xstring": "c",
       "main.h": "c",
-      "vesc.h": "c"
+      "vesc.h": "c",
+      "common_can.h": "c",
+      "mc_interface.h": "c",
+      "mcpwm_foc.h": "c"
     },
     "markdownlint.config": {
         "default": true,

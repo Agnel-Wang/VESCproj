@@ -41,3 +41,4 @@
 .\obj\main.o: .\USER\INC\delay.h
 .\obj\main.o: .\USER\INC\mc_interface.h
 .\obj\main.o: .\USER\INC\mcpwm_foc.h
+.\obj\main.o: .\USER\INC\common_can.h

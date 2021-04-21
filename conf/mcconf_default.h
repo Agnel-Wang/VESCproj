@@ -108,6 +108,9 @@
 #ifndef MCCONF_P_PID_ANG_DIV
 #define MCCONF_P_PID_ANG_DIV			1.0f		// Divide angle by this value
 #endif
+#ifndef MCCONF_P_MAX_SPEED //**
+#define MCCONF_P_MAX_SPEED              2100.f  // maximun speed in control pos mode
+#endif
 
 // Current control parameters
 #ifndef MCCONF_CC_GAIN

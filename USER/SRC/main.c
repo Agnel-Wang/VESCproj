@@ -5,28 +5,30 @@
 #include "led.h"
 #include "mc_interface.h"
 #include "mcpwm_foc.h"
+#include "common_can.h"
 
 /*
  * Timers used:
  * TIM1: mcpwm_out
- * TIM12: mcpwm
- * TIM8: mcpwm_sample
- * TIM3: servo_dec/Encoder (HW_R2)/servo_simple
- * TIM4: WS2811/WS2812 LEDs/Encoder (other HW)
+ * TIM3: Encoder
+ * TIM4: WS2811/WS2812 LEDs
  * TIM5: speed cycle
- * TIM2: motor timer task
+ * TIM7: CAN1
+ * TIM8: mcpwm_sample
+ * TIM12: 计算单次电流环持续时间
  *
  * DMA/stream   Device      Function
- * 1, 2         I2C1        Nunchuk, temp on rev 4.5f
- * 1, 7         I2C1        Nunchuk, temp on rev 4.5f
- * 1, 1         UART3       HW_R2
- * 1, 3         UART3       HW_R2
- * 2, 2         UART6       Other HW
- * 2, 7         UART6       Other HW
  * 2, 4         ADC         mcpwm
  * 1, 0         TIM4        WS2811/WS2812 LEDs CH1 (Ch 1)
  * 1, 3         TIM4        WS2811/WS2812 LEDs CH2 (Ch 2)
  *
+ * Peripherals              NIVC
+ * DMA2_Stream4_IRQn        3
+ * TIM8_CC_IRQn             6
+ * TIM3_IRQn                6
+ * TIM5_IRQn                7
+ * TIM7_IRQn                10
+ * CAN1_RX0_IRQn            11
  */
 
 /****UCOSII Tasks Set****/
@@ -61,6 +63,10 @@ int main(void) {
     conf_general_get_default_mc_configuration(&mcconf);
     mc_interface_init(&mcconf); 
     
+#if CAN_ENABLE
+    comm_can_init();
+#endif
+
 	OSInit();
 	OSTaskCreate(Task_Start, NULL, &START_TASK_STK[START_STK_SIZE - 1], START_TASK_PRIO);
 	OSStart();

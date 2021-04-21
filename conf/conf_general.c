@@ -98,6 +98,7 @@ void conf_general_get_default_mc_configuration(mc_configuration *conf) {
 	conf->p_pid_kd = MCCONF_P_PID_KD;
 	conf->p_pid_kd_filter = MCCONF_P_PID_KD_FILTER;
 	conf->p_pid_ang_div = MCCONF_P_PID_ANG_DIV;
+    conf->p_max_speed = MCCONF_P_MAX_SPEED;
 
 	conf->cc_startup_boost_duty = MCCONF_CC_STARTUP_BOOST_DUTY;
 	conf->cc_min_current = MCCONF_CC_MIN_CURRENT;

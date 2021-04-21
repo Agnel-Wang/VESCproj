@@ -39,3 +39,6 @@
 .\obj\mc_interface.o: .\uCOSII\CORE\ucos_ii.h
 .\obj\mc_interface.o: .\uCOSII\CONFIG\os_cfg.h
 .\obj\mc_interface.o: .\uCOSII\PORT\os_cpu.h
+.\obj\mc_interface.o: .\conf\conf_general.h
+.\obj\mc_interface.o: .\conf\appconf_default.h
+.\obj\mc_interface.o: .\conf\mcconf_default.h

@@ -1,5 +1,4 @@
 #include "mcpwm_foc.h"
-
 #include "mc_interface.h"
 #include "includes.h"
 #include "stm32f4xx_conf.h"
@@ -86,12 +85,11 @@ typedef struct {
 // Private variables
 static volatile mc_configuration *m_conf;
 static volatile mc_state m_state; // 运行状态
+static volatile bool m_begin;
 static volatile mc_control_mode m_control_mode; // 控制模式
 static volatile motor_state_t m_motor_state; // 电机状态参数
 
 static volatile bool m_init_done; // foc初始化完成
-static volatile bool m_dccal_done; // 电流零偏测量完成
-
 static volatile int detect_step; // 转速计单步计数值 Range [0 5]
 static volatile int curr0_sum; // 1路电流采样累计值
 static volatile int curr1_sum; // 2路电流采样累计值
@@ -108,6 +106,7 @@ static volatile float m_iq_set; // q轴电流设定
 static volatile float m_openloop_speed;
 static volatile bool m_output_on; // 是否是否输出pwm 只判断一次
 static volatile float m_pos_pid_set; //位置设定 [0, 360]
+static volatile float m_pos_set; // 双环嵌套的位置环设定
 static volatile float m_speed_pid_set_rpm; // 速度设定 ERPM
 static volatile float m_phase_now_observer; // 通过观测器获得的当前相位角
 static volatile float m_phase_now_observer_override;
@@ -118,11 +117,11 @@ static volatile float m_observer_x1;
 static volatile float m_observer_x2;
 static volatile float m_pll_phase;
 static volatile float m_pll_speed; //speed now. (rad/s) 
-static volatile int m_tachometer; // 转速计计算，其实是累计位置，每一圈增6
-static volatile int m_tachometer_abs; // 总转动位置(绝对值)
 static volatile float last_inj_adc_isr_duration; // 上一次adc采样中断持续时间
-static volatile float m_pos_pid_now; // 当前pid位置
+static volatile float m_pos_pid_now; // 当前位置,经过ang_div后的
 static volatile float m_gamma_now;
+static volatile float m_pos_now; // 累计位置
+static volatile float m_pos_max_limit;
 
 // Private functions
 static void do_dc_cal(void);
@@ -136,7 +135,8 @@ static void svm(float alpha, float beta, uint32_t PWMHalfPeriod,
 static void pll_run(float phase, float dt, volatile float *phase_var, volatile float *speed_var);
 static void control_current(volatile motor_state_t *state_m, float dt);
 static void run_pid_control_speed(float dt);
-static void run_pid_control_pos(float angle_now, float angle_set, float dt);
+static void run_pid_control_angle(float angle_now, float angle_set, float dt);
+static void run_pid_control_pos(float pos_now, float pos_set, float dt);
     
 void mcpwm_foc_init(volatile mc_configuration *configuration) {
     OSSchedLock();
@@ -150,12 +150,12 @@ void mcpwm_foc_init(volatile mc_configuration *configuration) {
     // Initialize variables
     m_conf = configuration;
     m_state = MC_STATE_OFF;
+    m_begin = false;
     m_control_mode = CONTROL_MODE_NONE;
 	curr0_sum = 0;
 	curr1_sum = 0;
 	curr2_sum = 0;
 	m_curr_samples = 0;
-	m_dccal_done = false;
 	m_phase_override = false;
 	m_phase_now_override = 0.0f;
 	m_duty_cycle_set = 0.0f;
@@ -164,6 +164,7 @@ void mcpwm_foc_init(volatile mc_configuration *configuration) {
 	m_openloop_speed = 0.0f;
 	m_output_on = false;
 	m_pos_pid_set = 0.0f;
+    m_pos_set = 0.0;
 	m_speed_pid_set_rpm = 0.0f;
 	m_phase_now_observer = 0.0f;
 	m_phase_now_observer_override = 0.0f;
@@ -174,10 +175,10 @@ void mcpwm_foc_init(volatile mc_configuration *configuration) {
 	m_observer_x2 = 0.0f;
 	m_pll_phase = 0.0f;
 	m_pll_speed = 0.0f;
-	m_tachometer = 0;
-	m_tachometer_abs = 0;
 	last_inj_adc_isr_duration = 0;
 	m_pos_pid_now = 0.0f;
+    m_pos_now = 0.0f;
+    m_pos_max_limit = m_conf->p_max_speed;
 	m_gamma_now = 0.0f;
 	memset((void*)&m_motor_state, 0, sizeof(motor_state_t));
     
@@ -366,6 +367,18 @@ void mcpwm_foc_init(volatile mc_configuration *configuration) {
 	// Calibrate current offset
 	ENABLE_GATE();
     do_dc_cal();
+
+	// Various time measurements
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM12, ENABLE);
+
+	// Time base configuration
+	TIM_TimeBaseStructure.TIM_Period = 0xFFFF;
+	TIM_TimeBaseStructure.TIM_Prescaler = (uint16_t)(((SYSTEM_CORE_CLOCK / 2) / 10000000) - 1);
+	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
+	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
+	TIM_TimeBaseInit(TIM12, &TIM_TimeBaseStructure);
+
+	TIM_Cmd(TIM12, ENABLE);
     
     // ------------- Timer5 for speed cycle ------------- //
     // TIM5 clock enable
@@ -403,15 +416,28 @@ mc_state mcpwm_foc_get_state(void) {
     return m_state;
 }
 
-bool mcpwm_foc_is_dccal_done(void) {
-    return m_dccal_done;
+void mcpwm_foc_set_state(mc_state state) {
+    // 电机运行前需提前设定模式
+    if(m_control_mode != CONTROL_MODE_NONE) {
+        m_state = state;
+    }
 }
 
 /**
  * Switch off all FETs.TIM12->CNT = 0;
  */
 void mcpwm_foc_stop_pwm(void) {
+    m_state = MC_STATE_RUNNING;
+    m_control_mode = CONTROL_MODE_CURRENT;
 	mcpwm_foc_set_current(0.0f);
+}
+
+void mcpwm_foc_set_ontrol_mode(mc_control_mode mode) {
+    m_control_mode = mode;
+}
+
+mc_control_mode mcpwm_foc_get_ontrol_mode(void) {
+	return m_control_mode;
 }
 
 /**
@@ -421,12 +447,7 @@ void mcpwm_foc_stop_pwm(void) {
  * The duty cycle to use.
  */
 void mcpwm_foc_set_duty(float dutyCycle) {
-	m_control_mode = CONTROL_MODE_DUTY;
-	m_duty_cycle_set = dutyCycle;
-
-	if (m_state != MC_STATE_RUNNING) {
-		m_state = MC_STATE_RUNNING;
-	}
+		m_duty_cycle_set = dutyCycle;
 }
 
 /**
@@ -438,12 +459,7 @@ void mcpwm_foc_set_duty(float dutyCycle) {
  * 实为ERPM
  */
 void mcpwm_foc_set_pid_speed(float rpm) {
-	m_control_mode = CONTROL_MODE_SPEED;
 	m_speed_pid_set_rpm = rpm;
-
-	if (m_state != MC_STATE_RUNNING) {
-		m_state = MC_STATE_RUNNING;
-	}
 }
 
 /**
@@ -454,12 +470,19 @@ void mcpwm_foc_set_pid_speed(float rpm) {
  * The desired position of the motor in degrees.
  */
 void mcpwm_foc_set_pid_pos(float pos) {
-	m_control_mode = CONTROL_MODE_POS;
 	m_pos_pid_set = pos;
+}
 
-	if (m_state != MC_STATE_RUNNING) {
-		m_state = MC_STATE_RUNNING;
-	}
+void mcpwm_foc_set_pos_set(float pos) {
+    m_pos_set = pos;
+}
+
+void mcpwm_foc_set_pos_now(float pos) {
+    m_pos_now = pos;
+}
+
+void mcpwm_foc_set_pos_max_rpm(float rpm) {
+    m_pos_max_limit = rpm;
 }
 
 /**
@@ -471,19 +494,17 @@ void mcpwm_foc_set_pid_pos(float pos) {
  * The current to use.
  */
 void mcpwm_foc_set_current(float current) {
-	if (fabsf(current) < m_conf->cc_min_current) {
-		m_control_mode = CONTROL_MODE_NONE;
-		m_state = MC_STATE_OFF;
-		stop_pwm_hw();
-		return;
-	}
-
-	m_control_mode = CONTROL_MODE_CURRENT;
-	m_iq_set = current;
-
-	if (m_state != MC_STATE_RUNNING) {
-		m_state = MC_STATE_RUNNING;
-	}
+    if( m_control_mode == CONTROL_MODE_CURRENT ) {
+        if (fabsf(current) < m_conf->cc_min_current) {
+            m_control_mode = CONTROL_MODE_NONE;
+            m_state = MC_STATE_OFF;
+            stop_pwm_hw();
+            return;
+        }
+        
+        utils_truncate_number(&current, -m_conf->l_current_max, m_conf->l_current_max);
+        m_iq_set = current;
+    }
 }
 
 /**
@@ -494,20 +515,17 @@ void mcpwm_foc_set_current(float current) {
  * The current to use. Positive and negative values give the same effect.
  */
 void mcpwm_foc_set_brake_current(float current) {
-	if (fabsf(current) < m_conf->cc_min_current) {
-		m_control_mode = CONTROL_MODE_NONE;
-		m_state = MC_STATE_OFF;
-		stop_pwm_hw();
-		return;
-	}
+    if( m_control_mode == CONTROL_MODE_CURRENT_BRAKE ) {
+        if (fabsf(current) < m_conf->cc_min_current) {
+            m_control_mode = CONTROL_MODE_NONE;
+            m_state = MC_STATE_OFF;
+            stop_pwm_hw();
+            return;
+        }
 
-	m_control_mode = CONTROL_MODE_CURRENT_BRAKE;
-	utils_truncate_number(&current, -m_conf->l_current_max, m_conf->l_current_max);
-	m_iq_set = current;
-
-	if (m_state != MC_STATE_RUNNING) {
-		m_state = MC_STATE_RUNNING;
-	}
+        utils_truncate_number(&current, -m_conf->l_current_max, m_conf->l_current_max);
+        m_iq_set = current;
+    }
 }
 
 float mcpwm_foc_get_duty_cycle_set(void) {
@@ -525,6 +543,17 @@ float mcpwm_foc_get_pid_pos_set(void) {
 float mcpwm_foc_get_pid_pos_now(void) {
 	return m_pos_pid_now;
 }
+float mcpwm_foc_get_pos_set(void) {
+    return m_pos_set;
+}
+
+float mcpwm_foc_get_pos_now(void) {
+    return m_pos_now;
+}
+
+float mcpwm_foc_get_pos_max_rpm(void) {
+    return m_pos_max_limit;
+}
 
 /**
  * Calculate the current RPM of the motor. This is a signed value and the sign
@@ -534,8 +563,12 @@ float mcpwm_foc_get_pid_pos_now(void) {
  * @return
  * The RPM value.
  */
-float mcpwm_foc_get_rpm(void) {
+float mcpwm_foc_get_rpm_now(void) {
 	return m_pll_speed / ((2.0f * M_PI) / 60.0f);
+}
+
+float mcpwm_foc_get_rpm_set(void) {
+    return m_speed_pid_set_rpm;
 }
 
 /**
@@ -636,46 +669,6 @@ float mcpwm_foc_get_tot_current_in(void) {
 	return m_motor_state.i_bus;
 }
 
-/**
- * Read the number of steps the motor has rotated. This number is signed and
- * will return a negative number when the motor is rotating backwards.
- *
- * @param reset
- * If true, the tachometer counter will be reset after this call.
- *
- * @return
- * The tachometer value in motor steps. The number of motor revolutions will
- * be this number divided by (3 * MOTOR_POLE_NUMBER).
- */
-int mcpwm_foc_get_tachometer_value(bool reset) {
-	int val = m_tachometer;
-
-	if (reset) {
-		m_tachometer = 0;
-	}
-
-	return val;
-}
-
-/**
- * Read the absolute number of steps the motor has rotated.
- *
- * @param reset
- * If true, the tachometer counter will be reset after this call.
- *
- * @return
- * The tachometer value in motor steps. The number of motor revolutions will
- * be this number divided by (3 * MOTOR_POLE_NUMBER).
- */
-int mcpwm_foc_get_tachometer_abs_value(bool reset) {
-	int val = m_tachometer_abs;
-
-	if (reset) {
-		m_tachometer_abs = 0;
-	}
-
-	return val;
-}
 
 /**
  * Read the motor phase.
@@ -721,178 +714,10 @@ float mcpwm_foc_get_vq(void) {
 	return m_motor_state.vq;
 }
 
-/**
- * Measure encoder offset and direction.
- *
- * @param current
- * The locking open loop current for the motor.
- *
- * @param offset
- * The detected offset.
- *
- * @param ratio
- * The ratio between electrical and mechanical revolutions
- *
- * @param direction
- * The detected direction.
- */
-void mcpwm_foc_encoder_detect(float current, bool print, float *offset, float *ratio, bool *inverted) {
-    m_phase_override = true;
-	m_id_set = current;
-	m_iq_set = 0.0f;
-	m_control_mode = CONTROL_MODE_CURRENT;
-	m_state = MC_STATE_RUNNING;
-    
-    //TODO: Disable timeout
-    
-    // Save configuration
-	float offset_old = m_conf->foc_encoder_offset;
-	float inverted_old = m_conf->foc_encoder_inverted;
-	float ratio_old = m_conf->foc_encoder_ratio;
-    
-	m_conf->foc_encoder_offset = 0.0f;
-	m_conf->foc_encoder_inverted = false;
-	m_conf->foc_encoder_ratio = 1.0f;
-
-    // Find index
-    int cnt = 0;
-    while(!encoder_index_found()) {
-		for (float i = 0.0f;i < 2.0f * M_PI;i += (2.0f * M_PI) / 500.0f) {
-			m_phase_now_override = i;
-			delay_ms(1);
-		}
-
-		cnt++;
-		if (cnt > 30) {
-			// Give up
-			break;
-		}
-    }
-    
-    // Rotate
-	for (float i = 0.0f;i < 2.0f * M_PI;i += (2.0f * M_PI) / 500.0f) {
-		m_phase_now_override = i;
-		delay_ms(1);
-	}
-    
-	// Inverted and ratio
-	delay_ms(1000);
-    
-	const int it_rat = 20;
-	float s_sum = 0.0f;
-	float c_sum = 0.0f;
-	float first = m_phase_now_encoder;
-
-	for (int i = 0; i < it_rat; i++) {
-		float phase_old = m_phase_now_encoder;
-		float phase_ovr_tmp = m_phase_now_override;
-		for (float i = phase_ovr_tmp; i < phase_ovr_tmp + (2.0f / 3.0f) * M_PI;
-				i += (2.0f * M_PI) / 500.0f) {
-			m_phase_now_override = i;
-			delay_ms(1);
-		}
-		utils_norm_angle_rad((float*)&m_phase_now_override);
-		delay_ms(300);
-		float diff = utils_angle_difference_rad(m_phase_now_encoder, phase_old);
-
-		float s, c;
-		sincosf(diff, &s, &c);
-		s_sum += s;
-		c_sum += c;
-
-		if (i > 3 && fabsf(utils_angle_difference_rad(m_phase_now_encoder, first)) < fabsf(diff / 2.0f)) {
-			break;
-		}
-	}
-
-	first = m_phase_now_encoder;
-    
-    
-	for (int i = 0; i < it_rat; i++) {
-		float phase_old = m_phase_now_encoder;
-		float phase_ovr_tmp = m_phase_now_override;
-		for (float i = phase_ovr_tmp; i > phase_ovr_tmp - (2.0f / 3.0f) * M_PI;
-				i -= (2.0f * M_PI) / 500.0f) {
-			m_phase_now_override = i;
-			delay_ms(1);
-		}
-		utils_norm_angle_rad((float*)&m_phase_now_override);
-		delay_ms(300);
-		float diff = utils_angle_difference_rad(phase_old, m_phase_now_encoder);
-
-		float s, c;
-		sincosf(diff, &s, &c);
-		s_sum += s;
-		c_sum += c;
-
-		if (i > 3 && fabsf(utils_angle_difference_rad(m_phase_now_encoder, first)) < fabsf(diff / 2.0f)) {
-			break;
-		}
-	}
-
-	float diff = atan2f(s_sum, c_sum) * 180.0f / M_PI;
-	*inverted = diff < 0.0f;
-	*ratio = roundf(((2.0f / 3.0f) * 180.0f) /
-			fabsf(diff));
-
-	m_conf->foc_encoder_inverted = *inverted;
-	m_conf->foc_encoder_ratio = *ratio;
-
-	// Rotate
-	for (float i = m_phase_now_override;i < 2.0f * M_PI;i += (2.0f * M_PI) / 500.0f) {
-		m_phase_now_override = i;
-		delay_ms(2);
-	}
-    
-	const int it_ofs = m_conf->foc_encoder_ratio * 3.0f;
-	s_sum = 0.0f;
-	c_sum = 0.0f;
-
-	for (int i = 0;i < it_ofs;i++) {
-		m_phase_now_override = ((float)i * 2.0f * M_PI * m_conf->foc_encoder_ratio) / ((float)it_ofs);
-		delay_ms(500);
-
-		float diff = utils_angle_difference_rad(m_phase_now_encoder, m_phase_now_override);
-		float s, c;
-		sincosf(diff, &s, &c);
-		s_sum += s;
-		c_sum += c;
-	}
-
-	for (int i = it_ofs;i > 0;i--) {
-		m_phase_now_override = ((float)i * 2.0f * M_PI * m_conf->foc_encoder_ratio) / ((float)it_ofs);
-		delay_ms(500);
-
-		float diff = utils_angle_difference_rad(m_phase_now_encoder, m_phase_now_override);
-		float s, c;
-		sincosf(diff, &s, &c);
-		s_sum += s;
-		c_sum += c;
-	}
-
-	*offset = atan2f(s_sum, c_sum) * 180.0f / M_PI;
-
-	utils_norm_angle(offset);
-
-	m_id_set = 0.0f;
-	m_iq_set = 0.0f;
-	m_phase_override = false;
-	m_control_mode = CONTROL_MODE_NONE;
-	m_state = MC_STATE_OFF;
-	stop_pwm_hw();
-
-	// Restore configuration
-	m_conf->foc_encoder_inverted = inverted_old;
-	m_conf->foc_encoder_offset = offset_old;
-	m_conf->foc_encoder_ratio = ratio_old;
-
-	//TODO:  Enable timeout
-	// timeout_configure(tout, tout_c);
-}
 
 //Private functions
 
-void TIM5_IRQHandler(void) { // 速度环
+void TIM5_IRQHandler(void) {
     if(TIM_GetITStatus(TIM5, TIM_IT_Update) != RESET) {
         const float dt = 0.001f;//速度环频率1000hz
 
@@ -900,16 +725,23 @@ void TIM5_IRQHandler(void) { // 速度环
 		m_gamma_now = utils_map(fabsf(m_motor_state.duty_now), 0.0f, 1.0f,
 				m_conf->foc_observer_gain * m_conf->foc_observer_gain_slow, m_conf->foc_observer_gain);
 
-		if( m_control_mode == CONTROL_MODE_SPEED) {
-			run_pid_control_speed(dt);
-		}
+        switch(m_control_mode) {
+            case CONTROL_MODE_SPEED:
+                run_pid_control_speed(dt);
+                break;
+            case CONTROL_MODE_POS:
+                run_pid_control_pos(m_pos_set, m_pos_now, dt);
+                break;
+            default:
+                break;
+        }
         
         TIM_ClearITPendingBit(TIM5, TIM_IT_Update);
     }
 }
 
 //dma ISR function
-void mcpwm_foc_tim_sample_int_handler(void) { // 电流环，位置环
+void mcpwm_foc_tim_sample_int_handler(void) {
     TIM12->CNT = 0;
     
     bool is_v7 = !(TIM1->CR1 & TIM_CR1_DIR);
@@ -1193,43 +1025,21 @@ void mcpwm_foc_tim_sample_int_handler(void) { // 电流环，位置环
 	// 5. Run PLL for speed estimation
 	pll_run(m_motor_state.phase, dt, &m_pll_phase, &m_pll_speed);
 
-	// 6. Update tachometer (resolution = 60 deg as for BLDC)
-    // diff从原本的 [-PI, PI] 范围映射到 {0, 1, 2, 3, 4, 5}
-	float ph_tmp = m_motor_state.phase;
-	utils_norm_angle_rad(&ph_tmp);
-	int step = (int)floorf((ph_tmp + M_PI) / (2.0f * M_PI) * 6.0f);
-	utils_truncate_number_int(&step, 0, 5);
-	static int step_last = 0;
-	int diff = step - step_last;
-	step_last = step;
-
-	if (diff > 3) {
-		diff -= 6;
-	} else if (diff < -2) {
-		diff += 6;
-	}
-
-	m_tachometer += diff; //每一圈转速计加6
-	m_tachometer_abs += ABS(diff);
-
     // 7. 位置更新
     //encoder is configured
 	float angle_now = 0.0f;
     angle_now = enc_ang;
     
-	if (m_conf->p_pid_ang_div > 0.98f && m_conf->p_pid_ang_div < 1.02f) {
-		m_pos_pid_now = angle_now;
-	} else {
-		static float angle_last = 0.0f;
-		float diff_f = utils_angle_difference(angle_now, angle_last);
-		angle_last = angle_now;
-		m_pos_pid_now += diff_f / m_conf->p_pid_ang_div;
-		utils_norm_angle((float*)&m_pos_pid_now);
-	}
+    static float angle_last = 0.0f;
+    float diff_f = utils_angle_difference(angle_now, angle_last);
+    angle_last = angle_now;
+    m_pos_pid_now += diff_f / m_conf->p_pid_ang_div;
+    m_pos_now += diff_f / m_conf->p_pid_ang_div;
+    utils_norm_angle((float*)&m_pos_pid_now);
 
 	// 8. Run position control
-	if (m_state == MC_STATE_RUNNING) {
-		run_pid_control_pos(m_pos_pid_now, m_pos_pid_set, dt);
+	if (m_state == MC_STATE_RUNNING && m_control_mode == CONTROL_MODE_ANGLE) {
+		run_pid_control_angle(m_pos_pid_now, m_pos_pid_set, dt);
 	}
 
 	// 9. MCIF handler
@@ -1259,8 +1069,6 @@ static void do_dc_cal(void) {
 	curr0_offset = curr0_sum / m_curr_samples;
 	curr1_offset = curr1_sum / m_curr_samples;
 	curr2_offset = curr2_sum / m_curr_samples;
-    
-    m_dccal_done = true;
 }
 
 
@@ -1550,7 +1358,7 @@ static void run_pid_control_speed(float dt) {
 		return;
 	}
 
-	const float rpm = mcpwm_foc_get_rpm();
+	const float rpm = mcpwm_foc_get_rpm_now();
 	float error = m_speed_pid_set_rpm - rpm;
 
 	// Too low RPM set. Reset state and return.
@@ -1583,14 +1391,14 @@ static void run_pid_control_speed(float dt) {
 	m_iq_set = output * m_conf->lo_current_max;
 }
 
-static void run_pid_control_pos(float angle_now, float angle_set, float dt) {
+static void run_pid_control_angle(float angle_now, float angle_set, float dt) {
 	static float i_term = 0;
 	static float prev_error = 0;
 	float p_term;
 	float d_term;
 
 	// PID is off. Return.
-	if (m_control_mode != CONTROL_MODE_POS) {
+	if (m_control_mode != CONTROL_MODE_ANGLE) {
 		i_term = 0;
 		prev_error = 0;
 		return;
@@ -1638,8 +1446,60 @@ static void run_pid_control_pos(float angle_now, float angle_set, float dt) {
         // Rotate the motor with 40 % power until the encoder index is found.
         m_iq_set = 0.4f * m_conf->lo_current_max;
     }
+    
+    mc_interface_current_feedforward(&m_iq_set);
 }
 
+static void run_pid_control_pos(float pos_now, float pos_set, float dt) {
+	static float i_term = 0;
+	static float prev_error = 0;
+	float p_term;
+	float d_term;
+    
+	// PID is off. Return.
+	if (m_control_mode != CONTROL_MODE_ANGLE) {
+		i_term = 0;
+		prev_error = 0;
+		return;
+	}
+    
+    // Compute parameters
+    float error = pos_set - pos_now;
+    //反向？
+   
+	p_term = error * m_conf->p_pid_kp;
+	i_term += error * (m_conf->p_pid_ki * dt);
+
+	static float dt_int = 0.0f;
+	dt_int += dt;
+	if (error == prev_error) {
+		d_term = 0.0f;
+	} else {
+		d_term = (error - prev_error) * (m_conf->p_pid_kd / dt_int);
+		dt_int = 0.0f;
+	}
+
+	// Filter D
+	static float d_filter = 0.0f;
+	UTILS_LP_FAST(d_filter, d_term, m_conf->p_pid_kd_filter);
+	d_term = d_filter;
+
+
+	// I-term wind-up protection
+	utils_truncate_number_abs(&p_term, 1.0f);
+	utils_truncate_number_abs(&i_term, 1.0f - fabsf(p_term));
+
+	// Store previous error
+	prev_error = error;
+
+	// Calculate output
+	float output = p_term + i_term + d_term;
+	utils_truncate_number(&output, -1.0f, 1.0f);
+    
+    m_speed_pid_set_rpm = output * m_pos_max_limit;
+    
+    run_pid_control_speed(dt);
+}
 static float correct_encoder(float obs_angle, float enc_angle, float speed) {
 	float rpm_abs = fabsf(speed / ((2.0f * M_PI) / 60.0f));
 	static bool using_encoder = true;

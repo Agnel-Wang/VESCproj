@@ -6,6 +6,7 @@
 #include "utils.h"
 #include "includes.h"
 #include "hw_60.h"
+#include "conf_general.h"
 
 // Macros
 #define DIR_MULT		(m_conf.m_invert_direction ? -1.0f : 1.0f)
@@ -38,6 +39,7 @@ static volatile float m_watt_seconds_charged;
 static volatile float m_position_set;
 static volatile float m_temp_fet;
 static volatile float m_temp_motor;
+static volatile float m_iq_feedforward; //Ç°À¡µçÁ÷
 
 // Sampling variables
 #define ADC_SAMPLE_MAX_LEN		2000
@@ -81,7 +83,7 @@ void mc_interface_init(mc_configuration *configuration) {
 	m_last_adc_duration_sample = 0.0f;
 	m_temp_fet = 0.0f;
 	m_temp_motor = 0.0f;
-
+    m_iq_feedforward = 0.0f;
 	m_sample_len = 1000;
 	m_sample_int = 1;
 	m_sample_now = 0;
@@ -99,6 +101,23 @@ void mc_interface_init(mc_configuration *configuration) {
     
     // Initialize selected implementation
     mcpwm_foc_init(&m_conf);
+}
+
+void mc_interface_set_control_mode(mc_control_mode mode) {
+    mcpwm_foc_set_ontrol_mode(mode);
+}
+
+mc_control_mode mc_interface_get_control_mode(void) {
+    mc_control_mode ret = CONTROL_MODE_NONE;
+    
+    ret = mcpwm_foc_get_ontrol_mode();
+    
+    return ret;
+}
+
+void mc_interface_current_feedforward(float* iq_set) {
+    *iq_set +=  DIR_MULT * m_iq_feedforward;
+    utils_truncate_number(iq_set, -m_conf.lo_current_max, m_conf.lo_current_max);
 }
 
 /**
@@ -124,28 +143,74 @@ void mc_interface_set_current(float current) {
     mcpwm_foc_set_current(DIR_MULT * current);
 }
 
+void mc_interface_set_current_feedward(float current) {
+    m_iq_feedforward = current;
+}
+
 void mc_interface_set_brake_current(float current) {
     mcpwm_foc_set_brake_current(DIR_MULT * current);
 }
 
 void mc_interface_set_pid_speed(float rpm) {
-    mcpwm_foc_set_pid_speed(DIR_MULT * rpm);
+    float ret = 0.0f;
+    ret = rpm * MCCONF_FOC_ENCODER_RATIO;
+    mcpwm_foc_set_pid_speed(DIR_MULT * ret);
 }
 
 /**
  * Disconnect the motor and let it turn freely.
  */
 void mc_interface_release_motor(void) {
-	mc_interface_set_current(0.0f);
+	mcpwm_foc_stop_pwm();
+}
+
+float mc_interface_get_tot_current(void) {
+    float ret = 0.0f;
+    
+    ret = mcpwm_foc_get_tot_current();
+    
+    return ret;
 }
 
 void mc_interface_set_pid_pos(float pos) {
     m_position_set = pos;
     
-	pos *= DIR_MULT;
 	utils_norm_angle(&pos);
     
     mcpwm_foc_set_pid_pos(pos);
+}
+
+float mc_interface_get_pid_pos_now(void) {
+    float ret = 0.0f;
+    
+    ret = mcpwm_foc_get_pid_pos_now();
+    
+    return ret;
+}
+
+float mc_interface_get_pos_set(void) {
+    float ret = 0.0f;
+    
+    ret = mcpwm_foc_get_pid_pos_set();
+    
+    return ret;
+}
+
+void mc_interface_set_pos_set(float pos) {
+    m_position_set = pos;
+    mcpwm_foc_set_pos_set(m_position_set);
+}
+
+void mc_interface_set_pos_now(float pos) {
+    mcpwm_foc_set_pos_now(pos);
+}
+
+float mc_interface_get_pos_now(void) {
+    float ret = 0.0f;
+    
+    ret = mcpwm_foc_get_pos_now();
+    
+    return ret;
 }
 
 float mc_interface_get_duty_cycle_set(void) {
@@ -164,20 +229,28 @@ float mc_interface_get_duty_cycle_now(void) {
     return DIR_MULT * ret;
 }
 
-float mc_interface_get_rpm(void) {
-    float ret = 0.0f;
-    
-    ret = mcpwm_foc_get_rpm();
-    
+float mc_interface_get_rpm_now(void) {
+    float ret = 0.0f;   
+    ret = mcpwm_foc_get_rpm_now() / MCCONF_FOC_ENCODER_RATIO;
     return DIR_MULT * ret;
 }
 
-int mc_interface_get_tachometer_value(bool reset) {
-    int ret = 0;
-    
-    ret = mcpwm_foc_get_tachometer_value(reset);
-    
+float mc_interface_get_rpm_set(void) {
+    float ret = 0.0f;   
+    ret = mcpwm_foc_get_rpm_set() / MCCONF_FOC_ENCODER_RATIO;
     return DIR_MULT * ret;
+}
+
+float mc_interface_get_pos_max_rpm(void) {
+    float ret = 0.0f;   
+    ret = mcpwm_foc_get_pos_max_rpm() / MCCONF_FOC_ENCODER_RATIO;   
+    return DIR_MULT * ret;
+}
+
+void mc_interface_set_pos_max_rpm(float rpm) {
+    float ret = 0.0f;
+    ret = rpm * MCCONF_FOC_ENCODER_RATIO;
+    mcpwm_foc_set_pos_max_rpm(DIR_MULT * ret);
 }
 
 void mc_interface_fault_stop(mc_fault_code fault) {
@@ -186,7 +259,7 @@ void mc_interface_fault_stop(mc_fault_code fault) {
 		return;
 	}   
     
-    if(mcpwm_foc_is_dccal_done() && m_fault_now == FAULT_CODE_NONE) {
+    if(m_fault_now == FAULT_CODE_NONE) {
         OSSchedLock();
 		volatile int val_samp = TIM8->CCR1;
 		volatile int current_samp = TIM1->CCR4;
@@ -199,8 +272,7 @@ void mc_interface_fault_stop(mc_fault_code fault) {
 		fdata.current_filtered = mcpwm_foc_get_tot_current_filtered();
 		fdata.voltage = GET_INPUT_VOLTAGE();
 		fdata.duty = mc_interface_get_duty_cycle_now();
-		fdata.rpm = mc_interface_get_rpm();
-		fdata.tacho = mc_interface_get_tachometer_value(false);
+		fdata.rpm = mc_interface_get_rpm_now();
 		fdata.cycles_running = m_cycles_running;
 		fdata.tim_val_samp = val_samp;
 		fdata.tim_current_samp = current_samp;

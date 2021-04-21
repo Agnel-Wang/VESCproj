@@ -3,6 +3,7 @@
 #include "hw_60.h"
 #include "sys.h"
 #include "utils.h"
+#include "conf_general.h"
 
 #define AS5047_SAMPLE_RATE_HZ		20000
 
@@ -36,7 +37,7 @@ void encoder_init(void) {
     // Time Base configuration
 	TIM_TimeBaseStructure.TIM_Prescaler = 0;
 	TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-	TIM_TimeBaseStructure.TIM_Period = ((168000000 / 2 / AS5047_SAMPLE_RATE_HZ) - 1);
+	TIM_TimeBaseStructure.TIM_Period = ((SYSTEM_CORE_CLOCK / 2 / AS5047_SAMPLE_RATE_HZ) - 1);
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
 	TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;
 	TIM_TimeBaseInit(HW_ENC_TIM, &TIM_TimeBaseStructure);

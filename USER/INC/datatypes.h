@@ -1,22 +1,3 @@
-/*
-	Copyright 2016 Benjamin Vedder	benjamin@vedder.se
-
-	This file is part of the VESC firmware.
-
-	The VESC firmware is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    The VESC firmware is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-    */
-
 #ifndef DATATYPES_H_
 #define DATATYPES_H_
 
@@ -24,11 +5,12 @@
 #include <stdbool.h>
 
 // Data types
+/**
+ * 仅保留RUNNING状态，相当于MO
+ */
 typedef enum {
    MC_STATE_OFF = 0,
-   MC_STATE_DETECTING,
-   MC_STATE_RUNNING,
-   MC_STATE_FULL_BRAKE,
+   MC_STATE_RUNNING
 } mc_state;
 
 typedef enum {
@@ -41,14 +23,21 @@ typedef enum {
 	FAULT_CODE_OVER_TEMP_MOTOR
 } mc_fault_code;
 
+/**
+ * 删除了几个不常用的模式
+ * 原本的CONTROL_MODE_POS改为CONTROL_MODE_ANGLE，意义为控制角度[0, 360]，且可加电流前馈
+ * 现CONTROL_MODE_POS为双环嵌套下的位置模式
+ */
 typedef enum {
-	CONTROL_MODE_DUTY = 0,
-	CONTROL_MODE_CURRENT,
+	CONTROL_MODE_NONE = 0,
+    CONTROL_MODE_CURRENT,
 	CONTROL_MODE_SPEED,
-	CONTROL_MODE_POS,
+	CONTROL_MODE_DUTY,
 	CONTROL_MODE_CURRENT_BRAKE,
-	CONTROL_MODE_NONE
+	CONTROL_MODE_POS,
+    CONTROL_MODE_ANGLE
 } mc_control_mode;
+
 
 typedef enum {
 	DRV8301_OC_LIMIT = 0,
@@ -128,6 +117,7 @@ typedef struct {
 	float p_pid_kd;
 	float p_pid_kd_filter;
 	float p_pid_ang_div; // 可以理解为外部齿轮减速比
+    float p_max_speed;
 	// Current controller
 	float cc_startup_boost_duty;
 	float cc_min_current; //Absolute values less than cc_min_current will release the motor.
@@ -151,13 +141,6 @@ typedef struct {
 	uint32_t send_can_status_rate_hz;
 } app_configuration;
 
-typedef struct {
-	int id;
-	float rpm;
-	float current;
-	float pos;
-} can_status_msg;
-
 // Logged fault data
 typedef struct {
 	mc_fault_code fault;
@@ -166,7 +149,6 @@ typedef struct {
 	float voltage;
 	float duty;
 	float rpm;
-	int tacho;
 	int cycles_running;
 	int tim_val_samp;
 	int tim_current_samp;
