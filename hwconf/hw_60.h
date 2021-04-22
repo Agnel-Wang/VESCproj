@@ -144,6 +144,12 @@
 #define HW_ENC_TIM_ISR_CH		TIM3_IRQn
 #define HW_ENC_TIM_ISR_VEC		TIM3_IRQHandler
 
+//CAN
+#define HW_CAN_TIM              TIM4
+#define HW_CAN_TIM_ISR_CH       TIM4_IRQn
+#define HW_CAN_TIM_ISR_VEC      TIM4_IRQHandler
+#define HW_CAN_TIM_CLK_EN()		RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM4, ENABLE)
+
 // NRF pins
 #define NRF_PORT_CSN			GPIOB
 #define NRF_PIN_CSN				PIN12

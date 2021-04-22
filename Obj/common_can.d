@@ -31,4 +31,4 @@
 .\obj\common_can.o: .\USER\INC\mc_interface.h
 .\obj\common_can.o: .\USER\INC\mcpwm_foc.h
 .\obj\common_can.o: .\GeneralFunction\inc\buffer.h
-.\obj\common_can.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdarg.h
+.\obj\common_can.o: .\hwconf\hw_60.h

@@ -7,7 +7,7 @@
 #include "mc_interface.h"
 #include "mcpwm_foc.h"
 #include "buffer.h"
-#include "stdarg.h"
+#include "hw_60.h"
 
 // Settings
 #define RX_FRAMES_SIZE	50
@@ -32,7 +32,10 @@ void comm_can_init(void) {
     rx_frames_front = 0;
     rx_frames_rear = 0;
     
+    HW_CAN_TIM_CLK_EN();
     RCC_APB1PeriphClockCmd(RCC_APB1Periph_CAN1, ENABLE);
+    
+    nvicEnableVector(CAN1_RX0_IRQn, 11);
     
     /* CAN cell init */
     CAN_InitStructure.CAN_TTCM = DISABLE; //非时间触发通道模式
@@ -51,21 +54,40 @@ void comm_can_init(void) {
     CAN_Init(CAN1, &CAN_InitStructure);      //初始化CAN1
     
     /* CAN filter init */
-    for(int i=0; i<9; i++) {
-        CAN_FilterInitStructure.CAN_FilterNumber = i;
-        CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask;
-        CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_32bit;
-        CAN_FilterInitStructure.CAN_FilterIdHigh =(((APPCONF_CONTROLLER_NODE + i)<< 3) & 0xFFFF0000) >> 16;
-        CAN_FilterInitStructure.CAN_FilterIdLow = ((APPCONF_CONTROLLER_NODE + i)<< 3) & 0xFFFF;
-        CAN_FilterInitStructure.CAN_FilterMaskIdHigh = (0xFFFF00 << 3) >> 16;
-        CAN_FilterInitStructure.CAN_FilterMaskIdLow = (0xFFFF << 3) & 0xFFFF;
-        CAN_FilterInitStructure.CAN_FilterFIFOAssignment = CAN_FilterFIFO0;
-        CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
-        CAN_FilterInit(&CAN_FilterInitStructure);
-    }
+    CAN_FilterInitStructure.CAN_FilterNumber = 0;
+    CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdMask;
+    CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_32bit;
+    CAN_FilterInitStructure.CAN_FilterIdHigh =(((APPCONF_CONTROLLER_NODE )<< 3) & 0xFFFF0000) >> 16;
+    CAN_FilterInitStructure.CAN_FilterIdLow = ((APPCONF_CONTROLLER_NODE )<< 3) & 0xFFFF;
+    CAN_FilterInitStructure.CAN_FilterMaskIdHigh = (0xFFFF00 << 3) >> 16;
+    CAN_FilterInitStructure.CAN_FilterMaskIdLow = (0xFFFF << 3) & 0xFFFF;
+    CAN_FilterInitStructure.CAN_FilterFIFOAssignment = CAN_FilterFIFO0;
+    CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
+    CAN_FilterInit(&CAN_FilterInitStructure);
     
-	TIM_DeInit(TIM7);
-	TIM7->CNT = 0;
+	CAN_FilterInitStructure.CAN_FilterNumber = 1;
+	CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdList;
+	CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_16bit;
+	CAN_FilterInitStructure.CAN_FilterIdHigh =( APPCONF_CONTROLLER_NODE + 1 )<< 5;
+	CAN_FilterInitStructure.CAN_FilterIdLow =( APPCONF_CONTROLLER_NODE + 2 ) << 5;
+	CAN_FilterInitStructure.CAN_FilterMaskIdHigh =( APPCONF_CONTROLLER_NODE + 3 ) << 5;
+	CAN_FilterInitStructure.CAN_FilterMaskIdLow =( APPCONF_CONTROLLER_NODE + 4 ) << 5;
+	CAN_FilterInitStructure.CAN_FilterFIFOAssignment = CAN_FilterFIFO0;
+	CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
+	CAN_FilterInit(&CAN_FilterInitStructure);
+    
+	CAN_FilterInitStructure.CAN_FilterNumber = 2;
+	CAN_FilterInitStructure.CAN_FilterMode = CAN_FilterMode_IdList;
+	CAN_FilterInitStructure.CAN_FilterScale = CAN_FilterScale_16bit;
+	CAN_FilterInitStructure.CAN_FilterIdHigh =( APPCONF_CONTROLLER_NODE + 5 )<< 5;
+	CAN_FilterInitStructure.CAN_FilterIdLow =( APPCONF_CONTROLLER_NODE + 6 ) << 5;
+	CAN_FilterInitStructure.CAN_FilterMaskIdHigh =( APPCONF_CONTROLLER_NODE + 7 ) << 5;
+	CAN_FilterInitStructure.CAN_FilterMaskIdLow =( APPCONF_CONTROLLER_NODE + 8 ) << 5;
+	CAN_FilterInitStructure.CAN_FilterFIFOAssignment = CAN_FilterFIFO0;
+	CAN_FilterInitStructure.CAN_FilterActivation = ENABLE;
+	CAN_FilterInit(&CAN_FilterInitStructure);
+    
+    CAN_ITConfig(CAN1, CAN_IT_FMP0, ENABLE);
     
     // Time Base configuration
 	TIM_TimeBaseStructure.TIM_Prescaler = (CAN_SEN_RATE_PSC - 1);
@@ -73,15 +95,15 @@ void comm_can_init(void) {
 	TIM_TimeBaseStructure.TIM_Period = (SYSTEM_CORE_CLOCK / 2 / CAN_SEN_RATE_PSC / APPCONF_SEND_CAN_STATUS_RATE_HZ - 1);
 	TIM_TimeBaseStructure.TIM_ClockDivision = 0;
 	TIM_TimeBaseStructure.TIM_RepetitionCounter = 0;
-	TIM_TimeBaseInit(TIM7, &TIM_TimeBaseStructure);
+	TIM_TimeBaseInit(HW_CAN_TIM, &TIM_TimeBaseStructure);
     
     // Enable overflow interrupt
-	TIM_ITConfig(TIM7, TIM_IT_Update, ENABLE);
+	TIM_ITConfig(HW_CAN_TIM, TIM_IT_Update, ENABLE);
     
-    nvicEnableVector(TIM7_IRQn, 10);
-    nvicEnableVector(CAN1_RX0_IRQn, 11);
+    // Enable timer
+	TIM_Cmd(HW_CAN_TIM, ENABLE);
     
-    CAN_ITConfig(CAN1, CAN_IT_FMP0, ENABLE);
+    nvicEnableVector(HW_CAN_TIM_ISR_CH, 8);
 }
 
 /**
@@ -105,15 +127,14 @@ void canReceive(CAN_TypeDef* CANx, uint8_t FIFONumber, CanRxMsg* RxMessage) {
  */
 void canProcess(const CanRxMsg RxMessage) {
     uint8_t buffer[4];
-    CanRxMsg rx_msg; 
-    rx_msg = RxMessage;
+    CanRxMsg rx_msg = RxMessage;
     if(rx_frames_front == rx_frames_rear) { // 队空
         return;
     } else {
-        if((rx_msg.IDE = CAN_Id_Standard) && (rx_msg.RTR == CAN_RTR_DATA)) {
+        if((rx_msg.IDE == CAN_Id_Standard) && (rx_msg.RTR == CAN_RTR_DATA)) {
             uint16_t m_id = rx_msg.StdId - APPCONF_CONTROLLER_NODE;
             if(m_id == 0 || m_id == APPCONF_CONTROLLER_ID) {
-                if(rx_msg.Data[0] == 'U' && rx_msg.Data[1] == 'M') {
+                if( rx_msg.Data[0] == 'U' && rx_msg.Data[1] == 'M' ) {
                     if(rx_msg.DLC == 4) {
                         int32_t index = 0;
                         uint32_t mode = mc_interface_get_control_mode();
@@ -223,8 +244,8 @@ void canSendstatus(void) {
     uint8_t buffer[8];
     int32_t send_index = 0;
     buffer_append_int16(buffer, (int16_t)APPCONF_CONTROLLER_ID, &send_index);
-    buffer_append_int16(buffer, (int16_t)mc_interface_get_rpm_now(), &send_index);
-	buffer_append_int16(buffer, (int16_t)(mc_interface_get_tot_current() * 10.0f), &send_index);		
+	buffer_append_int16(buffer, (int16_t)(mc_interface_get_tot_current() * 10.0f), &send_index);
+    buffer_append_int16(buffer, (int16_t)mc_interface_get_rpm_now(), &send_index);		
 	buffer_append_int16(buffer, (int16_t)(mc_interface_get_pid_pos_now() * 10.0f), &send_index);		
     comm_can_transmit(buffer, send_index);
 }
@@ -253,12 +274,12 @@ void CAN1_RX0_IRQHandler(void) {
 }
 
 // CAN process
-void TIM7_IRQHandler(void) {
-    if(TIM_GetITStatus(TIM7, TIM_IT_Update) != RESET) {
+void HW_CAN_TIM_ISR_VEC(void) {
+    if(TIM_GetITStatus(HW_CAN_TIM, TIM_IT_Update) != RESET) {
         canProcess(rx_frames[rx_frames_rear]);
 #if APPCONF_SEND_CAN_STATUS
         canSendstatus();
 #endif
-        TIM_ClearITPendingBit(TIM7, TIM_IT_Update);
+        TIM_ClearITPendingBit(HW_CAN_TIM, TIM_IT_Update);
     }
 }

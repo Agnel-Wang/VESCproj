@@ -1,5 +1,5 @@
 Dependencies for Project 'project', Target 'Target 1': (DO NOT MODIFY !)
-F (.\USER\SRC\main.c)(0x607D8825)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O2 -Otime --apcs=interwork --split_sections --enum_is_int -I .\GeneralFunction\inc -I .\Libraries\CMSIS -I .\Libraries\Startup -I .\Libraries\STM32F4xx_StdPeriph_Driver\inc -I .\uCOSII\CONFIG -I .\uCOSII\CORE -I .\uCOSII\PORT -I .\USER\INC -I .\hwconf -I .\conf --gnu --c99 --cpu=Cortex-M4.fp --fpmode=fast-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F405xx -DUSE_STDPERIPH_DRIVER -DSTM32F40X_HD -DARM_ENCRYPT -DARM_FPU -DARM_SINCOS -DARM_SQRT -DARM_MDK -DARM_DEBUG -DARM_BOOT -DARM_APP_NEW -DARM_EEPROM -DHW_VERSION_60 -DBOARD_OTG_NOVBUSSENS -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM -DM_PI="3.1415926f" -D__heap_base__="Image$$RW_IRAM1$$ZI$$Limit" -D__heap_end__="Image$$RW_IRAM2$$Base" --C99-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
+F (.\USER\SRC\main.c)(0x6080EAE1)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O2 -Otime --apcs=interwork --split_sections --enum_is_int -I .\GeneralFunction\inc -I .\Libraries\CMSIS -I .\Libraries\Startup -I .\Libraries\STM32F4xx_StdPeriph_Driver\inc -I .\uCOSII\CONFIG -I .\uCOSII\CORE -I .\uCOSII\PORT -I .\USER\INC -I .\hwconf -I .\conf --gnu --c99 --cpu=Cortex-M4.fp --fpmode=fast-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F405xx -DUSE_STDPERIPH_DRIVER -DSTM32F40X_HD -DARM_ENCRYPT -DARM_FPU -DARM_SINCOS -DARM_SQRT -DARM_MDK -DARM_DEBUG -DARM_BOOT -DARM_APP_NEW -DARM_EEPROM -DHW_VERSION_60 -DBOARD_OTG_NOVBUSSENS -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM -DM_PI="3.1415926f" -D__heap_base__="Image$$RW_IRAM1$$ZI$$Limit" -D__heap_end__="Image$$RW_IRAM2$$Base" --C99-o .\obj\main.o --omf_browse .\obj\main.crf --depend .\obj\main.d)
 I (.\USER\INC\stm32f4xx_conf.h)(0x607D71EB)
 I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h)(0x607D71EA)
 I (.\Libraries\CMSIS\stm32f4xx.h)(0x607D71EA)
@@ -33,9 +33,9 @@ I (.\uCOSII\PORT\os_cpu.h)(0x607D71EB)
 I (.\conf\conf_general.h)(0x607D71EB)
 I (.\USER\INC\datatypes.h)(0x607FD806)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5F15A8EF)
-I (.\conf\appconf_default.h)(0x607ED264)
+I (.\conf\appconf_default.h)(0x6080ED40)
 I (.\conf\mcconf_default.h)(0x607FD7D2)
-I (.\hwconf\hw_60.h)(0x607EE636)
+I (.\hwconf\hw_60.h)(0x6080EBC0)
 I (.\GeneralFunction\inc\sys.h)(0x607D71EA)
 I (.\USER\INC\led.h)(0x607D71EB)
 I (.\USER\INC\delay.h)(0x607D71EB)
@@ -134,12 +134,12 @@ I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_spi.h)(0x607D71EA)
 I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x607D71EA)
 I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x607D71EA)
 I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x607D71EA)
-I (.\hwconf\hw_60.h)(0x607EE636)
+I (.\hwconf\hw_60.h)(0x6080EBC0)
 I (.\GeneralFunction\inc\sys.h)(0x607D71EA)
 I (.\GeneralFunction\inc\utils.h)(0x607D71EA)
 I (.\conf\conf_general.h)(0x607D71EB)
 I (.\USER\INC\datatypes.h)(0x607FD806)
-I (.\conf\appconf_default.h)(0x607ED264)
+I (.\conf\appconf_default.h)(0x6080ED40)
 I (.\conf\mcconf_default.h)(0x607FD7D2)
 F (.\USER\SRC\mc_interface.c)(0x608034F7)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O2 -Otime --apcs=interwork --split_sections --enum_is_int -I .\GeneralFunction\inc -I .\Libraries\CMSIS -I .\Libraries\Startup -I .\Libraries\STM32F4xx_StdPeriph_Driver\inc -I .\uCOSII\CONFIG -I .\uCOSII\CORE -I .\uCOSII\PORT -I .\USER\INC -I .\hwconf -I .\conf --gnu --c99 --cpu=Cortex-M4.fp --fpmode=fast-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F405xx -DUSE_STDPERIPH_DRIVER -DSTM32F40X_HD -DARM_ENCRYPT -DARM_FPU -DARM_SINCOS -DARM_SQRT -DARM_MDK -DARM_DEBUG -DARM_BOOT -DARM_APP_NEW -DARM_EEPROM -DHW_VERSION_60 -DBOARD_OTG_NOVBUSSENS -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM -DM_PI="3.1415926f" -D__heap_base__="Image$$RW_IRAM1$$ZI$$Limit" -D__heap_end__="Image$$RW_IRAM2$$Base" --C99-o .\obj\mc_interface.o --omf_browse .\obj\mc_interface.crf --depend .\obj\mc_interface.d)
 I (.\USER\INC\mc_interface.h)(0x608034DA)
@@ -166,7 +166,7 @@ I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x607D71EA)
 I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x607D71EA)
 I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x607D71EA)
 I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x607D71EA)
-I (.\hwconf\hw_60.h)(0x607EE636)
+I (.\hwconf\hw_60.h)(0x6080EBC0)
 I (.\GeneralFunction\inc\sys.h)(0x607D71EA)
 I (.\hwconf\drv8301.h)(0x607D71EB)
 I (.\USER\INC\encoder.h)(0x607D71EB)
@@ -182,7 +182,7 @@ I (.\uCOSII\CORE\ucos_ii.h)(0x607D71EB)
 I (.\uCOSII\CONFIG\os_cfg.h)(0x607D71EB)
 I (.\uCOSII\PORT\os_cpu.h)(0x607D71EB)
 I (.\conf\conf_general.h)(0x607D71EB)
-I (.\conf\appconf_default.h)(0x607ED264)
+I (.\conf\appconf_default.h)(0x6080ED40)
 I (.\conf\mcconf_default.h)(0x607FD7D2)
 F (.\USER\SRC\mcpwm_foc.c)(0x607FFCA2)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O2 -Otime --apcs=interwork --split_sections --enum_is_int -I .\GeneralFunction\inc -I .\Libraries\CMSIS -I .\Libraries\Startup -I .\Libraries\STM32F4xx_StdPeriph_Driver\inc -I .\uCOSII\CONFIG -I .\uCOSII\CORE -I .\uCOSII\PORT -I .\USER\INC -I .\hwconf -I .\conf --gnu --c99 --cpu=Cortex-M4.fp --fpmode=fast-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F405xx -DUSE_STDPERIPH_DRIVER -DSTM32F40X_HD -DARM_ENCRYPT -DARM_FPU -DARM_SINCOS -DARM_SQRT -DARM_MDK -DARM_DEBUG -DARM_BOOT -DARM_APP_NEW -DARM_EEPROM -DHW_VERSION_60 -DBOARD_OTG_NOVBUSSENS -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM -DM_PI="3.1415926f" -D__heap_base__="Image$$RW_IRAM1$$ZI$$Limit" -D__heap_end__="Image$$RW_IRAM2$$Base" --C99-o .\obj\mcpwm_foc.o --omf_browse .\obj\mcpwm_foc.crf --depend .\obj\mcpwm_foc.d)
 I (.\USER\INC\mcpwm_foc.h)(0x607FFBF5)
@@ -219,16 +219,16 @@ I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5F1528A2)
 I (.\uCOSII\CORE\ucos_ii.h)(0x607D71EB)
 I (.\uCOSII\CONFIG\os_cfg.h)(0x607D71EB)
 I (.\uCOSII\PORT\os_cpu.h)(0x607D71EB)
-I (.\hwconf\hw_60.h)(0x607EE636)
+I (.\hwconf\hw_60.h)(0x6080EBC0)
 I (.\GeneralFunction\inc\sys.h)(0x607D71EA)
 I (.\USER\INC\delay.h)(0x607D71EB)
 I (.\conf\conf_general.h)(0x607D71EB)
-I (.\conf\appconf_default.h)(0x607ED264)
+I (.\conf\appconf_default.h)(0x6080ED40)
 I (.\conf\mcconf_default.h)(0x607FD7D2)
 I (.\GeneralFunction\inc\utils.h)(0x607D71EA)
 I (.\USER\INC\encoder.h)(0x607D71EB)
 I (C:\Keil_v5\ARM\ARMCC\include\math.h)(0x599ECD2E)
-F (.\USER\SRC\common_can.c)(0x608034EE)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O2 -Otime --apcs=interwork --split_sections --enum_is_int -I .\GeneralFunction\inc -I .\Libraries\CMSIS -I .\Libraries\Startup -I .\Libraries\STM32F4xx_StdPeriph_Driver\inc -I .\uCOSII\CONFIG -I .\uCOSII\CORE -I .\uCOSII\PORT -I .\USER\INC -I .\hwconf -I .\conf --gnu --c99 --cpu=Cortex-M4.fp --fpmode=fast-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F405xx -DUSE_STDPERIPH_DRIVER -DSTM32F40X_HD -DARM_ENCRYPT -DARM_FPU -DARM_SINCOS -DARM_SQRT -DARM_MDK -DARM_DEBUG -DARM_BOOT -DARM_APP_NEW -DARM_EEPROM -DHW_VERSION_60 -DBOARD_OTG_NOVBUSSENS -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM -DM_PI="3.1415926f" -D__heap_base__="Image$$RW_IRAM1$$ZI$$Limit" -D__heap_end__="Image$$RW_IRAM2$$Base" --C99-o .\obj\common_can.o --omf_browse .\obj\common_can.crf --depend .\obj\common_can.d)
+F (.\USER\SRC\common_can.c)(0x60811F2B)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O2 -Otime --apcs=interwork --split_sections --enum_is_int -I .\GeneralFunction\inc -I .\Libraries\CMSIS -I .\Libraries\Startup -I .\Libraries\STM32F4xx_StdPeriph_Driver\inc -I .\uCOSII\CONFIG -I .\uCOSII\CORE -I .\uCOSII\PORT -I .\USER\INC -I .\hwconf -I .\conf --gnu --c99 --cpu=Cortex-M4.fp --fpmode=fast-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F405xx -DUSE_STDPERIPH_DRIVER -DSTM32F40X_HD -DARM_ENCRYPT -DARM_FPU -DARM_SINCOS -DARM_SQRT -DARM_MDK -DARM_DEBUG -DARM_BOOT -DARM_APP_NEW -DARM_EEPROM -DHW_VERSION_60 -DBOARD_OTG_NOVBUSSENS -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM -DM_PI="3.1415926f" -D__heap_base__="Image$$RW_IRAM1$$ZI$$Limit" -D__heap_end__="Image$$RW_IRAM2$$Base" --C99-o .\obj\common_can.o --omf_browse .\obj\common_can.crf --depend .\obj\common_can.d)
 I (.\USER\INC\common_can.h)(0x60803526)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (.\GeneralFunction\inc\sys.h)(0x607D71EA)
@@ -255,12 +255,12 @@ I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x607D71EA)
 I (.\USER\INC\datatypes.h)(0x607FD806)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5F15A8EF)
 I (.\conf\conf_general.h)(0x607D71EB)
-I (.\conf\appconf_default.h)(0x607ED264)
+I (.\conf\appconf_default.h)(0x6080ED40)
 I (.\conf\mcconf_default.h)(0x607FD7D2)
 I (.\USER\INC\mc_interface.h)(0x608034DA)
 I (.\USER\INC\mcpwm_foc.h)(0x607FFBF5)
 I (.\GeneralFunction\inc\buffer.h)(0x607EE222)
-I (C:\Keil_v5\ARM\ARMCC\include\stdarg.h)(0x5F1528A2)
+I (.\hwconf\hw_60.h)(0x6080EBC0)
 F (.\GeneralFunction\src\dma.c)(0x607D71EA)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O2 -Otime --apcs=interwork --split_sections --enum_is_int -I .\GeneralFunction\inc -I .\Libraries\CMSIS -I .\Libraries\Startup -I .\Libraries\STM32F4xx_StdPeriph_Driver\inc -I .\uCOSII\CONFIG -I .\uCOSII\CORE -I .\uCOSII\PORT -I .\USER\INC -I .\hwconf -I .\conf --gnu --c99 --cpu=Cortex-M4.fp --fpmode=fast-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F405xx -DUSE_STDPERIPH_DRIVER -DSTM32F40X_HD -DARM_ENCRYPT -DARM_FPU -DARM_SINCOS -DARM_SQRT -DARM_MDK -DARM_DEBUG -DARM_BOOT -DARM_APP_NEW -DARM_EEPROM -DHW_VERSION_60 -DBOARD_OTG_NOVBUSSENS -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM -DM_PI="3.1415926f" -D__heap_base__="Image$$RW_IRAM1$$ZI$$Limit" -D__heap_end__="Image$$RW_IRAM2$$Base" --C99-o .\obj\dma.o --omf_browse .\obj\dma.crf --depend .\obj\dma.d)
 I (.\GeneralFunction\inc\dma.h)(0x607D71EA)
 I (.\GeneralFunction\inc\sys.h)(0x607D71EA)
@@ -690,7 +690,7 @@ I (.\uCOSII\PORT\os_cpu.h)(0x607D71EB)
 F (.\uCOSII\CONFIG\includes.h)(0x607D71EB)()
 F (.\uCOSII\CONFIG\os_cfg.h)(0x607D71EB)()
 F (.\hwconf\hw_60.c)(0x607FC96A)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -W -O2 -Otime --apcs=interwork --split_sections --enum_is_int -I .\GeneralFunction\inc -I .\Libraries\CMSIS -I .\Libraries\Startup -I .\Libraries\STM32F4xx_StdPeriph_Driver\inc -I .\uCOSII\CONFIG -I .\uCOSII\CORE -I .\uCOSII\PORT -I .\USER\INC -I .\hwconf -I .\conf --gnu --c99 --cpu=Cortex-M4.fp --fpmode=fast-I.\RTE\_Target_1-IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include-IC:\Keil_v5\ARM\PACK\Keil\STM32F4xx_DFP\2.9.0\Drivers\CMSIS\Device\ST\STM32F4xx\Include-D__UVISION_VERSION="525" -D_RTE_ -DSTM32F405xx -DUSE_STDPERIPH_DRIVER -DSTM32F40X_HD -DARM_ENCRYPT -DARM_FPU -DARM_SINCOS -DARM_SQRT -DARM_MDK -DARM_DEBUG -DARM_BOOT -DARM_APP_NEW -DARM_EEPROM -DHW_VERSION_60 -DBOARD_OTG_NOVBUSSENS -DUSE_STDPERIPH_DRIVER -DSTM32F4XX -D__FPU_PRESENT="1" -D__FPU_USED="1" -DARM_MATH_CM4 -D__CC_ARM -DM_PI="3.1415926f" -D__heap_base__="Image$$RW_IRAM1$$ZI$$Limit" -D__heap_end__="Image$$RW_IRAM2$$Base" --C99-o .\obj\hw_60.o --omf_browse .\obj\hw_60.crf --depend .\obj\hw_60.d)
-I (hwconf\hw_60.h)(0x607EE636)
+I (hwconf\hw_60.h)(0x6080EBC0)
 I (.\GeneralFunction\inc\sys.h)(0x607D71EA)
 I (.\Libraries\CMSIS\stm32f4xx.h)(0x607D71EA)
 I (C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.3.0\CMSIS\Include\core_cm4.h)(0x5A8E1FE2)
@@ -752,7 +752,7 @@ I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x607D71EA)
 I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x607D71EA)
 I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x607D71EA)
 I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x607D71EA)
-I (hwconf\hw_60.h)(0x607EE636)
+I (hwconf\hw_60.h)(0x6080EBC0)
 I (.\GeneralFunction\inc\sys.h)(0x607D71EA)
 I (.\USER\INC\delay.h)(0x607D71EB)
 I (.\uCOSII\CONFIG\includes.h)(0x607D71EB)
@@ -770,7 +770,7 @@ I (conf\conf_general.h)(0x607D71EB)
 I (.\USER\INC\datatypes.h)(0x607FD806)
 I (C:\Keil_v5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
 I (C:\Keil_v5\ARM\ARMCC\include\stdbool.h)(0x5F15A8EF)
-I (conf\appconf_default.h)(0x607ED264)
+I (conf\appconf_default.h)(0x6080ED40)
 I (conf\mcconf_default.h)(0x607FD7D2)
 I (.\USER\INC\stm32f4xx_conf.h)(0x607D71EB)
 I (.\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h)(0x607D71EA)

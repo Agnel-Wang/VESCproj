@@ -11,23 +11,20 @@
  * Timers used:
  * TIM1: mcpwm_out
  * TIM3: Encoder
- * TIM4: WS2811/WS2812 LEDs
+ * TIM4: CAN1
  * TIM5: speed cycle
- * TIM7: CAN1
  * TIM8: mcpwm_sample
  * TIM12: 计算单次电流环持续时间
  *
  * DMA/stream   Device      Function
  * 2, 4         ADC         mcpwm
- * 1, 0         TIM4        WS2811/WS2812 LEDs CH1 (Ch 1)
- * 1, 3         TIM4        WS2811/WS2812 LEDs CH2 (Ch 2)
  *
  * Peripherals              NIVC
  * DMA2_Stream4_IRQn        3
  * TIM8_CC_IRQn             6
  * TIM3_IRQn                6
  * TIM5_IRQn                7
- * TIM7_IRQn                10
+ * TIM4_IRQn                8
  * CAN1_RX0_IRQn            11
  */
 
